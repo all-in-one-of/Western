@@ -7,13 +7,20 @@ public class GameManager : Singleton<GameManager>
     public GameObject inputManagerPrefab;
     public GameObject uiManagerPrefab;
     public GameObject enemyManagerPrefab;
+    public GameObject saveManagerPrefab;
+    public GameObject levelManagerPrefab;
 
-    [System.NonSerialized] public int score;
+    [System.NonSerialized] public int credits;
 
 
 
     private void Start()
     {
+        GameObject saveManager = Instantiate(saveManagerPrefab, transform);
+        saveManager.name = "SaveManager";
+
+        GameObject levelManager = Instantiate(levelManagerPrefab, transform);
+
         GameObject inputManager = Instantiate(inputManagerPrefab,transform);
         inputManager.name = "InputManager";
 
@@ -24,16 +31,32 @@ public class GameManager : Singleton<GameManager>
         enemyManager.name = "EnemyManager";
 
         DontDestroyOnLoad(gameObject);
+
+        LoadGame();
     }
 
 
     public void LoadGame()
     {
-        SceneLoader.LoadScene("Game", InitManagers);
+        SceneLoader.LoadScene("Game", InitGame);
     }
 
-    public void InitManagers()
+    public void InitGame()
     {
+        SaveManager.instance.LoadData();
+        if (SaveManager.instance.playerData != null) {
+            LevelManager.instance.currentLevel = SaveManager.instance.playerData.currentLevel;
+        }
+        else
+        {
+            LevelManager.instance.currentLevel = 0;
+        }
         
+        LevelManager.instance.GenerateMap();
+        //Spawn player
+
+        EnemyManager.instance.Init();
+
+
     }
 }
