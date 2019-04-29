@@ -24,4 +24,6 @@ public class ControllerData : MonoBehaviour
 
     public enum PlayerStates { Alive, Dead };
     public PlayerStates state;
+
+    public bool isMoving;
 }

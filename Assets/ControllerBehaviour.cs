@@ -32,6 +32,15 @@ public class ControllerBehaviour : MonoBehaviour
                 {
                     transform.rotation = Quaternion.LookRotation(aimInput, Vector3.up);
                 }
+
+                if(Input.GetAxisRaw("Horizontal" + data.playerID)!=0 || Input.GetAxisRaw("Vertical" + data.playerID) != 0)
+                {
+                    data.isMoving = true;
+                }
+                else
+                {
+                    data.isMoving = false;
+                }
             }
 
             else if (Input.GetButtonDown("A_Button"))
