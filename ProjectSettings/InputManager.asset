@@ -179,7 +179,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 5
+    axis: 9
     joyNum: 1
   - serializedVersion: 3
     m_Name: Right_Trigger_2
@@ -195,5 +195,5 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 5
+    axis: 9
     joyNum: 2

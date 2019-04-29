@@ -23,10 +23,10 @@ public class ControllerBehaviour : MonoBehaviour
         {
             if (data.state != ControllerData.PlayerStates.Dead)
             {
-                data.moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+                data.moveInput = new Vector3(Input.GetAxisRaw("Horizontal"+data.playerID), 0f, Input.GetAxisRaw("Vertical" + data.playerID));
                 data.moveVelocity = data.moveInput * data.moveSpeed;
 
-                Vector3 aimInput = Vector3.right * Input.GetAxisRaw("Right_Horizontal") + Vector3.forward * -Input.GetAxisRaw("Right_Vertical");
+                Vector3 aimInput = Vector3.right * Input.GetAxisRaw("Right_Horizontal" + data.playerID) + Vector3.forward * -Input.GetAxisRaw("Right_Vertical" + data.playerID);
 
                 if (aimInput.sqrMagnitude > 0.0f)
                 {

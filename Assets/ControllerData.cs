@@ -9,7 +9,7 @@ public class ControllerData : MonoBehaviour
     public KeyCode Q;
     public KeyCode D;
 
-    
+    public string playerID;
 
     public float moveSpeed;
     [HideInInspector]

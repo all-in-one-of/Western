@@ -10,7 +10,6 @@ public class ArrowMovingBehaviour : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-        Destroy(gameObject, 10);
     }
 
     // Update is called once per frame

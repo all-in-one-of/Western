@@ -6,7 +6,7 @@ public class BowData : MonoBehaviour
 {
     public bool isFiring;
 
-    public ArrowMovingBehaviour bullet;
+    public GameObject bullet;
 
     public float bulletSpeed;
     public float timeBetweenShots;
