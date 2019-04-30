@@ -8,23 +8,71 @@ public class EnemyBehaviour : MonoBehaviour
     [System.NonSerialized] public bool active;
 
     public NavMeshAgent navMeshAgent;
+    public Transform self;
+    public SpriteRenderer spriteRenderer;
+
+    public float groupRange;
+    private Enemy enemy;
+
+    [System.NonSerialized] public float distanceToNearestPlayer;
 
 
     [Header("Phase 1 (run)")]
     public float targetRefreshDelay = 2;
 
-    [Header("Phase 2 (charge)")]
-    public float chargeDuration;
+    private List<EnemyBehaviour> allies;
+
+
 
     private PlayerBehaviour focusedPlayer;
+    private bool canSeePlayer = false;
+    private bool charging;
+    private bool shooting;
+
+    public void Init(Enemy enemy)
+    {
+        this.enemy = enemy;
+        spriteRenderer.sprite = enemy.sprite;
+    }
 
 
-    
+    private void Charge()
+    {
+        charging = true;
+        StartCoroutine(Shoot());
+        print("charging");
+    }
+
+    private void FocusPlayer(PlayerBehaviour player)
+    {
+        //on se retire de la liste du joueur focus précédent
+        focusedPlayer.attackingEnemies.Remove(this);
+        focusedPlayer = player;
+        focusedPlayer.AddAttackingEnemy(this);
+
+    }
+
+    private IEnumerator Shoot()
+    {
+        yield return new WaitForSeconds(enemy.chargeDuration);
+        charging = false;
+        shooting = true;
+        //shoot
+        print("shooting");
+        StartCoroutine(StopShooting());
+        
+    }
+
+    private IEnumerator StopShooting()
+    {
+        yield return new WaitForSeconds(enemy.shootDuration);
+        shooting = false;
+        StartCoroutine(RefreshTarget());
+    }
 
 
     private IEnumerator RefreshTarget()
     {
-        
         float minDist = Mathf.Infinity;
         PlayerBehaviour playerToFocus=null;
 
@@ -45,9 +93,10 @@ public class EnemyBehaviour : MonoBehaviour
             }
 
         }
+        distanceToNearestPlayer = minDist;
         if (playerToFocus != null)
         {
-            focusedPlayer = playerToFocus;
+            FocusPlayer(playerToFocus);
         }
 
         yield return new WaitForSeconds(targetRefreshDelay);
@@ -75,11 +124,54 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (!active) { return; }
-        if (focusedPlayer == null) { return; }
-        navMeshAgent.SetDestination(focusedPlayer.transform.position);
+        if (focusedPlayer == null || shooting) { return; }
+        if (charging)
+        {
+            self.LookAt(focusedPlayer.self);
+        }
+        if (Vector3.Distance(self.position,focusedPlayer.self.position)<=enemy.range && canSeePlayer)
+        {
+            Charge();
+        }
+        else
+        {
+            navMeshAgent.SetDestination(focusedPlayer.transform.position);
+        }
+        
     }
 
 
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
+        if (player != null && player==focusedPlayer)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(self.position,(self.position-player.self.position).normalized,out hit))
+            {
+                PlayerBehaviour raycastedPlayer = hit.collider.GetComponent<PlayerBehaviour>();
+                if (raycastedPlayer==null || raycastedPlayer != focusedPlayer)
+                {
+                    canSeePlayer = false;
+                }
+                else
+                {
+                    canSeePlayer = true;
+                }
+            }
+        }
+    }
 
+
+    private void OnTriggerExit(Collider other)
+    {
+        PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
+        if (player != null)
+        {
+            if (player == focusedPlayer)
+            {
+                canSeePlayer = false;
+            }
+        }
+    }
 }

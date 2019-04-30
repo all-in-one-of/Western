@@ -21,35 +21,35 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        //GameObject saveManager = Instantiate(saveManagerPrefab, transform);
-        //saveManager.name = "SaveManager";
+        GameObject saveManager = Instantiate(saveManagerPrefab, transform);
+        saveManager.name = "SaveManager";
 
-        //GameObject levelManager = Instantiate(levelManagerPrefab, transform);
+        GameObject levelManager = Instantiate(levelManagerPrefab, transform);
 
-        //GameObject inputManager = Instantiate(inputManagerPrefab, transform);
-        //inputManager.name = "InputManager";
+        GameObject inputManager = Instantiate(inputManagerPrefab, transform);
+        inputManager.name = "InputManager";
 
-        //GameObject uiManager = Instantiate(uiManagerPrefab, transform);
-        //uiManager.name = "UIManager";
+        GameObject uiManager = Instantiate(uiManagerPrefab, transform);
+        uiManager.name = "UIManager";
 
-        //GameObject enemyManager = Instantiate(enemyManagerPrefab, transform);
-        //enemyManager.name = "EnemyManager";
+        GameObject enemyManager = Instantiate(enemyManagerPrefab, transform);
+        enemyManager.name = "EnemyManager";
 
-        //GameObject playerManager = Instantiate(playerManagerPrefab, transform);
-        //playerManager.name = "PlayerManager";
+        GameObject playerManager = Instantiate(playerManagerPrefab, transform);
+        playerManager.name = "PlayerManager";
 
         DontDestroyOnLoad(gameObject);
 
-       // LoadGame();
+        LoadGame();
     }
 
     public void Update()
     {
-        if (Player1.data.state == ControllerData.PlayerStates.Dead && Player2.data.state == ControllerData.PlayerStates.Dead)
+        /*if (Player1.data.state == ControllerData.PlayerStates.Dead && Player2.data.state == ControllerData.PlayerStates.Dead)
         {
             //Game finished
             Debug.Log("Game Finished");
-        }
+        }*/
     }
 
 

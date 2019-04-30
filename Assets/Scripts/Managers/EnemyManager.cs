@@ -9,6 +9,9 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public GameObject enemyPrefab;
 
+    public float minGroupSpeed;
+    public float maxGroupSpeed;
+
 
     public void Init()
     {
@@ -26,7 +29,7 @@ public class EnemyManager : Singleton<EnemyManager>
         if (enemyNumber < EnemySpawn.spawns.Count)
         {
             enemies.Add(Instantiate(enemyPrefab, EnemySpawn.spawns[enemyNumber].self.position, EnemySpawn.spawns[enemyNumber].self.rotation).GetComponent<EnemyBehaviour>());
-            print("position : " + EnemySpawn.spawns[enemyNumber].self.position);
+            enemies[enemies.Count - 1].Init(EnemySpawn.spawns[enemyNumber].enemyToSpawn);
         }
         else
         {

@@ -484,7 +484,7 @@ PrefabInstance:
     - target: {fileID: 4340952514353819290, guid: fd7684490da966d4fa1673099aee978f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.39
+      value: -2.06
       objectReference: {fileID: 0}
     - target: {fileID: 4340952514353819290, guid: fd7684490da966d4fa1673099aee978f,
         type: 3}
@@ -559,7 +559,7 @@ PrefabInstance:
     - target: {fileID: 4103416514924189639, guid: d55dd46e8e0c71b4991e1e5a740692b2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.42
+      value: -3.25
       objectReference: {fileID: 0}
     - target: {fileID: 4103416514924189639, guid: d55dd46e8e0c71b4991e1e5a740692b2,
         type: 3}
@@ -606,5 +606,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4103416514924189638, guid: d55dd46e8e0c71b4991e1e5a740692b2,
+        type: 3}
+      propertyPath: enemyToSpawn
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d516621b1fb97545919ddfad9436b8c,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d55dd46e8e0c71b4991e1e5a740692b2, type: 3}

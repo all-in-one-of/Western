@@ -8,6 +8,7 @@ public class EnemySpawn : MonoBehaviour
     public Transform self;
     public GameObject preview;
 
+    public Enemy enemyToSpawn;
 
     private void Awake()
     {

@@ -6,7 +6,7 @@ public class BowController : MonoBehaviour
 {
     public BowData data;
 
-   public int numberOfBullets;
+    public int numberOfBullets;
     float timeBetweenShots;
 
     ControllerBehaviour controllerBehaviour;

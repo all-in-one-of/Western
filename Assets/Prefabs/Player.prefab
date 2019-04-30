@@ -206,7 +206,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 7608707442738253578}
-  debug: 0
+  DashStrengh: 0
+  DashCost: 0
 --- !u!114 &7608707442738253578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,17 +220,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03a8f79c52de6b40820e39f3386a5c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Z: 122
-  S: 115
-  Q: 113
-  D: 100
   playerID: _1
+  mainCamera: {fileID: 0}
   moveSpeed: 10
   myRigidbody: {fileID: 0}
   moveInput: {x: 0, y: 0, z: 0}
   moveVelocity: {x: 0, y: 0, z: 0}
   state: 0
   isMoving: 0
+  enduranceMax: 0
+  enduranceJauge: {fileID: 0}
+  timeBetweenEachDash: 0
+  enduranceRegenerationSpeed: 0
 --- !u!114 &7608707442738253570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 7608707442738253569}
+  numberOfBullets: 0
 --- !u!114 &7608707442738253569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFiring: 0
   bullet: {fileID: 8547179909775923830, guid: 42311060cfac6f54f921552d3daec83a, type: 3}
+  bulletsGroup: {fileID: 0}
   bulletSpeed: 15
   timeBetweenShots: 0.2
   magazineSize: 5
@@ -273,6 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fcfe5f756b16b8478149c97e559087f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  self: {fileID: 7608707442738253583}
 --- !u!1 &7608707443562827660
 GameObject:
   m_ObjectHideFlags: 0
