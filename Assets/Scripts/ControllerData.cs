@@ -1,15 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControllerData : MonoBehaviour
 {
-    public KeyCode Z;
-    public KeyCode S;
-    public KeyCode Q;
-    public KeyCode D;
-
     public string playerID;
+    public CameraBehaviour mainCamera;
 
     public float moveSpeed;
     [HideInInspector]
@@ -26,4 +23,8 @@ public class ControllerData : MonoBehaviour
     public PlayerStates state;
 
     public bool isMoving;
+
+    public float enduranceMax;
+    public Image enduranceJauge;
+    public float timeBetweenEachDash;
 }
