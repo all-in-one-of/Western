@@ -24,14 +24,13 @@ public class ArrowMovingBehaviour : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+
         if (other.GetComponent<BowController>()!=null)
         {
-            Debug.Log("ici");
-            if (other.GetComponent<BowController>().numberOfBullets < other.GetComponent<BowController>().data.magazineSize)
+            BowController otherController = other.GetComponent<BowController>();
+            if (otherController.numberOfBullets < otherController.data.magazineSize)
             {
-                Debug.Log("ici");
-
-                other.GetComponent<BowController>().numberOfBullets++;
+                otherController.numberOfBullets++;
                 Destroy(gameObject);
             }
         }

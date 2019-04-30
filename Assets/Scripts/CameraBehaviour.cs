@@ -21,8 +21,6 @@ public class CameraBehaviour : MonoBehaviour
         transform.position = new Vector3(transform.position.x- 0.3f, transform.position.y+11.41f, transform.position.z-9.37f);
         
         float camSize = rangeBewteenPlayers / 0.2f;
-        Debug.Log(camSize);
-        Debug.Log(Mathf.Clamp(camSize, 46.8f, 71f));
         camComponent.fieldOfView = Mathf.Clamp(camSize, 46.8f, 71f);
     }
 }
