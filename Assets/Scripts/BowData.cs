@@ -8,6 +8,9 @@ public class BowData : MonoBehaviour
 
     public GameObject bullet;
 
+
+    public GameObject bulletsGroup;
+
     public float bulletSpeed;
     public float timeBetweenShots;
     public int magazineSize;

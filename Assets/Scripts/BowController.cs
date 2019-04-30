@@ -6,7 +6,7 @@ public class BowController : MonoBehaviour
 {
     public BowData data;
 
-    int numberOfBullets;
+   public int numberOfBullets;
     float timeBetweenShots;
 
     ControllerBehaviour controllerBehaviour;
@@ -40,7 +40,7 @@ public class BowController : MonoBehaviour
 
             else
             {
-                Debug.Log("trigger not pulled");
+               // Debug.Log("trigger not pulled");
                 data.isFiring = false;
             }
         }
@@ -53,8 +53,11 @@ public class BowController : MonoBehaviour
                 timeBetweenShots = data.timeBetweenShots;
 
                 //Instantiate bullet
-                GameObject newBullet = Instantiate(data.bullet, data.firePoint.position, Quaternion.identity, transform);
+                GameObject newBullet = Instantiate(data.bullet, data.firePoint.position, Quaternion.Euler(data.firePoint.eulerAngles.x, data.firePoint.eulerAngles.y, data.firePoint.eulerAngles.z), data.bulletsGroup.transform);
                 newBullet.GetComponent<ArrowMovingBehaviour>().speed = data.bulletSpeed;
+
+                newBullet.GetComponent<Rigidbody>().AddForce(transform.forward * newBullet.GetComponent<ArrowMovingBehaviour>().speed);
+
 
                 numberOfBullets--;
             }
