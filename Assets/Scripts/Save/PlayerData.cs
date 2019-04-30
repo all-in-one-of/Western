@@ -5,5 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData 
 {
-    
+    public PlayerStats playerStats;
+    public int credits;
+    public int currentLevel;
 }

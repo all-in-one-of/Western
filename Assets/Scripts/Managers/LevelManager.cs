@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public List<Level> levels;
 
-    // Update is called once per frame
-    void Update()
+    
+
+    [System.NonSerialized] public int currentLevel;
+
+    public void GenerateMap()
     {
-        
+        SceneLoader.AddArenas(levels[currentLevel].arenas, levels[currentLevel].arenasToSpawnCount);
+
     }
 }
