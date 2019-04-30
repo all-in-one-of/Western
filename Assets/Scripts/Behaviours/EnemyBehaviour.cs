@@ -16,12 +16,14 @@ public class EnemyBehaviour : MonoBehaviour
     [Header("Phase 2 (charge)")]
     public float chargeDuration;
 
+    private PlayerBehaviour focusedPlayer;
+
 
     private IEnumerator RefreshTarget()
     {
         yield return new WaitForSeconds(targetRefreshDelay);
         float minDist = Mathf.Infinity;
-        PlayerBehaviour playerToFocus;
+        PlayerBehaviour playerToFocus=null;
 
         for (int i = 0; i < PlayerManager.instance.players.Count; i++)
         {
@@ -40,9 +42,10 @@ public class EnemyBehaviour : MonoBehaviour
             }
 
         }
-
-        
-
+        if (playerToFocus != null)
+        {
+            focusedPlayer = playerToFocus;
+        }
         
 
         if (active)
@@ -53,6 +56,12 @@ public class EnemyBehaviour : MonoBehaviour
 
 
         
+    }
+
+    private void Update()
+    {
+        if (focusedPlayer == null) { return; }
+        navMeshAgent.SetDestination(focusedPlayer.transform.position);
     }
 
 

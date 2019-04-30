@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //ici ce sont les valeurs au runtime, qu'on actualise directement quand on achète une upgrade
+    [System.NonSerialized] public int maxHealthUpgradeLevel;
+    [System.NonSerialized] public int speedUpgradeLevel;
+    [System.NonSerialized] public int maxAmmoUpgradeLevel;
+    [System.NonSerialized] public int startAmmoUpgradeLevel;
+    [System.NonSerialized] public int maxStaminaUpgradeLevel;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [System.NonSerialized] public int credits;
 }

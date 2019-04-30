@@ -9,8 +9,10 @@ public class GameManager : Singleton<GameManager>
     public GameObject enemyManagerPrefab;
     public GameObject saveManagerPrefab;
     public GameObject levelManagerPrefab;
+    public GameObject playerManagerPrefab;
 
-    [System.NonSerialized] public int credits;
+
+    [System.NonSerialized] public int playerCount=2;
 
 
 
@@ -30,6 +32,9 @@ public class GameManager : Singleton<GameManager>
         GameObject enemyManager = Instantiate(enemyManagerPrefab, transform);
         enemyManager.name = "EnemyManager";
 
+        GameObject playerManager = Instantiate(playerManagerPrefab, transform);
+        playerManager.name = "PlayerManager";
+
         DontDestroyOnLoad(gameObject);
 
         LoadGame();
@@ -43,20 +48,44 @@ public class GameManager : Singleton<GameManager>
 
     public void InitGame()
     {
-        SaveManager.instance.LoadData();
-        if (SaveManager.instance.playerData != null) {
-            LevelManager.instance.currentLevel = SaveManager.instance.playerData.currentLevel;
+        for (int i = 0; i < playerCount; i++)
+        {
+            SaveManager.instance.LoadPlayerData(i);
+        }
+        
+        if (playerCount <= 0)
+        {
+            Debug.Log("no player connected");
+            return;
+        }
+
+        if (SaveManager.instance.playerDatas[0].fromFile) {
+            LevelManager.instance.currentLevel = SaveManager.instance.playerDatas[0].currentLevel;
         }
         else
         {
             LevelManager.instance.currentLevel = 0;
         }
         
-        LevelManager.instance.GenerateMap();
-        //Spawn player
+        LevelManager.instance.LoadLevel(delegate {
+            //Spawn player
+            for (int i = 0; i < playerCount; i++)
+            {
+                PlayerManager.instance.SpawnPlayer(i);
+            }
 
-        EnemyManager.instance.Init();
+            //spawn enemies
+            EnemyManager.instance.Init();
+
+        });
+
+        
+        
+
+        
 
 
     }
+
+
 }

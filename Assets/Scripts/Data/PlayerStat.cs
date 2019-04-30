@@ -10,10 +10,5 @@ public class PlayerStat
     [Header("Upgrades")]
     public AnimationCurve priceOverUpgradeLevel;
     public float upgradeValue;
-    [HideInInspector]
-    public int upgradeLevel;
-    
-    
-
     
 }
