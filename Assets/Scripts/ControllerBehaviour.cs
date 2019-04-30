@@ -5,16 +5,18 @@ using UnityEngine.UI;
 
 public class ControllerBehaviour : MonoBehaviour
 {
-
     public ControllerData data;
 
     LineRenderer lineRenderer;
     BowController bowController;
 
     float timeBewteenDash;
-    public float currentEndurance;
+    float currentEndurance;
     bool readyToDash;
-    public float DashAmount;
+
+    public float DashStrengh;
+
+    public float DashCost;
 
     void Start()
     {
@@ -22,6 +24,7 @@ public class ControllerBehaviour : MonoBehaviour
         bowController = GetComponent<BowController>();
         lineRenderer = GetComponent<LineRenderer>();
 
+        //setup line renderer
         lineRenderer.startWidth = 0.5f;
         lineRenderer.endWidth = 0.5f;
         lineRenderer.SetPosition(0, bowController.data.firePoint.position);
@@ -38,13 +41,13 @@ public class ControllerBehaviour : MonoBehaviour
         data.enduranceJauge.fillAmount = currentEndurance / data.enduranceMax;
 
         FillingUpendurance();
+
         if (timeBewteenDash<= 0)
         {
             readyToDash = true;
         }
         else if (timeBewteenDash>0 && readyToDash==false)
         {
-           
             timeBewteenDash -= Time.deltaTime;
         }
 
@@ -79,12 +82,12 @@ public class ControllerBehaviour : MonoBehaviour
                 data.isMoving = false;
             }
 
-            if (Input.GetAxisRaw("Left_Trigger" + data.playerID) != 0 && currentEndurance >= 0.5f && readyToDash == true && data.moveInput != Vector3.zero)
+            if (Input.GetAxisRaw("Left_Trigger" + data.playerID) != 0 && currentEndurance >= DashCost && readyToDash == true && data.moveInput != Vector3.zero)
             {
             
                 //dasH
-                data.myRigidbody.AddForce(data.moveInput * DashAmount);
-                currentEndurance -= 0.5f;
+                data.myRigidbody.AddForce(data.moveInput * DashStrengh);
+                currentEndurance -= DashCost;
                 timeBewteenDash = data.timeBetweenEachDash;
                 readyToDash = false;
 
@@ -95,10 +98,9 @@ public class ControllerBehaviour : MonoBehaviour
             }
         }
 
-        else if (Input.GetButtonDown("A_Button"))
+        else if (Input.GetButtonDown("A_Button" + data.playerID))
         {
             //game finie
-
             data.state = ControllerData.PlayerStates.Alive;
         }
     }
