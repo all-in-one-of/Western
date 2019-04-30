@@ -10,9 +10,13 @@ public class ArrowPointBehaviour : MonoBehaviour
     {
         parentRigidbody = transform.parent.GetComponent<Rigidbody>();
     }
+
     public void OnTriggerEnter(Collider other)
     {
-        parentRigidbody.isKinematic = true;
-        transform.parent.parent = other.transform.GetChild(0).transform;
+        if (other.GetComponent<ControllerBehaviour>() == null)
+        {
+            parentRigidbody.isKinematic = true;
+            transform.parent.parent = other.transform.GetChild(0).transform;
+        }
     }
 }

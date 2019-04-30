@@ -16,11 +16,17 @@ public class CameraBehaviour : MonoBehaviour
     public void Update()
     {
         float rangeBewteenPlayers = Vector3.Distance(Player1.position, Player2.position);
-
-        transform.position = (Player1.position + Player2.position) / 2;
-        transform.position = new Vector3(transform.position.x- 0.3f, transform.position.y+11.41f, transform.position.z-9.37f);
         
-        float camSize = rangeBewteenPlayers / 0.2f;
-        camComponent.fieldOfView = Mathf.Clamp(camSize, 46.8f, 71f);
+        Vector3 positionToGo = (Player1.position + Player2.position) / 2;
+        Vector3 positionToTake = new Vector3(positionToGo.x - 0.3f, positionToGo.y + 11.41f, positionToGo.z - 9.37f);
+
+        transform.position = Vector3.Lerp(transform.position, positionToTake, Time.deltaTime*10);
+
+        float camSize = rangeBewteenPlayers / 1.2f;
+
+        Debug.Log(camSize);
+        float fielOfView = Mathf.Clamp(camSize, 12, 18f);
+        camComponent.orthographicSize = Mathf.Lerp(camComponent.fieldOfView, fielOfView, Time.deltaTime * 100);
     }
+
 }

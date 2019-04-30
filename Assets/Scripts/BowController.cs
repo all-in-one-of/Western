@@ -13,7 +13,7 @@ public class BowController : MonoBehaviour
 
     private void Awake()
     {
-        numberOfBullets = data.magazineSize;
+        numberOfBullets = data.magazineSize-1;
         timeBetweenShots = data.timeBetweenShots;
         controllerBehaviour = GetComponent<ControllerBehaviour>();
     }
