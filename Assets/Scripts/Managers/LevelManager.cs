@@ -77,6 +77,17 @@ public class LevelManager : Singleton<LevelManager>
         {
             SceneManager.sceneLoaded -= OnSceneAdded;
             arenaOffset = 0;
+
+            //build navmesh
+
+            for (int i = 0; i < WalkableSurface.surfaces.Count; i++)
+            {
+                WalkableSurface.surfaces[i].gameObject.AddComponent<NavMeshSourceTag>();
+            }
+
+
+
+
             if (callback != null)
             {
                 callback.Invoke();

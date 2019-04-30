@@ -17,7 +17,7 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             SpawnEnemy(i);
         }
-        Enable(on);
+        Enable(true);
     }
 
 
@@ -26,6 +26,7 @@ public class EnemyManager : Singleton<EnemyManager>
         if (enemyNumber < EnemySpawn.spawns.Count)
         {
             enemies.Add(Instantiate(enemyPrefab, EnemySpawn.spawns[enemyNumber].self.position, EnemySpawn.spawns[enemyNumber].self.rotation).GetComponent<EnemyBehaviour>());
+            print("position : " + EnemySpawn.spawns[enemyNumber].self.position);
         }
         else
         {
@@ -40,7 +41,7 @@ public class EnemyManager : Singleton<EnemyManager>
         this.on = on;
         for (int i = 0; i < enemies.Count; i++)
         {
-            enemies[i].active = on;
+            enemies[i].Activate(on);
         }
     }
 }

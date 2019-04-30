@@ -19,7 +19,7 @@ public class PlayerManager : Singleton<PlayerManager>
             players = new List<PlayerBehaviour>();
         }
 
-        players.Add(Instantiate(playerPrefab, PlayerSpawn.spawns[playerNumber].self.position, Quaternion.identity).GetComponent<PlayerBehaviour>());
+        players.Add(Instantiate(playerPrefab, PlayerSpawn.spawns[playerNumber].self.position, PlayerSpawn.spawns[playerNumber].self.rotation).GetComponent<PlayerBehaviour>());
 
         PlayerData playerData = SaveManager.instance.playerDatas[playerNumber];
         players[playerNumber].credits = playerData.credits;
