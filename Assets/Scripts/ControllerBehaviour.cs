@@ -107,7 +107,7 @@ public class ControllerBehaviour : MonoBehaviour
     {
         if (currentEndurance < data.enduranceMax )
         {
-            currentEndurance += Time.deltaTime * 0.05f;
+            currentEndurance += Time.deltaTime * data.enduranceRegenerationSpeed;
         }
     }
 

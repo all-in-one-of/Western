@@ -27,4 +27,6 @@ public class ControllerData : MonoBehaviour
     public float enduranceMax;
     public Image enduranceJauge;
     public float timeBetweenEachDash;
+
+    public float enduranceRegenerationSpeed;
 }

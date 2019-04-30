@@ -24,7 +24,6 @@ public class CameraBehaviour : MonoBehaviour
 
         float camSize = rangeBewteenPlayers / 1.2f;
 
-        Debug.Log(camSize);
         float fielOfView = Mathf.Clamp(camSize, 12, 18f);
         camComponent.orthographicSize = Mathf.Lerp(camComponent.fieldOfView, fielOfView, Time.deltaTime * 100);
     }
