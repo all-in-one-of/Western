@@ -15,6 +15,25 @@ public class ArrowMovingBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        Vector3 vel = rigidBody.velocity;
+        float angle = Mathf.Atan2(vel.y, vel.x) * Mathf.Rad2Deg;
+
+
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, angle);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<BowController>()!=null)
+        {
+            Debug.Log("ici");
+            if (other.GetComponent<BowController>().numberOfBullets < other.GetComponent<BowController>().data.magazineSize)
+            {
+                Debug.Log("ici");
+
+                other.GetComponent<BowController>().numberOfBullets++;
+                Destroy(gameObject);
+            }
+        }
     }
 }
