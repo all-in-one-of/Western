@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentRigidbody: {fileID: 0}
+  trajectoireFinished: 0
 --- !u!1 &5414058525273296483
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +180,7 @@ Transform:
   m_GameObject: {fileID: 5414058525273296483}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.04774064, y: 2.2744339, z: 2.1676297}
-  m_LocalScale: {x: 0.06782704, y: 0.047472917, z: 2.2182844}
+  m_LocalScale: {x: 0.2275153, y: 0.19198562, z: 5.3529854}
   m_Children:
   - {fileID: 4449335829374277757}
   - {fileID: 2621187324886668633}

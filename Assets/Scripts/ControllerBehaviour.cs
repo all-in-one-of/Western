@@ -11,9 +11,10 @@ public class ControllerBehaviour : MonoBehaviour
     BowController bowController;
 
     float timeBewteenDash;
-    float currentEndurance;
+   public  float currentEndurance;
     bool readyToDash;
 
+    bool coroutineLaunched;
     public float DashStrengh;
 
     public float DashCost;
@@ -82,12 +83,19 @@ public class ControllerBehaviour : MonoBehaviour
                 data.isMoving = false;
             }
 
-            if (Input.GetAxisRaw("Left_Trigger" + data.playerID) != 0 && currentEndurance >= DashCost && readyToDash == true && data.moveInput != Vector3.zero)
+            if (Input.GetAxisRaw("Left_Trigger" + data.playerID) != 0 && currentEndurance > 0 && readyToDash == true && data.moveInput != Vector3.zero)
             {
             
                 //dasH
                 data.myRigidbody.AddForce(data.moveInput * DashStrengh);
-                currentEndurance -= DashCost;
+                if (currentEndurance - DashCost >= 0)
+                {
+                    currentEndurance -= DashCost;
+                }
+                else
+                {
+                    currentEndurance = 0;
+                }
                 timeBewteenDash = data.timeBetweenEachDash;
                 readyToDash = false;
 
@@ -107,10 +115,28 @@ public class ControllerBehaviour : MonoBehaviour
 
     public void FillingUpendurance()
     {
-        if (currentEndurance < data.enduranceMax )
+        if (currentEndurance < data.enduranceMax && currentEndurance!=0)
         {
             currentEndurance += Time.deltaTime * data.enduranceRegenerationSpeed;
         }
+        else if (currentEndurance == 0)
+        {
+            if (coroutineLaunched == false)
+            {
+                StartCoroutine(waitForSeconds());
+            }
+            
+        }
+    }
+
+    public IEnumerator waitForSeconds()
+    {
+        coroutineLaunched = true;
+        yield return new WaitForSeconds(2);
+
+        currentEndurance = 1f;
+        coroutineLaunched = false;
+
     }
 
     void FixedUpdate()
