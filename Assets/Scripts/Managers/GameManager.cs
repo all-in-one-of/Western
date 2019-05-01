@@ -12,8 +12,7 @@ public class GameManager : Singleton<GameManager>
     public GameObject playerManagerPrefab;
 
 
-    public ControllerBehaviour Player1;
-    public ControllerBehaviour Player2;
+   
 
     [System.NonSerialized] public int playerCount = 2;
 
@@ -45,11 +44,7 @@ public class GameManager : Singleton<GameManager>
 
     public void Update()
     {
-        /*if (Player1.data.state == ControllerData.PlayerStates.Dead && Player2.data.state == ControllerData.PlayerStates.Dead)
-        {
-            //Game finished
-            Debug.Log("Game Finished");
-        }*/
+       
     }
 
 
