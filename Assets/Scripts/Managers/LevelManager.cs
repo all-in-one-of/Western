@@ -37,9 +37,12 @@ public class LevelManager : Singleton<LevelManager>
 
     public void GenerateLevel()
     {
+        //Nécessaire, ne pas enlever
+        EnemySpawn.InitSpawns();
+        PlayerSpawn.InitSpawns();
+
         arenasLeftToSpawn = levels[currentLevel].arenasToSpawnCount;
         //SceneLoader.AddArenas(levels[currentLevel].arenas, levels[currentLevel].arenasToSpawnCount);
-        print("arenas left to spawn : " + arenasLeftToSpawn);
 
         SceneManager.sceneLoaded += OnSceneAdded;
         if (!useSave)
@@ -54,9 +57,28 @@ public class LevelManager : Singleton<LevelManager>
         SceneManager.LoadScene(levels[currentLevel].arenas[currentArenaIndex].sceneName, LoadSceneMode.Additive);
     }
 
-    private void OnSceneAdded(Scene arg0, LoadSceneMode arg1)
+    private void OnSceneAdded(Scene arena, LoadSceneMode arg1)
     {
-        arg0.GetRootGameObjects()[0].transform.position = new Vector3(arenaOffset, 0, 0);
+        Transform rootTransform = arena.GetRootGameObjects()[0].transform;
+        rootTransform.position = new Vector3(arenaOffset, 0, 0);
+
+
+        //set arena index to every spawn point
+        List<EnemySpawn> enemySpawnsInThisArena = GetObjectsByComponent<EnemySpawn>(rootTransform);
+
+        for (int i = 0; i < enemySpawnsInThisArena.Count; i++)
+        {
+            enemySpawnsInThisArena[i].Init(currentArenaIndex);
+        }
+
+        List<PlayerSpawn> playerSpawnsInThisArena = GetObjectsByComponent<PlayerSpawn>(rootTransform);
+
+        for (int i = 0; i < playerSpawnsInThisArena.Count; i++)
+        {
+            playerSpawnsInThisArena[i].Init(currentArenaIndex);
+        }
+        //
+
         arenasLeftToSpawn--;
         if (arenasLeftToSpawn > 0)
         {
@@ -86,11 +108,35 @@ public class LevelManager : Singleton<LevelManager>
             }
 
 
-
-
             if (callback != null)
             {
                 callback.Invoke();
+            }
+        }
+    }
+
+    private List<T> GetObjectsByComponent<T>(Transform parent)
+    {
+        List<T> objects = new List<T>();
+
+        SearchChildrenByComponent<T>(objects, parent);
+
+        return objects;
+    }
+
+    private void SearchChildrenByComponent<T>(List<T> children,Transform parent)
+    {
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            Transform childTransform = parent.GetChild(i);
+            T childObject = childTransform.GetComponent<T>();
+            if (childObject!=null)
+            {
+                children.Add(childObject);
+            }
+            else
+            {
+                SearchChildrenByComponent<T>(children, childTransform);
             }
         }
     }

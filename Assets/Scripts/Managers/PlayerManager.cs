@@ -9,7 +9,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void SpawnPlayer(int playerNumber)
     {
-        if (playerNumber > PlayerSpawn.spawns.Count)
+        if (playerNumber > PlayerSpawn.levelSpawns[LevelManager.instance.currentArena].Count)
         {
             Debug.Log("no spawn point available");
             return;
@@ -18,8 +18,7 @@ public class PlayerManager : Singleton<PlayerManager>
         {
             players = new List<PlayerBehaviour>();
         }
-
-        players.Add(Instantiate(playerPrefab, PlayerSpawn.spawns[playerNumber].self.position, PlayerSpawn.spawns[playerNumber].self.rotation).GetComponent<PlayerBehaviour>());
+        players.Add(Instantiate(playerPrefab, PlayerSpawn.levelSpawns[LevelManager.instance.currentArena][playerNumber].self.position, PlayerSpawn.levelSpawns[LevelManager.instance.currentArena][playerNumber].self.rotation).GetComponent<PlayerBehaviour>());
 
         PlayerData playerData = SaveManager.instance.playerDatas[playerNumber];
         players[playerNumber].credits = playerData.credits;

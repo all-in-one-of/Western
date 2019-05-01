@@ -28,13 +28,22 @@ public class EnemyBehaviour : MonoBehaviour
     private bool canSeePlayer = false;
     private bool charging;
     private bool shooting;
+    private float currentSpeed;
+
+
 
     public void Init(Enemy enemy)
     {
         this.enemy = enemy;
+        UpdateSpeed(enemy.moveSpeed);
         spriteRenderer.sprite = enemy.sprite;
     }
 
+    public void UpdateSpeed(float speed)
+    {
+        currentSpeed = speed;
+        navMeshAgent.speed = currentSpeed;
+    }
 
     private void Charge()
     {
@@ -46,7 +55,11 @@ public class EnemyBehaviour : MonoBehaviour
     private void FocusPlayer(PlayerBehaviour player)
     {
         //on se retire de la liste du joueur focus précédent
-        focusedPlayer.attackingEnemies.Remove(this);
+        if (focusedPlayer!=null && focusedPlayer.attackingEnemies!=null && focusedPlayer.attackingEnemies.Contains(this))
+        {
+            focusedPlayer.attackingEnemies.Remove(this);
+        }
+        
         focusedPlayer = player;
         focusedPlayer.AddAttackingEnemy(this);
 
@@ -73,6 +86,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private IEnumerator RefreshTarget()
     {
+        yield return new WaitForSeconds(targetRefreshDelay);
         float minDist = Mathf.Infinity;
         PlayerBehaviour playerToFocus=null;
 
@@ -99,7 +113,7 @@ public class EnemyBehaviour : MonoBehaviour
             FocusPlayer(playerToFocus);
         }
 
-        yield return new WaitForSeconds(targetRefreshDelay);
+        
 
         if (active)
         {

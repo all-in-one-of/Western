@@ -16,8 +16,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     public List<EnemyBehaviour> attackingEnemies;
 
-    private float moveSpeed;
-
     private void Start()
     {
         attackingEnemies = new List<EnemyBehaviour>();
@@ -26,25 +24,22 @@ public class PlayerBehaviour : MonoBehaviour
     public void AddAttackingEnemy(EnemyBehaviour enemy)
     {
         attackingEnemies.Add(enemy);
+        RefreshEnemiesSpeed();
     }
 
     public void RemoveAttackingEnemy(EnemyBehaviour enemy)
     {
         attackingEnemies.Remove(enemy);
+        RefreshEnemiesSpeed();
     }
 
     private void RefreshEnemiesSpeed()
     {
         //get min and max distance
-        float minDist=Mathf.Infinity;
         float maxDist = -Mathf.Infinity;
         for (int i = 0; i < attackingEnemies.Count; i++)
         {
-            if (attackingEnemies[i].distanceToNearestPlayer < minDist)
-            {
-                minDist = attackingEnemies[i].distanceToNearestPlayer;
-            }
-            else if (attackingEnemies[i].distanceToNearestPlayer > maxDist)
+            if (attackingEnemies[i].distanceToNearestPlayer > maxDist)
             {
                 maxDist = attackingEnemies[i].distanceToNearestPlayer;
             }
@@ -53,8 +48,11 @@ public class PlayerBehaviour : MonoBehaviour
 
         for (int i = 0; i < attackingEnemies.Count; i++)
         {
-            float percent = Mathf.InverseLerp(minDist, maxDist, attackingEnemies[i].distanceToNearestPlayer);
-            moveSpeed = Mathf.Lerp(EnemyManager.instance.minGroupSpeed, EnemyManager.instance.maxGroupSpeed, percent);
+            float percent = Mathf.InverseLerp(0, maxDist, attackingEnemies[i].distanceToNearestPlayer);
+            print("percent : " + percent);
+            print(EnemyManager.instance.minGroupSpeed + "," + EnemyManager.instance.maxGroupSpeed);
+            attackingEnemies[i].UpdateSpeed(Mathf.Lerp(EnemyManager.instance.minGroupSpeed, EnemyManager.instance.maxGroupSpeed, percent));
+            print("new speed : " + Mathf.Lerp(EnemyManager.instance.minGroupSpeed, EnemyManager.instance.maxGroupSpeed, percent));
         }
 
     }

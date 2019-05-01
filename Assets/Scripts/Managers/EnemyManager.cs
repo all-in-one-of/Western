@@ -9,14 +9,14 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public GameObject enemyPrefab;
 
-    public float minGroupSpeed;
-    public float maxGroupSpeed;
+    public float minGroupSpeed=1;
+    public float maxGroupSpeed=2;
 
 
     public void Init()
     {
         
-        for (int i = 0; i < EnemySpawn.spawns.Count; i++)
+        for (int i = 0; i < EnemySpawn.levelSpawns[LevelManager.instance.currentArena].Count; i++)
         {
             SpawnEnemy(i);
         }
@@ -26,10 +26,10 @@ public class EnemyManager : Singleton<EnemyManager>
 
     private void SpawnEnemy(int enemyNumber)
     {
-        if (enemyNumber < EnemySpawn.spawns.Count)
+        if (enemyNumber < EnemySpawn.levelSpawns[LevelManager.instance.currentArena].Count)
         {
-            enemies.Add(Instantiate(enemyPrefab, EnemySpawn.spawns[enemyNumber].self.position, EnemySpawn.spawns[enemyNumber].self.rotation).GetComponent<EnemyBehaviour>());
-            enemies[enemies.Count - 1].Init(EnemySpawn.spawns[enemyNumber].enemyToSpawn);
+            enemies.Add(Instantiate(enemyPrefab, EnemySpawn.levelSpawns[LevelManager.instance.currentArena][enemyNumber].self.position, EnemySpawn.levelSpawns[LevelManager.instance.currentArena][enemyNumber].self.rotation).GetComponent<EnemyBehaviour>());
+            enemies[enemies.Count - 1].Init(EnemySpawn.levelSpawns[LevelManager.instance.currentArena][enemyNumber].enemyToSpawn);
         }
         else
         {
