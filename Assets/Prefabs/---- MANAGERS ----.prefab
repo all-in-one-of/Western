@@ -1,5 +1,57 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &441703273
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 441703274}
+  - component: {fileID: 441703275}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &441703274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441703273}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2892385608603074852}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &441703275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 441703273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0de4b310fe7fc44a786b8535a851f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1lifebar: {fileID: 0}
+  player2lifebar: {fileID: 0}
+  scoreText: {fileID: 0}
+  timerBeforeLoosingComboText: {fileID: 0}
+  HUD: {fileID: 0}
+  MainMenu: {fileID: 0}
+  PauseMenu: {fileID: 0}
+  mainCam: {fileID: 0}
+  gameRunning: 0
 --- !u!1 &2892385607419362371
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2892385608423516898
 Transform:
   m_ObjectHideFlags: 0
@@ -407,7 +459,6 @@ MonoBehaviour:
   saveManagerPrefab: {fileID: 0}
   levelManagerPrefab: {fileID: 0}
   playerManagerPrefab: {fileID: 0}
-  gameRunning: 0
 --- !u!1 &2892385608603074851
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +490,7 @@ Transform:
   - {fileID: 2892385607571801745}
   - {fileID: 2892385607419362372}
   - {fileID: 2892385607769260789}
+  - {fileID: 441703274}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

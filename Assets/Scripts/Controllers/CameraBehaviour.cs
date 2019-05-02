@@ -15,6 +15,7 @@ public class CameraBehaviour : MonoBehaviour
     Vector3 newcamPosition;
     float timer;
 
+    public Vector3 camPosition;
     
     public void Update()
     {
@@ -29,6 +30,7 @@ public class CameraBehaviour : MonoBehaviour
 
         float fielOfView = Mathf.Clamp(camSize, minCamSize, maxCamSize);
         camComponent.orthographicSize = Mathf.Lerp(camComponent.fieldOfView, fielOfView, Time.deltaTime * 100);
+
     }
 
 }

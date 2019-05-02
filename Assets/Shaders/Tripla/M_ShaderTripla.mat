@@ -5,7 +5,8 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: M_ShaderTripla
   m_Shader: {fileID: 4800000, guid: 3eb4c453618a40848976c171defe870a, type: 3}
   m_ShaderKeywords: 
@@ -56,11 +57,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _Tex_X_W:
         m_Texture: {fileID: 2800000, guid: 76d345f863b88b24cbec27f09b9d8c66, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0.15, y: 0.15}
         m_Offset: {x: 0, y: 0}
     - _Tex_X_Y:
         m_Texture: {fileID: 2800000, guid: 76d345f863b88b24cbec27f09b9d8c66, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0.15, y: 0.15}
         m_Offset: {x: 0, y: 0}
     - _Tex_X_Z:
         m_Texture: {fileID: 2800000, guid: b0f10200f2f6fb3478236b37a683a7be, type: 3}
