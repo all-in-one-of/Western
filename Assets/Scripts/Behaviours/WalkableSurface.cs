@@ -14,4 +14,9 @@ public class WalkableSurface : MonoBehaviour
         }
         surfaces.Add(this);
     }
+
+    private void OnDestroy()
+    {
+        surfaces.Remove(this);
+    }
 }
