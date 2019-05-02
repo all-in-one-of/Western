@@ -6,8 +6,9 @@ public class BowController : MonoBehaviour
 {
     public BowData data;
 
-    public int numberOfBullets;
+    public float numberOfBullets;
     float timeBetweenShots;
+    PlayerGameplayValues playerStats;
 
     ControllerBehaviour controllerBehaviour;
 
@@ -16,9 +17,16 @@ public class BowController : MonoBehaviour
 
     private void Awake()
     {
-        numberOfBullets = data.magazineSize-1;
+        playerStats = GetComponent<PlayerGameplayValues>();
+
         timeBetweenShots = data.timeBetweenShots;
         controllerBehaviour = GetComponent<ControllerBehaviour>();
+    }
+
+    public void Start()
+    {
+        numberOfBullets = playerStats.numberOfArrowStartingGame;
+
     }
     public void Update()
     {
@@ -80,9 +88,10 @@ public class BowController : MonoBehaviour
             //Instantiate bullet
             GameObject newBullet = Instantiate(data.bullet, data.firePoint.position, Quaternion.Euler(data.firePoint.eulerAngles.x, data.firePoint.eulerAngles.y, data.firePoint.eulerAngles.z), data.bulletsGroup.transform);
                 newBullet.GetComponent<ArrowMovingBehaviour>().speed = data.bulletSpeed;
+                Vector3 vec = transform.forward * newBullet.GetComponent<ArrowMovingBehaviour>().speed;
 
-                newBullet.GetComponent<Rigidbody>().AddForce(transform.forward * newBullet.GetComponent<ArrowMovingBehaviour>().speed);
-
+                newBullet.GetComponent<Rigidbody>().AddForce(vec);
+                Debug.Log(vec);
 
                 numberOfBullets--;
             }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ac3293b9057c9c49840131a022b1f27, type: 3}
-  m_Name: PlayerStats
+  m_Name: Player1Stats
   m_EditorClassIdentifier: 
   maxHealth:
     startValue: 100
@@ -40,38 +40,56 @@ MonoBehaviour:
       m_RotationOrder: 4
     upgradeValue: 10
   speed:
-    startValue: 0
+    startValue: 10
     priceOverUpgradeLevel:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    upgradeValue: 0
+    upgradeValue: 5
   maxAmmo:
-    startValue: 0
+    startValue: 4
     priceOverUpgradeLevel:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    upgradeValue: 0
+    upgradeValue: 1
   startAmmo:
-    startValue: 0
+    startValue: 3
     priceOverUpgradeLevel:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    upgradeValue: 0
+    upgradeValue: 1
   maxStamina:
-    startValue: 0
+    startValue: 20
     priceOverUpgradeLevel:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    upgradeValue: 0
+    upgradeValue: 10
+  healthRegen:
+    startValue: 0.1
+    priceOverUpgradeLevel:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    upgradeValue: 0.2
+  staminaRegen:
+    startValue: 1
+    priceOverUpgradeLevel:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    upgradeValue: 1
