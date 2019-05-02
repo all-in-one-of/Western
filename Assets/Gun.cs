@@ -8,8 +8,8 @@ public class Gun : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
-        print("player in trigger : " + player);
+        PlayerBehaviour player = other.transform.parent.GetComponentInParent<PlayerBehaviour>();
+        print("object in trigger : " + other);
         if (player != null)
         {
             enemyBehaviour.playerInTriggerBox = player;
