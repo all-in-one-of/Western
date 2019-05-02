@@ -7,8 +7,8 @@ public class HealthBehaviour : MonoBehaviour
 {
     public Image healthBar;
 
-    PlayerGameplayValues playerStats;
-  ControllerBehaviour controllerBehaviour;
+    public PlayerGameplayValues playerStats;
+    ControllerBehaviour controllerBehaviour;
 
     public void Start()
     {
