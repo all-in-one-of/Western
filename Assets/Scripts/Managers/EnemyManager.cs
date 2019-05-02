@@ -53,4 +53,13 @@ public class EnemyManager : Singleton<EnemyManager>
             enemies[i].Activate(on);
         }
     }
+
+    public void RemoveEnemy(EnemyBehaviour enemy)
+    {
+        enemies.Remove(enemy);
+        if (enemies.Count <= 0)
+        {
+            UIManager.instance.ShowUpgradeMenu();
+        }
+    }
 }

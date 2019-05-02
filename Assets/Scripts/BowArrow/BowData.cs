@@ -13,7 +13,6 @@ public class BowData : MonoBehaviour
 
     public float bulletSpeed;
     public float timeBetweenShots;
-    public int magazineSize;
 
     public Transform firePoint;
 }

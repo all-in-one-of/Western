@@ -15,11 +15,11 @@ public class ArrowMovingBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 vel = rigidBody.velocity;
-        float angle = Mathf.Atan2(vel.y, vel.x) * Mathf.Rad2Deg;
+        //Vector3 vel = rigidBody.velocity;
+        //float angle = Mathf.Atan2(vel.y, vel.x) * Mathf.Rad2Deg;
 
 
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, angle);
+        //transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, angle);
     }
 
     public void OnTriggerEnter(Collider other)
@@ -28,12 +28,15 @@ public class ArrowMovingBehaviour : MonoBehaviour
         if (other.GetComponent<BowController>()!=null)
         {
             BowController otherController = other.GetComponent<BowController>();
-            if (otherController.numberOfBullets < otherController.data.magazineSize)
+            PlayerGameplayValues otherControllerValues = other.GetComponent<PlayerGameplayValues>();
+            if (otherController.numberOfBullets < otherControllerValues.magazineSize)
             {
                 SoundManager.instance.PlayArrowTake();
                 otherController.numberOfBullets++;
                 Destroy(gameObject);
             }
         }
+
+        Debug.Log("collission arrow moving");
     }
 }

@@ -26,7 +26,6 @@ public class GameManagerValues : Singleton<GameManagerValues>
 
     public void Start()
     {
-        GameManager.instance.gameRunning = true;
     }
 
     // Update is called once per frame
@@ -45,13 +44,13 @@ public class GameManagerValues : Singleton<GameManagerValues>
 
         TimerText.text = timer.ToString("F2") + " sec left";
 
-        if (Player1.data.state == ControllerData.PlayerStates.Dead && Player2.data.state == ControllerData.PlayerStates.Dead && GameManager.instance.gameRunning==true)
+        if (Player1.data.state == ControllerData.PlayerStates.Dead && Player2.data.state == ControllerData.PlayerStates.Dead && Menu.instance.gameRunning==true)
         {
             //Game finished
             SoundManager.instance.PlayUniqueSound(SoundManager.instance.gameOver);
 
             Debug.Log("Game Finished");
-            GameManager.instance.gameRunning = false;
+            Menu.instance.gameRunning = false;
         }
 
         if(comboValue > 1 && timerGoingOn==false)  //start cooldown before loosing combo
@@ -93,7 +92,6 @@ public class GameManagerValues : Singleton<GameManagerValues>
 
         }
 
-        Debug.Log(timer);
        
 
 

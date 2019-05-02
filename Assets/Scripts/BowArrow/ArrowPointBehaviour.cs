@@ -21,6 +21,8 @@ public class ArrowPointBehaviour : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        Debug.Log("collission arrow point");
+
         if (other.GetComponent<ControllerBehaviour>() == null && other.gameObject.tag!="Ennemy")
         {
             parentRigidbody.isKinematic = true;
