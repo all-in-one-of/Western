@@ -9,4 +9,7 @@ public class Menu : MonoBehaviour
     public Image player2lifebar;
     public Text scoreText;
     public Text timerBeforeLoosingComboText;
+
+    public GameObject HUD;
+    public GameObject MainMenu;
 }
