@@ -149,7 +149,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (focusedPlayer == null || shooting) { return; }
         
-        gunTransform.eulerAngles = new Vector3(gunTransform.eulerAngles.x, Quaternion.LookRotation(focusedPlayer.self.position - self.position, Vector3.up).eulerAngles.y-90, gunTransform.eulerAngles.z);
+        gunTransform.eulerAngles = new Vector3(gunTransform.eulerAngles.x, gunTransform.eulerAngles.y, Quaternion.LookRotation(focusedPlayer.self.position - self.position, Vector3.up).eulerAngles.y + 90);
         if (charging)
         {
             //self.LookAt(focusedPlayer.self);

@@ -57,9 +57,10 @@ public class GameManager : Singleton<GameManager>
         
 
         UIManager.instance.SpawnCanvas();
+        InputManager.instance.Init();
     }
 
-    private void LoadArenas()
+    public void LoadArenas()
     {
         if (playerCount <= 0)
         {

@@ -10,12 +10,15 @@ public class Menu : Singleton<Menu>
     public Text scoreText;
     public Text timerBeforeLoosingComboText;
 
-    public GameObject HUD;
-    public GameObject MainMenu;
-    public GameObject PauseMenu;
-    public GameObject upgradeMenu;
+    public SubMenu HUD;
+    public SubMenu MainMenu;
+    public SubMenu PauseMenu;
+    public SubMenu upgradeMenu;
 
-    public CameraBehaviour mainCam;
+    public RectTransform selectionButtonTransform;
+
+
+
 
     public bool gameRunning;
 
@@ -27,13 +30,13 @@ public class Menu : Singleton<Menu>
 
     public void Update()
     {
-        if (MainMenu.activeSelf == true && Input.GetButtonDown("Start_Button"))
+        if (MainMenu.gameObject.activeSelf == true && Input.GetButtonDown("Start_Button"))
         {
-            MainMenu.SetActive(false);
-            HUD.SetActive(true);
+            MainMenu.gameObject.SetActive(false);
+            HUD.gameObject.SetActive(true);
         }
 
-        if(MainMenu.activeSelf == false && Input.GetButtonDown("Select_Button") )
+        if(MainMenu.gameObject.activeSelf == false && Input.GetButtonDown("Select_Button") )
         {
             StopGame();
         }
@@ -43,18 +46,27 @@ public class Menu : Singleton<Menu>
     {
         if (gameRunning == true)
         {
-            PauseMenu.SetActive(true);
+            PauseMenu.gameObject.SetActive(true);
             Time.timeScale = 0;
-            mainCam.gameObject.transform.position = mainCam.camPosition;
             gameRunning = false;
             return;
         }
         else
         {
-            PauseMenu.SetActive(false);
+            PauseMenu.gameObject.SetActive(false);
             gameRunning = true;
             Time.timeScale = 1;
             return;
         }
+    }
+
+    public void StartGame()
+    {
+        GameManager.instance.LoadArenas();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

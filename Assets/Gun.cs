@@ -10,8 +10,11 @@ public class Gun : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerBehaviour player = other.transform.parent.GetComponentInParent<PlayerBehaviour>();
-        print("object in trigger : " + other);
+        PlayerBehaviour player = other.GetComponentInParent<PlayerBehaviour>();
+        if (player == null)
+        {
+            player = other.GetComponent<PlayerBehaviour>();
+        }
         if (player != null)
         {
             enemyBehaviour.playerInTriggerBox = player;
@@ -31,8 +34,7 @@ public class Gun : MonoBehaviour
 
     public void ShootOnPlayer(PlayerBehaviour player) 
     {
-        BulletBehaviour bullet = Instantiate(EnemyManager.instance.bulletPrefab, embout.position, embout.rotation).GetComponent<BulletBehaviour>();
-
+        BulletBehaviour bullet = Instantiate(EnemyManager.instance.bulletPrefab, embout.position, Quaternion.identity).GetComponent<BulletBehaviour>();
         Vector3 direction = (player.self.position - enemyBehaviour.self.position).normalized;
 
         bullet.Init(new Vector3(direction.x,0,direction.z) * enemyBehaviour.enemy.bulletSpeed,enemyBehaviour.enemy.bulletDamage);
