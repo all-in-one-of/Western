@@ -16,6 +16,11 @@ public class Menu : Singleton<Menu>
 
     public CameraBehaviour mainCam;
 
+    public Sprite arrowPleine;
+    public Sprite arrowEmpty;
+
+    public GameObject lotFlechePlayer1;
+    public GameObject lotFlechePlayer2;
     public bool gameRunning;
 
     public void Start()
