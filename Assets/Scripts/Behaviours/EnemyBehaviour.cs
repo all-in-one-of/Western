@@ -159,6 +159,7 @@ public class EnemyBehaviour : MonoBehaviour
             if (Physics.Raycast(self.position, playerInTriggerBox.self.position-self.position, out hit,Mathf.Infinity,layerMask))
             {
                 PlayerBehaviour raycastedPlayer = hit.collider.GetComponent<PlayerBehaviour>();
+                print(hit.collider.name);
                 if (raycastedPlayer == null || raycastedPlayer != focusedPlayer)
                 {
                     canSeePlayer = false;

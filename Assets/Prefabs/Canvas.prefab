@@ -419,10 +419,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0de4b310fe7fc44a786b8535a851f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1lifebar: {fileID: 0}
-  player2lifebar: {fileID: 0}
-  scoreText: {fileID: 0}
-  timerBeforeLoosingComboText: {fileID: 0}
+  player1lifebar: {fileID: 8134064476164479575}
+  player2lifebar: {fileID: 8134064478066383628}
+  scoreText: {fileID: 8134064476159119247}
+  timerBeforeLoosingComboText: {fileID: 8134064476506417804}
 --- !u!1 &8134064478066383626
 GameObject:
   m_ObjectHideFlags: 0
