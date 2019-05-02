@@ -78,7 +78,7 @@ public class ControllerBehaviour : MonoBehaviour
         if (data.state != ControllerData.PlayerStates.Dead)
         {
             
-                data.moveInput = new Vector3(Input.GetAxisRaw("Horizontal" + data.playerID), 0f, Input.GetAxisRaw("Vertical" + data.playerID));
+            data.moveInput = new Vector3(Input.GetAxisRaw("Horizontal" + data.playerID), 0f, Input.GetAxisRaw("Vertical" + data.playerID));
 
             data.moveVelocity = data.moveInput * playerStats.speed;
 
@@ -100,7 +100,7 @@ public class ControllerBehaviour : MonoBehaviour
 
             if (aimInput.sqrMagnitude > 0.0f)
             {
-                transform.rotation = Quaternion.LookRotation(aimInput, Vector3.up);
+                playerBehaviour.transform.rotation = Quaternion.LookRotation(aimInput, Vector3.up);
 
                    
                 lineRenderer.SetPosition(1, aimInput * 10000);

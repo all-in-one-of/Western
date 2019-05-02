@@ -14,6 +14,7 @@ public class PlayerBehaviour : MonoBehaviour
     [System.NonSerialized] public int credits;
     public Transform self;
     public Animator animator;
+    public Transform bow;
 
     public List<EnemyBehaviour> attackingEnemies;
 
