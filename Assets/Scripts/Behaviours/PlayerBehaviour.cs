@@ -49,10 +49,7 @@ public class PlayerBehaviour : MonoBehaviour
         for (int i = 0; i < attackingEnemies.Count; i++)
         {
             float percent = Mathf.InverseLerp(0, maxDist, attackingEnemies[i].distanceToNearestPlayer);
-            print("percent : " + percent);
-            print(EnemyManager.instance.minGroupSpeed + "," + EnemyManager.instance.maxGroupSpeed);
             attackingEnemies[i].UpdateSpeed(Mathf.Lerp(EnemyManager.instance.minGroupSpeed, EnemyManager.instance.maxGroupSpeed, percent));
-            print("new speed : " + Mathf.Lerp(EnemyManager.instance.minGroupSpeed, EnemyManager.instance.maxGroupSpeed, percent));
         }
 
     }

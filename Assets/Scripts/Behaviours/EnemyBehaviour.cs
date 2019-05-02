@@ -30,6 +30,8 @@ public class EnemyBehaviour : MonoBehaviour
     private bool shooting;
     private float currentSpeed;
 
+    private PlayerBehaviour playerInTriggerBox;
+
 
 
     public void Init(Enemy enemy)
@@ -47,6 +49,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Charge()
     {
+        navMeshAgent.isStopped = true;
         charging = true;
         StartCoroutine(Shoot());
         print("charging");
@@ -141,30 +144,20 @@ public class EnemyBehaviour : MonoBehaviour
         if (focusedPlayer == null || shooting) { return; }
         if (charging)
         {
-            self.LookAt(focusedPlayer.self);
+            //self.LookAt(focusedPlayer.self);
+            self.eulerAngles = new Vector3(self.eulerAngles.x,  Quaternion.LookRotation(focusedPlayer.self.position-self.position,Vector3.up).eulerAngles.y, self.eulerAngles.z);
+            return;
         }
-        if (Vector3.Distance(self.position,focusedPlayer.self.position)<=enemy.range && canSeePlayer)
-        {
-            Charge();
-        }
-        else
-        {
-            navMeshAgent.SetDestination(focusedPlayer.transform.position);
-        }
-        
-    }
 
-
-    private void OnTriggerEnter(Collider other)
-    {
-        PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
-        if (player != null && player==focusedPlayer)
+        if (playerInTriggerBox != null && playerInTriggerBox==focusedPlayer)
         {
             RaycastHit hit;
-            if (Physics.Raycast(self.position,(self.position-player.self.position).normalized,out hit))
+            int layerMask = 1 << 12;
+            layerMask = ~layerMask;
+            if (Physics.Raycast(self.position, playerInTriggerBox.self.position-self.position, out hit,Mathf.Infinity,layerMask))
             {
                 PlayerBehaviour raycastedPlayer = hit.collider.GetComponent<PlayerBehaviour>();
-                if (raycastedPlayer==null || raycastedPlayer != focusedPlayer)
+                if (raycastedPlayer == null || raycastedPlayer != focusedPlayer)
                 {
                     canSeePlayer = false;
                 }
@@ -174,18 +167,36 @@ public class EnemyBehaviour : MonoBehaviour
                 }
             }
         }
+
+        if (Vector3.Distance(self.position,focusedPlayer.self.position)<=enemy.range && canSeePlayer)
+        {
+            Charge();
+        }
+        else
+        {
+            navMeshAgent.isStopped = false;
+            navMeshAgent.SetDestination(focusedPlayer.transform.position);
+        }
+        
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
+        if (player != null)
+        {
+            playerInTriggerBox = player;
+        }
     }
 
 
     private void OnTriggerExit(Collider other)
     {
         PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
-        if (player != null)
+        if (player != null && player==playerInTriggerBox)
         {
-            if (player == focusedPlayer)
-            {
-                canSeePlayer = false;
-            }
+            playerInTriggerBox = null;
         }
     }
 }

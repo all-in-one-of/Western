@@ -18,11 +18,12 @@ public class LevelManager : Singleton<LevelManager>
     private int currentArenaIndex;
     private float arenaOffset = 0;
     private bool useSave = false;
+    private int arenasAdded = 0;
 
 
     public void LoadLevel(UnityAction callback=null) {
         this.callback = callback;
-
+        
         //on considère toujours la sauvegarde du premier joueur connecté
         if (SaveManager.instance.playerDatas[0].fromFile)
         {
@@ -32,6 +33,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             useSave = false;
         }
+        arenasAdded = 0;
         GenerateLevel();
     }
 
@@ -59,27 +61,29 @@ public class LevelManager : Singleton<LevelManager>
 
     private void OnSceneAdded(Scene arena, LoadSceneMode arg1)
     {
+        
         Transform rootTransform = arena.GetRootGameObjects()[0].transform;
         rootTransform.position = new Vector3(arenaOffset, 0, 0);
 
+
+        arenasLeftToSpawn--;
 
         //set arena index to every spawn point
         List<EnemySpawn> enemySpawnsInThisArena = GetObjectsByComponent<EnemySpawn>(rootTransform);
 
         for (int i = 0; i < enemySpawnsInThisArena.Count; i++)
         {
-            enemySpawnsInThisArena[i].Init(currentArenaIndex);
+            enemySpawnsInThisArena[i].Init(levels[currentLevel].arenas.Count - arenasLeftToSpawn);
         }
 
         List<PlayerSpawn> playerSpawnsInThisArena = GetObjectsByComponent<PlayerSpawn>(rootTransform);
 
         for (int i = 0; i < playerSpawnsInThisArena.Count; i++)
         {
-            playerSpawnsInThisArena[i].Init(currentArenaIndex);
+            playerSpawnsInThisArena[i].Init(levels[currentLevel].arenas.Count - arenasLeftToSpawn);
         }
         //
-
-        arenasLeftToSpawn--;
+        
         if (arenasLeftToSpawn > 0)
         {
             arenaOffset += levels[currentLevel].arenas[currentArenaIndex].sceneWidth;
@@ -114,6 +118,8 @@ public class LevelManager : Singleton<LevelManager>
             }
         }
     }
+
+
 
     private List<T> GetObjectsByComponent<T>(Transform parent)
     {

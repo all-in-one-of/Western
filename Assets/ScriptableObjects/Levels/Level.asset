@@ -15,4 +15,4 @@ MonoBehaviour:
   arenas:
   - sceneName: LevelTest
     sceneWidth: 10
-  arenasToSpawnCount: 1
+  arenasToSpawnCount: 2

@@ -15,7 +15,13 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public void Init()
     {
-        
+        for (int i = 0; i < EnemySpawn.levelSpawns.Length; i++)
+        {
+            print("arena " + i + ", enemySpawn count : " + EnemySpawn.levelSpawns[i].Count);
+        }
+
+
+
         for (int i = 0; i < EnemySpawn.levelSpawns[LevelManager.instance.currentArena].Count; i++)
         {
             SpawnEnemy(i);
