@@ -4,23 +4,32 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    public static List<EnemySpawn> spawns;
+    public static List<EnemySpawn>[] levelSpawns=new List<EnemySpawn>[4];
     public Transform self;
     public GameObject preview;
 
     public Enemy enemyToSpawn;
 
-    private void Awake()
+    private int arenaIndex;
+
+    public static void InitSpawns()
     {
-        if (spawns == null)
+        for (int i = 0; i < 4; i++)
         {
-            spawns = new List<EnemySpawn>();
+            levelSpawns[i] = new List<EnemySpawn>();
         }
-        spawns.Add(this);
     }
+
+    public void Init(int arenaIndex)
+    {
+        this.arenaIndex = arenaIndex;
+        levelSpawns[arenaIndex].Add(this);
+    }
+
 
     private void Start()
     {
         preview.SetActive(false);
+        print("arena index : " + arenaIndex);
     }
 }

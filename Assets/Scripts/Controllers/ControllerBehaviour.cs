@@ -58,7 +58,7 @@ public class ControllerBehaviour : MonoBehaviour
         }
 
 
-            data.enduranceJauge.fillAmount = currentEndurance / data.enduranceMax;
+        ///data.enduranceJauge.fillAmount = currentEndurance / data.enduranceMax;
 
         FillingUpendurance();
 

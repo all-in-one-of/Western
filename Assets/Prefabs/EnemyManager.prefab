@@ -46,3 +46,5 @@ MonoBehaviour:
   enemies: []
   enemyPrefab: {fileID: 8055712555609436717, guid: f7160ad6cde8ce54489c170b1948dba2,
     type: 3}
+  minGroupSpeed: 1
+  maxGroupSpeed: 2

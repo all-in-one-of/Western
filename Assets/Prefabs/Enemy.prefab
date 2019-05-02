@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 493390308880795472}
   - component: {fileID: 7012817034799803499}
   - component: {fileID: 5398387491457465752}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 8055712555609436716}
   - component: {fileID: 5023010661489561773}
   - component: {fileID: 2938788024300965034}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,6 +142,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 8055712555609436716}
   self: {fileID: 8055712555609436718}
   spriteRenderer: {fileID: 2938788024300965034}
+  groupRange: 0
   targetRefreshDelay: 2
 --- !u!195 &8055712555609436716
 NavMeshAgent:

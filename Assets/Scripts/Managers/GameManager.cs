@@ -25,6 +25,7 @@ public class GameManager : Singleton<GameManager>
         saveManager.name = "SaveManager";
 
         GameObject levelManager = Instantiate(levelManagerPrefab, transform);
+        levelManager.name = "LevelManager";
 
         GameObject inputManager = Instantiate(inputManagerPrefab, transform);
         inputManager.name = "InputManager";
@@ -78,8 +79,8 @@ public class GameManager : Singleton<GameManager>
 
         LevelManager.instance.LoadLevel(delegate
         {
-            //Spawn player
-            for (int i = 0; i < playerCount; i++)
+            //Spawn players according to the number of spawn points in the arena
+            for (int i = 0; i < PlayerSpawn.levelSpawns[LevelManager.instance.currentArena].Count; i++)
             {
                 PlayerManager.instance.SpawnPlayer(i);
             }
