@@ -86,10 +86,21 @@ public class ControllerBehaviour : MonoBehaviour
 
             if (aimInput.z <= 0) {
                 playerBehaviour.animator.SetBool("GoingUp", false);
+                playerBehaviour.bowSpriteRenderer.sortingOrder = 50;
             }
             else
             {
                 playerBehaviour.animator.SetBool("GoingUp", true);
+                playerBehaviour.bowSpriteRenderer.sortingOrder = -50;
+            }
+
+            if (aimInput.x >= 0)
+            {
+                playerBehaviour.playerSpriteRenderer.flipX = true;
+            }
+            else
+            {
+                playerBehaviour.playerSpriteRenderer.flipX = false;
             }
 
 
@@ -100,7 +111,7 @@ public class ControllerBehaviour : MonoBehaviour
 
             if (aimInput.sqrMagnitude > 0.0f)
             {
-                playerBehaviour.transform.rotation = Quaternion.LookRotation(aimInput, Vector3.up);
+                playerBehaviour.parentBow.transform.eulerAngles = new Vector3(playerBehaviour.parentBow.transform.eulerAngles.x, playerBehaviour.parentBow.transform.eulerAngles.y, Quaternion.LookRotation(aimInput, Vector3.up).eulerAngles.y+90) ;
 
                    
                 lineRenderer.SetPosition(1, aimInput * 10000);

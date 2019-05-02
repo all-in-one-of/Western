@@ -12,6 +12,8 @@ public class EnemyManager : Singleton<EnemyManager>
     public float minGroupSpeed=1;
     public float maxGroupSpeed=2;
 
+    public GameObject bulletPrefab;
+
 
     public void Init()
     {
