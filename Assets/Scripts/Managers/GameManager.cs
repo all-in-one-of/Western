@@ -11,10 +11,6 @@ public class GameManager : Singleton<GameManager>
     public GameObject levelManagerPrefab;
     public GameObject playerManagerPrefab;
 
-
-    public bool gameRunning;
-
-
     [System.NonSerialized] public int playerCount = 2;
 
 
