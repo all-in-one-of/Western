@@ -43,6 +43,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e0ebc4a5cdedf2468fa53fa390b640f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasPrefab: {fileID: 8134064477678840423, guid: aa82193dabf13c34cad21cdb2fc20fdd,
-    type: 3}
-  menu: {fileID: 0}
