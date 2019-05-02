@@ -13,15 +13,32 @@ MonoBehaviour:
   m_Name: PlayerStats
   m_EditorClassIdentifier: 
   maxHealth:
-    startValue: 0
+    startValue: 100
     priceOverUpgradeLevel:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    upgradeValue: 0
-    upgradeLevel: 0
+    upgradeValue: 10
   speed:
     startValue: 0
     priceOverUpgradeLevel:
@@ -31,7 +48,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     upgradeValue: 0
-    upgradeLevel: 0
   maxAmmo:
     startValue: 0
     priceOverUpgradeLevel:
@@ -41,7 +57,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     upgradeValue: 0
-    upgradeLevel: 0
   startAmmo:
     startValue: 0
     priceOverUpgradeLevel:
@@ -51,7 +66,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     upgradeValue: 0
-    upgradeLevel: 0
   maxStamina:
     startValue: 0
     priceOverUpgradeLevel:
@@ -61,4 +75,3 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     upgradeValue: 0
-    upgradeLevel: 0
