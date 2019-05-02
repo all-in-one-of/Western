@@ -10,8 +10,10 @@ public class EnemyBehaviour : MonoBehaviour
     public NavMeshAgent navMeshAgent;
     public Transform self;
     public SpriteRenderer spriteRenderer;
+    public Animator animator;
 
     public float groupRange;
+    public Transform gun;
     private Enemy enemy;
     private float currentHealth;
 
@@ -31,7 +33,7 @@ public class EnemyBehaviour : MonoBehaviour
     private bool shooting;
     private float currentSpeed;
 
-    private PlayerBehaviour playerInTriggerBox;
+    [System.NonSerialized] public PlayerBehaviour playerInTriggerBox;
 
 
 
@@ -40,7 +42,6 @@ public class EnemyBehaviour : MonoBehaviour
         this.enemy = enemy;
         currentHealth = enemy.health;
         UpdateSpeed(enemy.moveSpeed);
-        spriteRenderer.sprite = enemy.sprite;
     }
 
     public void UpdateSpeed(float speed)
@@ -91,7 +92,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private IEnumerator RefreshTarget()
     {
-        yield return new WaitForSeconds(targetRefreshDelay);
+        
         float minDist = Mathf.Infinity;
         PlayerBehaviour playerToFocus=null;
 
@@ -118,7 +119,7 @@ public class EnemyBehaviour : MonoBehaviour
             FocusPlayer(playerToFocus);
         }
 
-        
+        yield return new WaitForSeconds(targetRefreshDelay);
 
         if (active)
         {
@@ -144,10 +145,11 @@ public class EnemyBehaviour : MonoBehaviour
     private void Update()
     {
         if (focusedPlayer == null || shooting) { return; }
+        gun.eulerAngles = new Vector3(gun.eulerAngles.x, Quaternion.LookRotation(focusedPlayer.self.position - self.position, Vector3.up).eulerAngles.y-90, gun.eulerAngles.z);
         if (charging)
         {
             //self.LookAt(focusedPlayer.self);
-            self.eulerAngles = new Vector3(self.eulerAngles.x,  Quaternion.LookRotation(focusedPlayer.self.position-self.position,Vector3.up).eulerAngles.y, self.eulerAngles.z);
+            
             return;
         }
 
@@ -159,6 +161,7 @@ public class EnemyBehaviour : MonoBehaviour
             if (Physics.Raycast(self.position, playerInTriggerBox.self.position-self.position, out hit,Mathf.Infinity,layerMask))
             {
                 PlayerBehaviour raycastedPlayer = hit.collider.GetComponent<PlayerBehaviour>();
+                print(hit.collider.name);
                 if (raycastedPlayer == null || raycastedPlayer != focusedPlayer)
                 {
                     canSeePlayer = false;
@@ -173,37 +176,19 @@ public class EnemyBehaviour : MonoBehaviour
         if (Vector3.Distance(self.position,focusedPlayer.self.position)<=enemy.range && canSeePlayer)
         {
             Charge();
+            animator.SetBool("Moving", false);
         }
         else
         {
             navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(focusedPlayer.transform.position);
+            animator.SetBool("Moving", true);
         }
         
     }
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
-        if (player != null)
-        {
-            playerInTriggerBox = player;
-            return;
-        }
-        
-
-    }
-
-
-    private void OnTriggerExit(Collider other)
-    {
-        PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
-        if (player != null && player==playerInTriggerBox)
-        {
-            playerInTriggerBox = null;
-        }
-    }
+    
 
 
     public void Die()
