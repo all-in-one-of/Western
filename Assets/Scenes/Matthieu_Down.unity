@@ -1184,6 +1184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 12996630}
+  playerStats: {fileID: 0}
 --- !u!114 &510977204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1250,6 +1251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 510977206}
+  playerBehaviour: {fileID: 0}
   DashStrengh: 10000
   DashCost: 10
 --- !u!54 &510977208
@@ -1582,8 +1584,8 @@ Transform:
   - {fileID: 128005796}
   - {fileID: 1421647663}
   - {fileID: 478059153}
-  - {fileID: 1229630706}
   - {fileID: 1562765892}
+  - {fileID: 1229630706}
   - {fileID: 1573040991}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -2359,6 +2361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 1533783274}
+  playerBehaviour: {fileID: 0}
   DashStrengh: 10000
   DashCost: 10
 --- !u!114 &1533783274
@@ -2508,6 +2511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 892250767}
+  playerStats: {fileID: 0}
 --- !u!114 &1533783278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2645,7 +2649,7 @@ Transform:
   m_LocalScale: {x: 3.5000014, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 858850235}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 119.76201, z: 0}
 --- !u!1 &1573040990
 GameObject:
