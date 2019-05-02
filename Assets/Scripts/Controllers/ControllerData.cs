@@ -8,7 +8,6 @@ public class ControllerData : MonoBehaviour
     public string playerID;
     public CameraBehaviour mainCamera;
 
-    public float moveSpeed;
     [HideInInspector]
     public Rigidbody myRigidbody;
 
@@ -24,9 +23,7 @@ public class ControllerData : MonoBehaviour
 
     public bool isMoving;
 
-    public float enduranceMax;
     public Image enduranceJauge;
     public float timeBetweenEachDash;
 
-    public float enduranceRegenerationSpeed;
 }

@@ -30,6 +30,5 @@ public class EnemySpawn : MonoBehaviour
     private void Start()
     {
         preview.SetActive(false);
-        print("arena index : " + arenaIndex);
     }
 }

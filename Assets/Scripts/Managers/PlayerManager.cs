@@ -18,8 +18,9 @@ public class PlayerManager : Singleton<PlayerManager>
         {
             players = new List<PlayerBehaviour>();
         }
+        print("spawning player" + playerNumber);
         players.Add(Instantiate(playerPrefab, PlayerSpawn.levelSpawns[LevelManager.instance.currentArena][playerNumber].self.position, PlayerSpawn.levelSpawns[LevelManager.instance.currentArena][playerNumber].self.rotation).GetComponent<PlayerBehaviour>());
-
+        players[players.Count - 1].gameObject.name = "Player" + playerNumber;
         PlayerData playerData = SaveManager.instance.playerDatas[playerNumber];
         players[playerNumber].credits = playerData.credits;
         players[playerNumber].maxAmmoUpgradeLevel = playerData.maxAmmoUpgradeLevel;
