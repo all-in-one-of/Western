@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFiring: 0
-  bullet: {fileID: 5414058525273296483, guid: 20be1e0230ff8ea45a225280969301cc, type: 3}
+  bullet: {fileID: 910500829487882625, guid: 2e40bb67ebf1d2d418c6ef6f571921bd, type: 3}
   bulletsGroup: {fileID: 0}
   bulletSpeed: 2500
   timeBetweenShots: 0.2
