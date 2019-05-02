@@ -18,7 +18,11 @@ public class LevelManager : Singleton<LevelManager>
     private int currentArenaIndex;
     private float arenaOffset = 0;
     private bool useSave = false;
-    private int arenasAdded = 0;
+
+    private Scene[] arenaScenes;
+
+    public Camera[] cameras = new Camera[4];
+    private Camera currentCamera;
 
 
     public void LoadLevel(UnityAction callback=null) {
@@ -33,8 +37,57 @@ public class LevelManager : Singleton<LevelManager>
         {
             useSave = false;
         }
-        arenasAdded = 0;
         GenerateLevel();
+    }
+
+    public void LoadArena()
+    {
+        RemoveAllPlayers();
+        RemoveAllEnemies();
+        currentCamera.enabled = false;
+        currentCamera = cameras[currentArena];
+        currentCamera.enabled = true;
+        SpawnPlayersAndEnemies();
+
+    }
+
+    private void SpawnPlayersAndEnemies()
+    {
+        //Spawn players according to the number of spawn points in the arena
+        for (int i = 0; i < PlayerSpawn.levelSpawns[currentArena].Count; i++)
+        {
+            PlayerManager.instance.SpawnPlayer(i);
+
+        }
+
+        //spawn enemies
+        EnemyManager.instance.Init();
+    }
+
+    private void RemoveAllPlayers()
+    {
+        if (PlayerManager.instance.players != null)
+        {
+            for (int i = 0; i < PlayerManager.instance.players.Count; i++)
+            {
+                Destroy(PlayerManager.instance.players[i].gameObject);
+                
+            }
+            PlayerManager.instance.players.Clear();
+        }
+
+    }
+
+    private void RemoveAllEnemies()
+    {
+        if (EnemyManager.instance.enemies != null)
+        {
+            for (int i = 0; i < EnemyManager.instance.enemies.Count; i++)
+            {
+                Destroy(EnemyManager.instance.enemies[i].gameObject);
+            }
+            EnemyManager.instance.enemies.Clear();
+        }
     }
 
     public void GenerateLevel()
@@ -42,6 +95,8 @@ public class LevelManager : Singleton<LevelManager>
         //Nécessaire, ne pas enlever
         EnemySpawn.InitSpawns();
         PlayerSpawn.InitSpawns();
+        cameras = new Camera[4];
+        arenaScenes = new Scene[4];
 
         arenasLeftToSpawn = levels[currentLevel].arenasToSpawnCount;
         //SceneLoader.AddArenas(levels[currentLevel].arenas, levels[currentLevel].arenasToSpawnCount);
@@ -59,6 +114,36 @@ public class LevelManager : Singleton<LevelManager>
         SceneManager.LoadScene(levels[currentLevel].arenas[currentArenaIndex].sceneName, LoadSceneMode.Additive);
     }
 
+    public void DestroyLevel()
+    {
+        RemoveAllPlayers();
+        RemoveAllEnemies();
+        for (int i = 0; i < levels.Count; i++)
+        {
+            StartCoroutine(UnloadArena(arenaScenes[i]));
+        }
+        
+    }
+
+    private IEnumerator WaitManyTimes()
+    {
+        for (int i = 0; i < levels.Count; i++)
+        {
+            yield return null;
+        }
+
+        //here all the arenas are unloaded
+
+    }
+
+    private IEnumerator UnloadArena(Scene arena)
+    {
+        AsyncOperation unload= SceneManager.UnloadSceneAsync(arena);
+        yield return unload;
+        StartCoroutine(WaitManyTimes());
+    }
+
+
     private void OnSceneAdded(Scene arena, LoadSceneMode arg1)
     {
         
@@ -71,19 +156,27 @@ public class LevelManager : Singleton<LevelManager>
         //set arena index to every spawn point
         List<EnemySpawn> enemySpawnsInThisArena = GetObjectsByComponent<EnemySpawn>(rootTransform);
 
+        int arenaNumber = levels[currentLevel].arenas.Count - arenasLeftToSpawn;
+
         for (int i = 0; i < enemySpawnsInThisArena.Count; i++)
         {
-            enemySpawnsInThisArena[i].Init(levels[currentLevel].arenas.Count - arenasLeftToSpawn);
+            enemySpawnsInThisArena[i].Init(arenaNumber);
         }
 
         List<PlayerSpawn> playerSpawnsInThisArena = GetObjectsByComponent<PlayerSpawn>(rootTransform);
 
         for (int i = 0; i < playerSpawnsInThisArena.Count; i++)
         {
-            playerSpawnsInThisArena[i].Init(levels[currentLevel].arenas.Count - arenasLeftToSpawn);
+            playerSpawnsInThisArena[i].Init(arenaNumber);
         }
+
+        List<Camera> cams = GetObjectsByComponent<Camera>(rootTransform);
+
+
+        cameras[arenaNumber] = cams[0];
+        arenaScenes[arenaNumber] = arena;
         //
-        
+
         if (arenasLeftToSpawn > 0)
         {
             arenaOffset += levels[currentLevel].arenas[currentArenaIndex].sceneWidth;
@@ -93,7 +186,7 @@ public class LevelManager : Singleton<LevelManager>
             }
             else
             {
-                currentArenaIndex = SaveManager.instance.playerDatas[0].arenaIndexes[levels[currentLevel].arenas.Count - arenasLeftToSpawn];
+                currentArenaIndex = SaveManager.instance.playerDatas[0].arenaIndexes[arenaNumber];
             }
             
             selectedArenaIndexes.Add(currentArenaIndex);
@@ -110,7 +203,17 @@ public class LevelManager : Singleton<LevelManager>
             {
                 WalkableSurface.surfaces[i].gameObject.AddComponent<NavMeshSourceTag>();
             }
+            if (Obstacle.obstacles == null)
+            {
+                Debug.LogWarning("t'as oublié de mettre des obstacles wesh");
+                return;
+            }
+            for (int i = 0; i < Obstacle.obstacles.Count; i++)
+            {
+                Obstacle.obstacles[i].gameObject.AddComponent<NavMeshSourceTag>();
+            }
 
+            currentCamera = cameras[0];
 
             if (callback != null)
             {
@@ -125,7 +228,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         List<T> objects = new List<T>();
 
-        SearchChildrenByComponent<T>(objects, parent);
+        SearchChildrenByComponent(objects, parent);
 
         return objects;
     }
@@ -136,13 +239,14 @@ public class LevelManager : Singleton<LevelManager>
         {
             Transform childTransform = parent.GetChild(i);
             T childObject = childTransform.GetComponent<T>();
-            if (childObject!=null)
+
+            if (childObject!= null && !childObject.Equals(default(T)))
             {
                 children.Add(childObject);
             }
             else
             {
-                SearchChildrenByComponent<T>(children, childTransform);
+                SearchChildrenByComponent(children, childTransform);
             }
         }
     }

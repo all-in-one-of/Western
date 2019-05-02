@@ -13,4 +13,5 @@ public class Enemy : ScriptableObject
     public Sprite sprite;
     public float chargeDuration;
     public float shootDuration;
+    public float health;
 }

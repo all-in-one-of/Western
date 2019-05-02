@@ -44,10 +44,6 @@ public class GameManager : Singleton<GameManager>
         LoadGame();
     }
 
-    public void Update()
-    {
-       
-    }
 
 
     public void LoadGame()
@@ -77,17 +73,10 @@ public class GameManager : Singleton<GameManager>
             LevelManager.instance.currentLevel = 0;
         }
 
-        LevelManager.instance.LoadLevel(delegate
-        {
-            //Spawn players according to the number of spawn points in the arena
-            for (int i = 0; i < PlayerSpawn.levelSpawns[LevelManager.instance.currentArena].Count; i++)
-            {
-                PlayerManager.instance.SpawnPlayer(i);
-            }
-
-            //spawn enemies
-            EnemyManager.instance.Init();
-
-        });
+        LevelManager.instance.LoadLevel(LevelManager.instance.LoadArena);
     }
+
+    
+
+    
 }

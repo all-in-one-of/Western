@@ -13,6 +13,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public float groupRange;
     private Enemy enemy;
+    private float currentHealth;
 
     [System.NonSerialized] public float distanceToNearestPlayer;
 
@@ -37,6 +38,7 @@ public class EnemyBehaviour : MonoBehaviour
     public void Init(Enemy enemy)
     {
         this.enemy = enemy;
+        currentHealth = enemy.health;
         UpdateSpeed(enemy.moveSpeed);
         spriteRenderer.sprite = enemy.sprite;
     }
@@ -187,7 +189,10 @@ public class EnemyBehaviour : MonoBehaviour
         if (player != null)
         {
             playerInTriggerBox = player;
+            return;
         }
+        
+
     }
 
 
@@ -198,5 +203,12 @@ public class EnemyBehaviour : MonoBehaviour
         {
             playerInTriggerBox = null;
         }
+    }
+
+
+    public void Die()
+    {
+        EnemyManager.instance.RemoveEnemy(this);
+        Destroy(gameObject);
     }
 }
