@@ -40,38 +40,56 @@ MonoBehaviour:
       m_RotationOrder: 4
     upgradeValue: 10
   speed:
-    startValue: 0
+    startValue: 10
     priceOverUpgradeLevel:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    upgradeValue: 0
+    upgradeValue: 5
   maxAmmo:
-    startValue: 0
+    startValue: 4
     priceOverUpgradeLevel:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    upgradeValue: 0
+    upgradeValue: 1
   startAmmo:
-    startValue: 0
+    startValue: 3
     priceOverUpgradeLevel:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    upgradeValue: 0
+    upgradeValue: 1
   maxStamina:
-    startValue: 0
+    startValue: 20
     priceOverUpgradeLevel:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    upgradeValue: 0
+    upgradeValue: 10
+  healthRegen:
+    startValue: 0.1
+    priceOverUpgradeLevel:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    upgradeValue: 0.2
+  staminaRegen:
+    startValue: 1
+    priceOverUpgradeLevel:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    upgradeValue: 1

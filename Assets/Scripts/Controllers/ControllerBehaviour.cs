@@ -10,8 +10,9 @@ public class ControllerBehaviour : MonoBehaviour
     LineRenderer lineRenderer;
     BowController bowController;
 
+    PlayerGameplayValues playerStats;
+
     float timeBewteenDash;
-   public  float currentEndurance;
     bool readyToDash;
 
     bool coroutineLaunched;
@@ -24,6 +25,8 @@ public class ControllerBehaviour : MonoBehaviour
 
     void Start()
     {
+        playerStats = GetComponent<PlayerGameplayValues>();
+
         data.myRigidbody = GetComponent<Rigidbody>();
         bowController = GetComponent<BowController>();
         lineRenderer = GetComponent<LineRenderer>();
@@ -35,12 +38,12 @@ public class ControllerBehaviour : MonoBehaviour
 
         lineRenderer.SetPosition(1, transform.forward * 10000);
 
-        currentEndurance = data.enduranceMax;
     }
 
 
     void Update()
     {
+        data.enduranceJauge.fillAmount = playerStats.stamina / playerStats.maxStamina;
 
         if (noStaminaSoundPlaying == true && timer <= 0)
         {
@@ -76,7 +79,7 @@ public class ControllerBehaviour : MonoBehaviour
             
                 data.moveInput = new Vector3(Input.GetAxisRaw("Horizontal" + data.playerID), 0f, Input.GetAxisRaw("Vertical" + data.playerID));
 
-            data.moveVelocity = data.moveInput * data.moveSpeed;
+            data.moveVelocity = data.moveInput * playerStats.speed;
 
             Vector3 aimInput = Vector3.right * Input.GetAxisRaw("Right_Horizontal" + data.playerID) + Vector3.forward * -Input.GetAxisRaw("Right_Vertical" + data.playerID);
 
@@ -102,20 +105,20 @@ public class ControllerBehaviour : MonoBehaviour
                 data.isMoving = false;
             }
 
-            if (Input.GetAxisRaw("Left_Trigger" + data.playerID) != 0 && currentEndurance > 0 && readyToDash == true && data.moveInput != Vector3.zero)
+            if (Input.GetAxisRaw("Left_Trigger" + data.playerID) != 0 && playerStats.stamina > 0 && readyToDash == true && data.moveInput != Vector3.zero)
             {
 
                 //dasH
                 SoundManager.instance.PlayDash();
 
                 data.myRigidbody.AddForce(data.moveInput * DashStrengh);
-                if (currentEndurance - DashCost >= 0)
+                if (playerStats.stamina - DashCost >= 0)
                 {
-                    currentEndurance -= DashCost;
+                    playerStats.stamina -= DashCost;
                 }
                 else
                 {
-                    currentEndurance = 0;
+                    playerStats.stamina = 0;
                 }
                 timeBewteenDash = data.timeBetweenEachDash;
                 readyToDash = false;
@@ -125,7 +128,7 @@ public class ControllerBehaviour : MonoBehaviour
             {
                 //no input dash
             }
-            else if(currentEndurance <= 0)
+            else if (playerStats.stamina <= 0)
             {
                 if (noStaminaSoundPlaying == false)
                 {
@@ -144,11 +147,11 @@ public class ControllerBehaviour : MonoBehaviour
 
     public void FillingUpendurance()
     {
-        if (currentEndurance < data.enduranceMax && currentEndurance!=0)
+        if (playerStats.stamina < playerStats.maxStamina && playerStats.stamina!= 0)
         {
-            currentEndurance += Time.deltaTime * data.enduranceRegenerationSpeed;
+            playerStats.stamina += Time.deltaTime * playerStats.staminaRegen;
         }
-        else if (currentEndurance == 0)
+        else if (playerStats.stamina == 0)
         {
             if (coroutineLaunched == false)
             {
@@ -163,7 +166,7 @@ public class ControllerBehaviour : MonoBehaviour
         coroutineLaunched = true;
         yield return new WaitForSeconds(2);
 
-        currentEndurance = 1f;
+        playerStats.stamina = 1f;
         coroutineLaunched = false;
 
     }

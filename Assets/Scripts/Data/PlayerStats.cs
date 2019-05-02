@@ -10,4 +10,6 @@ public class PlayerStats : ScriptableObject
     public PlayerStat maxAmmo;
     public PlayerStat startAmmo;
     public PlayerStat maxStamina;
+    public PlayerStat healthRegen;
+    public PlayerStat staminaRegen;
 }

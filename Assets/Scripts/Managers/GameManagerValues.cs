@@ -93,7 +93,6 @@ public class GameManagerValues : Singleton<GameManagerValues>
 
         }
 
-        Debug.Log(timer);
        
 
 
