@@ -18,11 +18,12 @@ public class LevelManager : Singleton<LevelManager>
     private int currentArenaIndex;
     private float arenaOffset = 0;
     private bool useSave = false;
+    private int arenasAdded = 0;
 
 
     public void LoadLevel(UnityAction callback=null) {
         this.callback = callback;
-
+        
         //on considère toujours la sauvegarde du premier joueur connecté
         if (SaveManager.instance.playerDatas[0].fromFile)
         {
@@ -32,14 +33,18 @@ public class LevelManager : Singleton<LevelManager>
         {
             useSave = false;
         }
+        arenasAdded = 0;
         GenerateLevel();
     }
 
     public void GenerateLevel()
     {
+        //Nécessaire, ne pas enlever
+        EnemySpawn.InitSpawns();
+        PlayerSpawn.InitSpawns();
+
         arenasLeftToSpawn = levels[currentLevel].arenasToSpawnCount;
         //SceneLoader.AddArenas(levels[currentLevel].arenas, levels[currentLevel].arenasToSpawnCount);
-        print("arenas left to spawn : " + arenasLeftToSpawn);
 
         SceneManager.sceneLoaded += OnSceneAdded;
         if (!useSave)
@@ -54,10 +59,31 @@ public class LevelManager : Singleton<LevelManager>
         SceneManager.LoadScene(levels[currentLevel].arenas[currentArenaIndex].sceneName, LoadSceneMode.Additive);
     }
 
-    private void OnSceneAdded(Scene arg0, LoadSceneMode arg1)
+    private void OnSceneAdded(Scene arena, LoadSceneMode arg1)
     {
-        arg0.GetRootGameObjects()[0].transform.position = new Vector3(arenaOffset, 0, 0);
+        
+        Transform rootTransform = arena.GetRootGameObjects()[0].transform;
+        rootTransform.position = new Vector3(arenaOffset, 0, 0);
+
+
         arenasLeftToSpawn--;
+
+        //set arena index to every spawn point
+        List<EnemySpawn> enemySpawnsInThisArena = GetObjectsByComponent<EnemySpawn>(rootTransform);
+
+        for (int i = 0; i < enemySpawnsInThisArena.Count; i++)
+        {
+            enemySpawnsInThisArena[i].Init(levels[currentLevel].arenas.Count - arenasLeftToSpawn);
+        }
+
+        List<PlayerSpawn> playerSpawnsInThisArena = GetObjectsByComponent<PlayerSpawn>(rootTransform);
+
+        for (int i = 0; i < playerSpawnsInThisArena.Count; i++)
+        {
+            playerSpawnsInThisArena[i].Init(levels[currentLevel].arenas.Count - arenasLeftToSpawn);
+        }
+        //
+        
         if (arenasLeftToSpawn > 0)
         {
             arenaOffset += levels[currentLevel].arenas[currentArenaIndex].sceneWidth;
@@ -86,11 +112,37 @@ public class LevelManager : Singleton<LevelManager>
             }
 
 
-
-
             if (callback != null)
             {
                 callback.Invoke();
+            }
+        }
+    }
+
+
+
+    private List<T> GetObjectsByComponent<T>(Transform parent)
+    {
+        List<T> objects = new List<T>();
+
+        SearchChildrenByComponent<T>(objects, parent);
+
+        return objects;
+    }
+
+    private void SearchChildrenByComponent<T>(List<T> children,Transform parent)
+    {
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            Transform childTransform = parent.GetChild(i);
+            T childObject = childTransform.GetComponent<T>();
+            if (childObject!=null)
+            {
+                children.Add(childObject);
+            }
+            else
+            {
+                SearchChildrenByComponent<T>(children, childTransform);
             }
         }
     }

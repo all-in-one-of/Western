@@ -28,16 +28,28 @@ public class EnemyBehaviour : MonoBehaviour
     private bool canSeePlayer = false;
     private bool charging;
     private bool shooting;
+    private float currentSpeed;
+
+    private PlayerBehaviour playerInTriggerBox;
+
+
 
     public void Init(Enemy enemy)
     {
         this.enemy = enemy;
+        UpdateSpeed(enemy.moveSpeed);
         spriteRenderer.sprite = enemy.sprite;
     }
 
+    public void UpdateSpeed(float speed)
+    {
+        currentSpeed = speed;
+        navMeshAgent.speed = currentSpeed;
+    }
 
     private void Charge()
     {
+        navMeshAgent.isStopped = true;
         charging = true;
         StartCoroutine(Shoot());
         print("charging");
@@ -46,7 +58,11 @@ public class EnemyBehaviour : MonoBehaviour
     private void FocusPlayer(PlayerBehaviour player)
     {
         //on se retire de la liste du joueur focus précédent
-        focusedPlayer.attackingEnemies.Remove(this);
+        if (focusedPlayer!=null && focusedPlayer.attackingEnemies!=null && focusedPlayer.attackingEnemies.Contains(this))
+        {
+            focusedPlayer.attackingEnemies.Remove(this);
+        }
+        
         focusedPlayer = player;
         focusedPlayer.AddAttackingEnemy(this);
 
@@ -73,6 +89,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private IEnumerator RefreshTarget()
     {
+        yield return new WaitForSeconds(targetRefreshDelay);
         float minDist = Mathf.Infinity;
         PlayerBehaviour playerToFocus=null;
 
@@ -99,7 +116,7 @@ public class EnemyBehaviour : MonoBehaviour
             FocusPlayer(playerToFocus);
         }
 
-        yield return new WaitForSeconds(targetRefreshDelay);
+        
 
         if (active)
         {
@@ -127,30 +144,20 @@ public class EnemyBehaviour : MonoBehaviour
         if (focusedPlayer == null || shooting) { return; }
         if (charging)
         {
-            self.LookAt(focusedPlayer.self);
+            //self.LookAt(focusedPlayer.self);
+            self.eulerAngles = new Vector3(self.eulerAngles.x,  Quaternion.LookRotation(focusedPlayer.self.position-self.position,Vector3.up).eulerAngles.y, self.eulerAngles.z);
+            return;
         }
-        if (Vector3.Distance(self.position,focusedPlayer.self.position)<=enemy.range && canSeePlayer)
-        {
-            Charge();
-        }
-        else
-        {
-            navMeshAgent.SetDestination(focusedPlayer.transform.position);
-        }
-        
-    }
 
-
-    private void OnTriggerEnter(Collider other)
-    {
-        PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
-        if (player != null && player==focusedPlayer)
+        if (playerInTriggerBox != null && playerInTriggerBox==focusedPlayer)
         {
             RaycastHit hit;
-            if (Physics.Raycast(self.position,(self.position-player.self.position).normalized,out hit))
+            int layerMask = 1 << 12;
+            layerMask = ~layerMask;
+            if (Physics.Raycast(self.position, playerInTriggerBox.self.position-self.position, out hit,Mathf.Infinity,layerMask))
             {
                 PlayerBehaviour raycastedPlayer = hit.collider.GetComponent<PlayerBehaviour>();
-                if (raycastedPlayer==null || raycastedPlayer != focusedPlayer)
+                if (raycastedPlayer == null || raycastedPlayer != focusedPlayer)
                 {
                     canSeePlayer = false;
                 }
@@ -160,18 +167,36 @@ public class EnemyBehaviour : MonoBehaviour
                 }
             }
         }
+
+        if (Vector3.Distance(self.position,focusedPlayer.self.position)<=enemy.range && canSeePlayer)
+        {
+            Charge();
+        }
+        else
+        {
+            navMeshAgent.isStopped = false;
+            navMeshAgent.SetDestination(focusedPlayer.transform.position);
+        }
+        
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
+        if (player != null)
+        {
+            playerInTriggerBox = player;
+        }
     }
 
 
     private void OnTriggerExit(Collider other)
     {
         PlayerBehaviour player = other.GetComponent<PlayerBehaviour>();
-        if (player != null)
+        if (player != null && player==playerInTriggerBox)
         {
-            if (player == focusedPlayer)
-            {
-                canSeePlayer = false;
-            }
+            playerInTriggerBox = null;
         }
     }
 }
