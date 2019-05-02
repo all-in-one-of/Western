@@ -5,25 +5,23 @@ using UnityEngine.UI;
 
 public class HealthBehaviour : MonoBehaviour
 {
-    public float health;
-    public float MaxHealth;
     public Image healthBar;
-    public float healthRegenerationSpeed;
 
+    PlayerGameplayValues playerStats;
   ControllerBehaviour controllerBehaviour;
 
     public void Start()
     {
-        health = MaxHealth;
+        playerStats = GetComponent<PlayerGameplayValues>();
         controllerBehaviour = GetComponent<ControllerBehaviour>();
     }
     public void Update()
     {
-        healthBar.fillAmount = health / MaxHealth;
+        healthBar.fillAmount = playerStats.health / playerStats.maxHealth;
 
-        if (Input.GetKeyDown(KeyCode.Space) && health>0)
+        if (Input.GetKeyDown(KeyCode.Space) && playerStats.health > 0)
         {
-            health -= 10;
+            playerStats.health -= 10;
         }
 
         FillingUpHealth();
@@ -33,15 +31,15 @@ public class HealthBehaviour : MonoBehaviour
 
     public void FillingUpHealth()
     {
-        if (health < MaxHealth && controllerBehaviour.data.state!=ControllerData.PlayerStates.Dead)
+        if (playerStats.health < playerStats.maxHealth && controllerBehaviour.data.state!=ControllerData.PlayerStates.Dead)
         {
-            health += Time.deltaTime * healthRegenerationSpeed;
+            playerStats.health += Time.deltaTime * playerStats.healthRegen;
         }
     }
 
     public void PlayerDead()
     {
-        if (health <= 0 && controllerBehaviour.data.state== ControllerData.PlayerStates.Alive)
+        if (playerStats.health <= 0 && controllerBehaviour.data.state== ControllerData.PlayerStates.Alive)
         {
             SoundManager.instance.PlayDie();
            controllerBehaviour.data.state = ControllerData.PlayerStates.Dead;

@@ -8,11 +8,13 @@ public class RevivingBehaviour : MonoBehaviour
      BowController bowController;
      float timerRevive;
      public float timeToRevivePlayer;
-
+    PlayerGameplayValues playerStats;
     bool PlayerReviving;
 
     public void Start()
     {
+        playerStats = GetComponent<PlayerGameplayValues>();
+
         controllerBehaviour = transform.parent.GetComponent<ControllerBehaviour>();
         healthBehaviour = transform.parent.GetComponent<HealthBehaviour>();
         bowController = transform.parent.GetComponent<BowController>();
@@ -30,7 +32,7 @@ public class RevivingBehaviour : MonoBehaviour
         {
             SoundManager.instance.PlayUniqueSound(SoundManager.instance.revive);
             controllerBehaviour.data.state = ControllerData.PlayerStates.Alive;
-            healthBehaviour.health = healthBehaviour.MaxHealth/2;
+            playerStats.health = playerStats.maxHealth/2;
             bowController.numberOfBullets = 0;
 
         }
