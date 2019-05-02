@@ -18,3 +18,4 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 889174cc9a9db4c4d80524bca790be65, type: 3}
   chargeDuration: 1
   shootDuration: 1
+  health: 0

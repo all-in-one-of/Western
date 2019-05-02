@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ControllerBehaviour : MonoBehaviour
 {
     public ControllerData data;
+    public PlayerBehaviour playerBehaviour;
 
     LineRenderer lineRenderer;
     BowController bowController;
@@ -77,11 +78,20 @@ public class ControllerBehaviour : MonoBehaviour
         if (data.state != ControllerData.PlayerStates.Dead)
         {
             
-                data.moveInput = new Vector3(Input.GetAxisRaw("Horizontal" + data.playerID), 0f, Input.GetAxisRaw("Vertical" + data.playerID));
+            data.moveInput = new Vector3(Input.GetAxisRaw("Horizontal" + data.playerID), 0f, Input.GetAxisRaw("Vertical" + data.playerID));
 
             data.moveVelocity = data.moveInput * playerStats.speed;
 
             Vector3 aimInput = Vector3.right * Input.GetAxisRaw("Right_Horizontal" + data.playerID) + Vector3.forward * -Input.GetAxisRaw("Right_Vertical" + data.playerID);
+
+            if (aimInput.z <= 0) {
+                playerBehaviour.animator.SetBool("GoingUp", false);
+            }
+            else
+            {
+                playerBehaviour.animator.SetBool("GoingUp", true);
+            }
+
 
 
             lineRenderer.startWidth = 0.5f;
@@ -90,7 +100,7 @@ public class ControllerBehaviour : MonoBehaviour
 
             if (aimInput.sqrMagnitude > 0.0f)
             {
-                transform.rotation = Quaternion.LookRotation(aimInput, Vector3.up);
+                playerBehaviour.transform.rotation = Quaternion.LookRotation(aimInput, Vector3.up);
 
                    
                 lineRenderer.SetPosition(1, aimInput * 10000);
@@ -104,6 +114,8 @@ public class ControllerBehaviour : MonoBehaviour
             {
                 data.isMoving = false;
             }
+
+            playerBehaviour.animator.SetBool("Moving", data.isMoving);
 
             if (Input.GetAxisRaw("Left_Trigger" + data.playerID) != 0 && playerStats.stamina > 0 && readyToDash == true && data.moveInput != Vector3.zero)
             {

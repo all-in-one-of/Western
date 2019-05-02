@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ennemy
+  - SurfaceRebond
   layers:
   - Default
   - TransparentFX
