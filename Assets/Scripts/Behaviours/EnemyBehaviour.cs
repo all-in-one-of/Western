@@ -92,7 +92,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private IEnumerator RefreshTarget()
     {
-        yield return new WaitForSeconds(targetRefreshDelay);
+        
         float minDist = Mathf.Infinity;
         PlayerBehaviour playerToFocus=null;
 
@@ -119,7 +119,7 @@ public class EnemyBehaviour : MonoBehaviour
             FocusPlayer(playerToFocus);
         }
 
-        
+        yield return new WaitForSeconds(targetRefreshDelay);
 
         if (active)
         {
