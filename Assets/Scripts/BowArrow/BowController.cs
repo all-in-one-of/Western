@@ -87,8 +87,8 @@ public class BowController : MonoBehaviour
 
             //Instantiate bullet
             GameObject newBullet = Instantiate(data.bullet, data.firePoint.position, Quaternion.Euler(data.firePoint.eulerAngles.x, data.firePoint.eulerAngles.y, data.firePoint.eulerAngles.z), data.bulletsGroup.transform);
-                newBullet.GetComponent<ArrowMovingBehaviour>().speed = data.bulletSpeed;
-                Vector3 vec = transform.forward * newBullet.GetComponent<ArrowMovingBehaviour>().speed;
+                newBullet.GetComponent<ArrowValuesGeneralNEW>().speed = data.bulletSpeed;
+                Vector3 vec = transform.forward * newBullet.GetComponent<ArrowValuesGeneralNEW>().speed;
 
                 newBullet.GetComponent<Rigidbody>().AddForce(vec);
                 Debug.Log(vec);
