@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HealthBehaviour : MonoBehaviour
 {
-    public Image healthBar;
+    [System.NonSerialized] public Image healthBar;
 
     public PlayerGameplayValues playerStats;
     ControllerBehaviour controllerBehaviour;
@@ -14,7 +14,16 @@ public class HealthBehaviour : MonoBehaviour
     {
         playerStats = GetComponent<PlayerGameplayValues>();
         controllerBehaviour = GetComponent<ControllerBehaviour>();
+        if (controllerBehaviour.data.playerID == "_1")
+        {
+            healthBar = UIManager.instance.menu.player1lifebar;
+        }
+        else
+        {
+            healthBar = UIManager.instance.menu.player2lifebar;
+        }
     }
+
     public void Update()
     {
         healthBar.fillAmount = playerStats.health / playerStats.maxHealth;

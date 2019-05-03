@@ -13,6 +13,7 @@ public class Menu : Singleton<Menu>
     public GameObject HUD;
     public GameObject MainMenu;
     public GameObject PauseMenu;
+    public GameObject upgradeMenu;
 
     public CameraBehaviour mainCam;
 
@@ -45,18 +46,18 @@ public class Menu : Singleton<Menu>
 
     public void StopGame()
     {
-        if (Menu.instance.gameRunning == true)
+        if (gameRunning == true)
         {
             PauseMenu.SetActive(true);
             Time.timeScale = 0;
             mainCam.gameObject.transform.position = mainCam.camPosition;
-            Menu.instance.gameRunning = false;
+            gameRunning = false;
             return;
         }
         else
         {
             PauseMenu.SetActive(false);
-            Menu.instance.gameRunning = true;
+            gameRunning = true;
             Time.timeScale = 1;
             return;
         }
