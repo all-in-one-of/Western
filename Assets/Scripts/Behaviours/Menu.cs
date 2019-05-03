@@ -21,6 +21,9 @@ public class Menu : Singleton<Menu>
 
     public GameObject lotFlechePlayer1;
     public GameObject lotFlechePlayer2;
+
+
+    public GameManagerValues gameManagerValues;
     public bool gameRunning;
 
     public void Start()
@@ -34,6 +37,7 @@ public class Menu : Singleton<Menu>
         Time.timeScale = 1;
         MainMenu.SetActive(false);
         HUD.SetActive(true);
+        GameManager.instance.LoadArenas();
     }
 
     public void OnClickExitGame()

@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 496810593562383268}
   - component: {fileID: 496810593562383274}
   - component: {fileID: 4696090212470599231}
+  - component: {fileID: 2785113240342359593}
   m_Layer: 8
   m_Name: Player1
   m_TagString: Untagged
@@ -571,6 +572,14 @@ MonoBehaviour:
   healthBehaviour: {fileID: 496810593562383277}
   controllerBehaviour: {fileID: 496810593562383266}
   attackingEnemies: []
+--- !u!81 &2785113240342359593
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496810593562383264}
+  m_Enabled: 1
 --- !u!1 &496810594367886144
 GameObject:
   m_ObjectHideFlags: 0
