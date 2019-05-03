@@ -8,6 +8,7 @@ public class ControllerBehaviour : MonoBehaviour
     public ControllerData data;
     public PlayerBehaviour playerBehaviour;
 
+    public ParticleSystem dashParticle;
     LineRenderer lineRenderer;
     BowController bowController;
 
@@ -45,6 +46,9 @@ public class ControllerBehaviour : MonoBehaviour
 
     void Update()
     {
+
+        
+
         data.enduranceJauge.fillAmount = playerStats.stamina / playerStats.maxStamina;
 
         if (noStaminaSoundPlaying == true && timer <= 0)
@@ -142,8 +146,15 @@ public class ControllerBehaviour : MonoBehaviour
 
                 //dasH
                 SoundManager.instance.PlayDash();
+                dashParticle.Play();
 
                 data.myRigidbody.AddForce(data.moveInput * DashStrengh);
+
+                dashParticle.gameObject.transform.LookAt(-(data.moveInput * DashStrengh));
+
+                dashParticle.gameObject.transform.localPosition = Vector3.zero;
+
+
                 if (playerStats.stamina - DashCost >= 0)
                 {
                     playerStats.stamina -= DashCost;
@@ -154,6 +165,7 @@ public class ControllerBehaviour : MonoBehaviour
                 }
                 timeBewteenDash = data.timeBetweenEachDash;
                 readyToDash = false;
+                StartCoroutine(waitForSecondsDash(0.2f));
 
             }
             else if (data.moveInput == Vector3.zero)
@@ -177,7 +189,12 @@ public class ControllerBehaviour : MonoBehaviour
         }
     }
 
+    IEnumerator waitForSecondsDash(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        dashParticle.Stop();
 
+    }
     private void Bounce(Vector3 direction,float remainingRange)
     {
         int layerMask = 1 << 8 | 1 << 12;
