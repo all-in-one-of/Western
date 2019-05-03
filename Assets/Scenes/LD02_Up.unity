@@ -1869,13 +1869,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133008277}
-  m_LocalRotation: {x: 0.6462363, y: -0, z: -0, w: 0.7631374}
-  m_LocalPosition: {x: 48.21, y: -2.2200012, z: -16.350002}
+  m_LocalRotation: {x: 0.7084002, y: -0, z: -0, w: 0.705811}
+  m_LocalPosition: {x: 48.21, y: -2.86, z: -16.350002}
   m_LocalScale: {x: 6.496338, y: 6.49634, z: 6.49634}
   m_Children: []
   m_Father: {fileID: 796322645}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 80.517006, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90.208984, y: -0.000015258789, z: -0.000015258789}
 --- !u!212 &133008279
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -25501,6 +25501,16 @@ MonoBehaviour:
   levelManagerPrefab: {fileID: 0}
   playerManagerPrefab: {fileID: 0}
   levelFinished: 0
+  p1healthUpgradeLevel: 0
+  p1speedUpgradeLevel: 0
+  p1magazineSizeUpgradeLevel: 0
+  p1startArrowsNumberUpgradeLevel: 0
+  p1maxStaminaUpgradeLevel: 0
+  p2healthUpgradeLevel: 0
+  p2speedUpgradeLevel: 0
+  p2magazineSizeUpgradeLevel: 0
+  p2startArrowsNumberUpgradeLevel: 0
+  p2maxStaminaUpgradeLevel: 0
 --- !u!1 &1887352890 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4221547395517203372, guid: 791e6706b0a19ad45a6b9c6c4f4ee9b1,
