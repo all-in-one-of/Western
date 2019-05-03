@@ -6,7 +6,7 @@ using UnityEngine;
 public class UIManager : Singleton<UIManager>
 {
     public GameObject canvasPrefab;
-    public Menu menu;
+    [System.NonSerialized] public Menu menu;
 
     public void SpawnCanvas()
     {
@@ -17,6 +17,7 @@ public class UIManager : Singleton<UIManager>
     public void ShowUpgradeMenu()
     {
         //menu.upgradeMenu.setActive(true);
+        menu.upgradeMenu.SetActive(true);
     }
 
     [MenuItem("Western/NextArena")]
