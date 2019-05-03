@@ -25,18 +25,25 @@ public class Menu : Singleton<Menu>
 
     public void Start()
     {
-        gameRunning = true;
+        gameRunning = false;
+        Time.timeScale = 0;
+    }
 
+    public void OnClickStartGame()
+    {
+        gameRunning = true;
+        Time.timeScale = 1;
+        MainMenu.SetActive(false);
+        HUD.SetActive(true);
+    }
+
+    public void OnClickExitGame()
+    {
+        Application.Quit();
     }
 
     public void Update()
     {
-        if (MainMenu.activeSelf == true && Input.GetButtonDown("Start_Button"))
-        {
-            MainMenu.SetActive(false);
-            HUD.SetActive(true);
-        }
-
         if(MainMenu.activeSelf == false && Input.GetButtonDown("Select_Button") )
         {
             StopGame();
