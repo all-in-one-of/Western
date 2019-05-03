@@ -387,6 +387,7 @@ MonoBehaviour:
   isMoving: 0
   enduranceJauge: {fileID: 496810594385528594}
   timeBetweenEachDash: 1
+  lineRange: 30
 --- !u!114 &496810593562383275
 MonoBehaviour:
   m_ObjectHideFlags: 0
