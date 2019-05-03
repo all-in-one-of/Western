@@ -18,4 +18,4 @@ MonoBehaviour:
   chargeDuration: 1
   shootDuration: 1
   bulletDamage: 10
-  aggroRange: 30
+  aggroRange: 27
