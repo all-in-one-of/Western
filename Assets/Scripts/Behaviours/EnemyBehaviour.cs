@@ -150,9 +150,39 @@ public class EnemyBehaviour : MonoBehaviour
         if (focusedPlayer == null || shooting) { return; }
         
         gunTransform.eulerAngles = new Vector3(gunTransform.eulerAngles.x, gunTransform.eulerAngles.y, Quaternion.LookRotation(focusedPlayer.self.position - self.position, Vector3.up).eulerAngles.y + 90);
+
+        print("z :"+ gunTransform.eulerAngles.z);
+
+        if (gunTransform.eulerAngles.z >= 90 && gunTransform.eulerAngles.z < 270)
+        {
+            gun.spriteRenderer.flipY = true;
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            gun.spriteRenderer.flipY = false;
+            spriteRenderer.flipX = false;
+        }
+
+        //Orientation
+        if (gunTransform.eulerAngles.z <= 360 && gunTransform.eulerAngles.z > 180)
+        {
+            animator.SetBool("GoingUp", false);
+            gun.spriteRenderer.sortingOrder = -50;
+        }
+        else
+        {
+            animator.SetBool("GoingUp", true);
+            gun.spriteRenderer.sortingOrder = 50;
+        }
+
+
+
+
         if (charging)
         {
             //self.LookAt(focusedPlayer.self);
+            
             
             return;
         }
@@ -188,28 +218,12 @@ public class EnemyBehaviour : MonoBehaviour
             navMeshAgent.isStopped = false;
             navMeshAgent.SetDestination(focusedPlayer.transform.position);
             animator.SetBool("Moving", true);
-            if (navMeshAgent.velocity.x >= 0)
-            {
-                spriteRenderer.flipX = true;
-            }
-            else
-            {
-                spriteRenderer.flipX = false;
-            }
         }
 
 
-        //Orientation
-        if (navMeshAgent.velocity.z <= 0)
-        {
-            animator.SetBool("GoingUp", false);
-            gun.spriteRenderer.sortingOrder = -50;
-        }
-        else
-        {
-            animator.SetBool("GoingUp", true);
-            gun.spriteRenderer.sortingOrder = 50;
-        }
+        
+
+        
 
 
     }

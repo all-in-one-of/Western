@@ -34,7 +34,7 @@ public class Gun : MonoBehaviour
 
     public void ShootOnPlayer(PlayerBehaviour player) 
     {
-        BulletBehaviour bullet = Instantiate(EnemyManager.instance.bulletPrefab, embout.position, Quaternion.identity).GetComponent<BulletBehaviour>();
+        BulletBehaviour bullet = Instantiate(EnemyManager.instance.bulletPrefab, new Vector3(embout.position.x,transform.position.y,embout.position.z), Quaternion.identity).GetComponent<BulletBehaviour>();
         Vector3 direction = (player.self.position - enemyBehaviour.self.position).normalized;
 
         bullet.Init(new Vector3(direction.x,0,direction.z) * enemyBehaviour.enemy.bulletSpeed,enemyBehaviour.enemy.bulletDamage);
