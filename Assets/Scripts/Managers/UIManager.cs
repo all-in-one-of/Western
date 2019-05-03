@@ -6,18 +6,16 @@ using UnityEngine;
 public class UIManager : Singleton<UIManager>
 {
     public GameObject canvasPrefab;
-    public Menu menu;
+    
+
+    [System.NonSerialized] public Menu menu;
 
     public void SpawnCanvas()
     {
         menu=Instantiate(canvasPrefab).GetComponent<Menu>();
     }
 
-    
-    public void ShowUpgradeMenu()
-    {
-        //menu.upgradeMenu.setActive(true);
-    }
+
 
     [MenuItem("Western/NextArena")]
     public static void NextArena()
@@ -37,10 +35,7 @@ public class UIManager : Singleton<UIManager>
         LevelManager.instance.DestroyLevel();
         if (LevelManager.instance.currentLevel < LevelManager.instance.levels.Count-1)
         {
-            
             LevelManager.instance.currentLevel++;
-            
-
         }
         else
         {

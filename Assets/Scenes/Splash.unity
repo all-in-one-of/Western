@@ -161,7 +161,6 @@ MonoBehaviour:
     type: 3}
   playerManagerPrefab: {fileID: 6959280701868591123, guid: 4d9b928bfec414d48bf3ec92a472fe46,
     type: 3}
-  gameRunning: 0
 --- !u!4 &1059171555
 Transform:
   m_ObjectHideFlags: 0

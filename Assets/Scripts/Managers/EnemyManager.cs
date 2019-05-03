@@ -12,6 +12,8 @@ public class EnemyManager : Singleton<EnemyManager>
     public float minGroupSpeed=1;
     public float maxGroupSpeed=2;
 
+    public GameObject bulletPrefab;
+
 
     public void Init()
     {
@@ -59,7 +61,7 @@ public class EnemyManager : Singleton<EnemyManager>
         enemies.Remove(enemy);
         if (enemies.Count <= 0)
         {
-            UIManager.instance.ShowUpgradeMenu();
+            //pop stand achat
         }
     }
 }

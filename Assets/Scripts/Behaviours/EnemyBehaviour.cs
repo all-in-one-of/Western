@@ -13,8 +13,9 @@ public class EnemyBehaviour : MonoBehaviour
     public Animator animator;
 
     public float groupRange;
-    public Transform gun;
-    private Enemy enemy;
+    public Gun gun;
+    public Transform gunTransform;
+    [System.NonSerialized] public Enemy enemy;
     private float currentHealth;
 
     [System.NonSerialized] public float distanceToNearestPlayer;
@@ -78,6 +79,7 @@ public class EnemyBehaviour : MonoBehaviour
         shooting = true;
         //shoot
         print("shooting");
+        gun.ShootOnPlayer(focusedPlayer);
         StartCoroutine(StopShooting());
         
     }
@@ -86,6 +88,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(enemy.shootDuration);
         shooting = false;
+        print("zbeub");
         StartCoroutine(RefreshTarget());
     }
 
@@ -145,10 +148,41 @@ public class EnemyBehaviour : MonoBehaviour
     private void Update()
     {
         if (focusedPlayer == null || shooting) { return; }
-        gun.eulerAngles = new Vector3(gun.eulerAngles.x, Quaternion.LookRotation(focusedPlayer.self.position - self.position, Vector3.up).eulerAngles.y-90, gun.eulerAngles.z);
+        
+        gunTransform.eulerAngles = new Vector3(gunTransform.eulerAngles.x, gunTransform.eulerAngles.y, Quaternion.LookRotation(focusedPlayer.self.position - self.position, Vector3.up).eulerAngles.y + 90);
+
+        print("z :"+ gunTransform.eulerAngles.z);
+
+        if (gunTransform.eulerAngles.z >= 90 && gunTransform.eulerAngles.z < 270)
+        {
+            gun.spriteRenderer.flipY = true;
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            gun.spriteRenderer.flipY = false;
+            spriteRenderer.flipX = false;
+        }
+
+        //Orientation
+        if (gunTransform.eulerAngles.z <= 360 && gunTransform.eulerAngles.z > 180)
+        {
+            animator.SetBool("GoingUp", false);
+            gun.spriteRenderer.sortingOrder = -50;
+        }
+        else
+        {
+            animator.SetBool("GoingUp", true);
+            gun.spriteRenderer.sortingOrder = 50;
+        }
+
+
+
+
         if (charging)
         {
             //self.LookAt(focusedPlayer.self);
+            
             
             return;
         }
@@ -156,12 +190,12 @@ public class EnemyBehaviour : MonoBehaviour
         if (playerInTriggerBox != null && playerInTriggerBox==focusedPlayer)
         {
             RaycastHit hit;
-            int layerMask = 1 << 12;
+            int layerMask = (1 << 12)|(1<<11);
             layerMask = ~layerMask;
             if (Physics.Raycast(self.position, playerInTriggerBox.self.position-self.position, out hit,Mathf.Infinity,layerMask))
             {
-                PlayerBehaviour raycastedPlayer = hit.collider.GetComponent<PlayerBehaviour>();
-                print(hit.collider.name);
+                PlayerBehaviour raycastedPlayer = hit.collider.GetComponentInParent<PlayerBehaviour>();
+                Debug.Log("object hit : ",hit.collider.gameObject);
                 if (raycastedPlayer == null || raycastedPlayer != focusedPlayer)
                 {
                     canSeePlayer = false;
@@ -173,6 +207,7 @@ public class EnemyBehaviour : MonoBehaviour
             }
         }
 
+        //velocity
         if (Vector3.Distance(self.position,focusedPlayer.self.position)<=enemy.range && canSeePlayer)
         {
             Charge();
@@ -184,7 +219,13 @@ public class EnemyBehaviour : MonoBehaviour
             navMeshAgent.SetDestination(focusedPlayer.transform.position);
             animator.SetBool("Moving", true);
         }
+
+
         
+
+        
+
+
     }
 
 
