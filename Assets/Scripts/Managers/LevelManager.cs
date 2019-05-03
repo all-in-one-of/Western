@@ -19,7 +19,9 @@ public class LevelManager : Singleton<LevelManager>
     private float arenaOffset = 0;
     private bool useSave = false;
 
+
     private Scene[] arenaScenes;
+    private GameObject currentRootArena;
 
     public Camera[] cameras = new Camera[4];
     private Camera currentCamera;
@@ -42,18 +44,30 @@ public class LevelManager : Singleton<LevelManager>
 
     public void LoadArena()
     {
+        if (currentRootArena != null)
+        {
+            currentRootArena.SetActive(false);
+        }
+        
         RemoveAllPlayers();
         RemoveAllEnemies();
         if (currentCamera != null)
         {
             currentCamera.enabled = false;
+            currentCamera.GetComponent<CameraBehaviour>().Activate(false);
         }
         currentCamera = cameras[currentArena];
-        currentCamera.enabled = true;
+        if (currentCamera != null)
+        {
+            currentCamera.enabled = true;
+            currentCamera.GetComponent<CameraBehaviour>().Init();
+        }
+        
         SpawnPlayersAndEnemies();
         UIManager.instance.menu.MainMenu.gameObject.SetActive(false);
         UIManager.instance.menu.HUD.gameObject.SetActive(true);
         InputManager.instance.Enable(false);
+        currentRootArena = arenaScenes[currentArena].GetRootGameObjects()[0];
 
     }
 
@@ -156,16 +170,20 @@ public class LevelManager : Singleton<LevelManager>
         Transform rootTransform = arena.GetRootGameObjects()[0].transform;
         rootTransform.position = new Vector3(arenaOffset, 0, 0);
 
+        //rootTransform.gameObject.SetActive(false);
 
-        arenasLeftToSpawn--;
+        
 
         //set arena index to every spawn point
         List<EnemySpawn> enemySpawnsInThisArena = GetObjectsByComponent<EnemySpawn>(rootTransform);
 
         int arenaNumber = levels[currentLevel].arenas.Count - arenasLeftToSpawn;
 
+        arenasLeftToSpawn--;
+
         for (int i = 0; i < enemySpawnsInThisArena.Count; i++)
         {
+            print("arena number : " + arenaNumber);
             enemySpawnsInThisArena[i].Init(arenaNumber);
         }
 

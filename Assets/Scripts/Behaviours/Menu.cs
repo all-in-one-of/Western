@@ -14,13 +14,15 @@ public class Menu : Singleton<Menu>
     public GameObject MainMenu;
     public GameObject PauseMenu;
     public GameObject CreditMenu;
-
+    public GameObject GameOverMenu;
 
     public Sprite arrowPleine;
     public Sprite arrowEmpty;
 
     public GameObject lotFlechePlayer1;
     public GameObject lotFlechePlayer2;
+
+    
 
 
     public GameManagerValues gameManagerValues;
