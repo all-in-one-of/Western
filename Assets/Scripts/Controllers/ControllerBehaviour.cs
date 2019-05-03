@@ -205,13 +205,20 @@ public class ControllerBehaviour : MonoBehaviour
         {
             if (Physics.Raycast(bowController.data.firePoint.position, direction, out raycastHit, remainingRange, layerMask))
             {
-                
-                lineRenderer.SetPosition(lineRenderer.positionCount - 1, raycastHit.point);
-                Vector3 bounceDirection = Vector3.Reflect(direction, raycastHit.normal);
-                bounceDirection = new Vector3(bounceDirection.x, 0, bounceDirection.y);
-                remainingRange -= raycastHit.distance;
+                if (raycastHit.collider.CompareTag("SurfaceRebond"))
+                {
+                    lineRenderer.SetPosition(lineRenderer.positionCount - 1, raycastHit.point);
+                    Vector3 bounceDirection = Vector3.Reflect(direction, raycastHit.normal);
+                    bounceDirection = new Vector3(bounceDirection.x, 0, bounceDirection.y);
+                    remainingRange -= raycastHit.distance;
 
-                Bounce(bounceDirection.normalized, remainingRange);
+                    Bounce(bounceDirection.normalized, remainingRange);
+                }
+                else
+                {
+                    lineRenderer.SetPosition(lineRenderer.positionCount - 1, lineRenderer.GetPosition(lineRenderer.positionCount - 2) + direction * remainingRange);
+                }
+
             }
             else
             {
