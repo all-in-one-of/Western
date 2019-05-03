@@ -13,7 +13,7 @@ public class EnemyManager : Singleton<EnemyManager>
     public float maxGroupSpeed=2;
 
     public GameObject bulletPrefab;
-
+    public GameObject standPrefab;
 
     public void Init()
     {
@@ -62,6 +62,7 @@ public class EnemyManager : Singleton<EnemyManager>
         if (enemies.Count <= 0)
         {
             //pop stand achat
+            Instantiate(standPrefab);
         }
     }
 }

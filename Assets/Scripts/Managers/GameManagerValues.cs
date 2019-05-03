@@ -54,6 +54,8 @@ public class GameManagerValues : Singleton<GameManagerValues>
 
                 Debug.Log("Game Finished");
                 Menu.instance.gameRunning = false;
+
+                UIManager.instance.menu.GameOverMenu.SetActive(true);
             }
         }
         
