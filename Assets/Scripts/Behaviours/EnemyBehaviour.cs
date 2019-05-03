@@ -11,11 +11,10 @@ public class EnemyBehaviour : MonoBehaviour
     public Transform self;
     public SpriteRenderer spriteRenderer;
     public Animator animator;
-    public Transform gunTransform;
-
 
     public float groupRange;
     public Gun gun;
+    public Transform gunTransform;
     [System.NonSerialized] public Enemy enemy;
     private float currentHealth;
 
@@ -80,6 +79,7 @@ public class EnemyBehaviour : MonoBehaviour
         shooting = true;
         //shoot
         print("shooting");
+        gun.ShootOnPlayer(focusedPlayer);
         StartCoroutine(StopShooting());
         
     }
@@ -88,6 +88,7 @@ public class EnemyBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(enemy.shootDuration);
         shooting = false;
+        print("zbeub");
         StartCoroutine(RefreshTarget());
     }
 
@@ -189,12 +190,12 @@ public class EnemyBehaviour : MonoBehaviour
         if (playerInTriggerBox != null && playerInTriggerBox==focusedPlayer)
         {
             RaycastHit hit;
-            int layerMask = 1 << 12;
+            int layerMask = (1 << 12)|(1<<11);
             layerMask = ~layerMask;
             if (Physics.Raycast(self.position, playerInTriggerBox.self.position-self.position, out hit,Mathf.Infinity,layerMask))
             {
-                PlayerBehaviour raycastedPlayer = hit.collider.GetComponent<PlayerBehaviour>();
-                print(hit.collider.name);
+                PlayerBehaviour raycastedPlayer = hit.collider.GetComponentInParent<PlayerBehaviour>();
+                Debug.Log("object hit : ",hit.collider.gameObject);
                 if (raycastedPlayer == null || raycastedPlayer != focusedPlayer)
                 {
                     canSeePlayer = false;
@@ -206,6 +207,7 @@ public class EnemyBehaviour : MonoBehaviour
             }
         }
 
+        //velocity
         if (Vector3.Distance(self.position,focusedPlayer.self.position)<=enemy.range && canSeePlayer)
         {
             Charge();

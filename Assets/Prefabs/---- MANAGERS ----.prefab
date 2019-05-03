@@ -50,7 +50,7 @@ MonoBehaviour:
   HUD: {fileID: 0}
   MainMenu: {fileID: 0}
   PauseMenu: {fileID: 0}
-  mainCam: {fileID: 0}
+  CreditMenu: {fileID: 0}
   arrowPleine: {fileID: 3726666444859746568, guid: b1e8f6ab926ae544db023e86a138251e,
     type: 3}
   arrowEmpty: {fileID: -6738162394269708684, guid: b1e8f6ab926ae544db023e86a138251e,
