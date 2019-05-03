@@ -27,6 +27,7 @@ public class HealthBehaviour : MonoBehaviour
         }
         else
         {
+            print("zbeb");
             playerStats = GetComponent<PlayerGameplayValues>();
 
         }

@@ -18,12 +18,14 @@ public class PlayerGameplayValues : MonoBehaviour
     public float staminaRegen;
 
     BowController bowController;
+    ControllerBehaviour controllerBehaviour;
 
     
 
     public void Start()
     {
         bowController = GetComponent<BowController>();
+        controllerBehaviour = GetComponent<ControllerBehaviour>();
         //if premiere partie et jamais joué avant
         print(scriptableStats);
         maxHealth = scriptableStats.maxHealth.startValue;
@@ -42,8 +44,27 @@ public class PlayerGameplayValues : MonoBehaviour
     public void UpgradeHealth()
     {
         //if assez de money
-        maxHealth += 10;
-        health += 10;
+        if (controllerBehaviour.data.playerID == "_1")
+        {
+            if (GameManagerValues.instance.score >= scriptableStats.maxHealth.priceOverUpgradeLevel.Evaluate(GameManager.instance.p1healthUpgradeLevel))
+            {
+                GameManager.instance.p1healthUpgradeLevel++;
+                maxHealth += 10;
+                health += 10;
+                GameManagerValues.instance.score -= scriptableStats.maxHealth.priceOverUpgradeLevel.Evaluate(GameManager.instance.p1healthUpgradeLevel);
+            }
+            
+        }
+        else
+        {
+            if (GameManagerValues.instance.score >= scriptableStats.maxHealth.priceOverUpgradeLevel.Evaluate(GameManager.instance.p2healthUpgradeLevel))
+            {
+                GameManager.instance.p2healthUpgradeLevel++;
+                maxHealth += 10;
+                health += 10;
+                GameManagerValues.instance.score -= scriptableStats.maxHealth.priceOverUpgradeLevel.Evaluate(GameManager.instance.p2healthUpgradeLevel);
+            }
+        }
         Debug.Log("health");
     }
 
@@ -57,22 +78,49 @@ public class PlayerGameplayValues : MonoBehaviour
 
     public void UpgradeSpeed()
     {
-        speed *= 1.05f;
+        if (controllerBehaviour.data.playerID == "_1")
+        {
+            if (GameManagerValues.instance.score >= scriptableStats.speed.priceOverUpgradeLevel.Evaluate(GameManager.instance.p1speedUpgradeLevel))
+            {
+                GameManager.instance.p1speedUpgradeLevel++;
+                speed *= 1.05f;
+            }
+
+        }
+        else
+        {
+            if (GameManagerValues.instance.score >= scriptableStats.speed.priceOverUpgradeLevel.Evaluate(GameManager.instance.p2speedUpgradeLevel))
+            {
+                GameManager.instance.p2speedUpgradeLevel++;
+                speed *= 1.05f;
+            }
+        }
         Debug.Log("speed");
 
     }
 
     public void UpgradeMaxAmmo()
     {
-        magazineSize++;
-        bowController.numberOfBullets++;
+        
 
         if (GetComponent<ControllerBehaviour>().data.playerID == "_1") {
+            if (GameManagerValues.instance.score >= scriptableStats.maxAmmo.priceOverUpgradeLevel.Evaluate(GameManager.instance.p1magazineSizeUpgradeLevel))
+            {
+                GameManager.instance.p1magazineSizeUpgradeLevel++;
+                magazineSize++;
+                bowController.numberOfBullets++;
+            }
             GameObject arrow = Instantiate(Menu.instance.lotFlechePlayer1.transform.GetChild(0).gameObject, Menu.instance.lotFlechePlayer1.transform);
         }
         else
         {
             GameObject arrow = Instantiate(Menu.instance.lotFlechePlayer2.transform.GetChild(0).gameObject, Menu.instance.lotFlechePlayer2.transform);
+            if (GameManagerValues.instance.score >= scriptableStats.maxAmmo.priceOverUpgradeLevel.Evaluate(GameManager.instance.p2magazineSizeUpgradeLevel))
+            {
+                GameManager.instance.p2magazineSizeUpgradeLevel++;
+                magazineSize++;
+                bowController.numberOfBullets++;
+            }
         }
         Debug.Log("magazineSize");
 
@@ -94,8 +142,24 @@ public class PlayerGameplayValues : MonoBehaviour
 
     public void UpgradeStamina()
     {
-        maxStamina += 10;
-        stamina += 10;
+        if (GetComponent<ControllerBehaviour>().data.playerID == "_1")
+        {
+            if (GameManagerValues.instance.score >= scriptableStats.maxStamina.priceOverUpgradeLevel.Evaluate(GameManager.instance.p1maxStaminaUpgradeLevel))
+            {
+                GameManager.instance.p1maxStaminaUpgradeLevel++;
+                maxStamina += 10;
+                stamina += 10;
+            }
+        }
+        else
+        {
+            if (GameManagerValues.instance.score >= scriptableStats.maxStamina.priceOverUpgradeLevel.Evaluate(GameManager.instance.p2maxStaminaUpgradeLevel))
+            {
+                GameManager.instance.p2magazineSizeUpgradeLevel++;
+                maxStamina += 10;
+                stamina += 10;
+            }
+        }
         Debug.Log("stamina");
 
     }

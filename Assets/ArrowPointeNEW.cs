@@ -44,8 +44,9 @@ public class ArrowPointeNEW : MonoBehaviour
             SoundManager.instance.PlayUniqueSound(SoundManager.instance.arrowBounce);
         }
 
-        else if (other.gameObject.tag == "Ennemy")
+        else if (other.gameObject.tag == "Ennemy" && other.GetComponent<Gun>()==null)
         {
+            
             if (trajectoireFinished == false)
             {
                 GameManagerValues.instance.score++;

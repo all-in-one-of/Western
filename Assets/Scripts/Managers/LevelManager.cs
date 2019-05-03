@@ -142,7 +142,12 @@ public class LevelManager : Singleton<LevelManager>
         SceneManager.sceneLoaded += OnSceneAdded;
         if (!useSave)
         {
-            currentArenaIndex = Random.Range(0, levels[currentLevel].arenas.Count);
+            int random = Random.Range(0, levels[currentLevel].arenas.Count);
+            while (currentArenaIndex == random)
+            {
+                random= Random.Range(0, levels[currentLevel].arenas.Count);
+            }
+            currentArenaIndex = random;
         }
         else
         {
