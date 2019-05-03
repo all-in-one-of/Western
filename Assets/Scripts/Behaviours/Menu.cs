@@ -14,7 +14,7 @@ public class Menu : Singleton<Menu>
     public GameObject MainMenu;
     public GameObject PauseMenu;
 
-    public CameraBehaviour mainCam;
+    public RectTransform selectionButtonTransform;
 
     public Sprite arrowPleine;
     public Sprite arrowEmpty;
@@ -54,7 +54,7 @@ public class Menu : Singleton<Menu>
     {
         if (Menu.instance.gameRunning == true)
         {
-            PauseMenu.SetActive(true);
+            PauseMenu.gameObject.SetActive(true);
             Time.timeScale = 0;
             mainCam.gameObject.transform.position = mainCam.camPosition;
             Menu.instance.gameRunning = false;
@@ -67,5 +67,15 @@ public class Menu : Singleton<Menu>
             Time.timeScale = 1;
             return;
         }
+    }
+
+    public void StartGame()
+    {
+        GameManager.instance.LoadArenas();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
