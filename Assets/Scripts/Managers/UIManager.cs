@@ -16,6 +16,20 @@ public class UIManager : Singleton<UIManager>
         
     }
 
+    public void GameOver()
+    {
+        menu.HUD.SetActive(false);
+        menu.GameOverMenu.SetActive(true);
+
+    }
+
+    private IEnumerator BackToMenu()
+    {
+        yield return new WaitForSeconds(5);
+        menu.GameOverMenu.SetActive(false);
+        menu.MainMenu.SetActive(true);
+    }
+
 
 
     [MenuItem("Western/NextArena")]
