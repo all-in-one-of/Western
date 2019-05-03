@@ -31,11 +31,13 @@ public class PlayerManager : Singleton<PlayerManager>
         else
         {
             players[players.Count - 1].animator.runtimeAnimatorController = player2AnimatorController;
+            Destroy(players[players.Count - 1].GetComponent<AudioListener>());
         }
 
         players[players.Count - 1].gameObject.name = "Player" + playerNumber;
         players[players.Count - 1].GetComponent<ControllerData>().playerID ="_"+(playerNumber + 1);
         PlayerData playerData = SaveManager.instance.playerDatas[playerNumber];
+        UIManager.instance.menu.gameManagerValues.Player1 = players[players.Count - 1].GetComponent<ControllerBehaviour>();
         players[playerNumber].credits = playerData.credits;
         players[playerNumber].maxAmmoUpgradeLevel = playerData.maxAmmoUpgradeLevel;
         players[playerNumber].maxHealthUpgradeLevel = playerData.maxHealthUpgradeLevel;

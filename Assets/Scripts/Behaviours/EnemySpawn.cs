@@ -14,7 +14,7 @@ public class EnemySpawn : MonoBehaviour
 
     public static void InitSpawns()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < LevelManager.instance.levels[LevelManager.instance.currentLevel].arenasToSpawnCount; i++)
         {
             levelSpawns[i] = new List<EnemySpawn>();
         }

@@ -7,7 +7,7 @@ public enum TypeOfUpgrade
     health,
     healthRegen,
     speed,
-    maxAmmo,
+    arrow,
     ammoStart,
     stamina,
     staminaRegen
@@ -46,7 +46,7 @@ public class ItemOfUpgrade : MonoBehaviour
 
     public void Update()
     {
-        textPrice.text = price.ToString();
+        textPrice.text = price.ToString()+" xp";
         textName.text = typeOfUpgrade.ToString();
 
         if (playerController!=null)
@@ -78,7 +78,7 @@ public class ItemOfUpgrade : MonoBehaviour
                  }
             }
 
-            if (typeOfUpgrade == TypeOfUpgrade.maxAmmo)
+            if (typeOfUpgrade == TypeOfUpgrade.arrow)
             {
                     if (GameManagerValues.instance.score >= price)
                     {

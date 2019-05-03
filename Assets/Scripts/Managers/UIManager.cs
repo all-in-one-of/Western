@@ -13,6 +13,21 @@ public class UIManager : Singleton<UIManager>
     public void SpawnCanvas()
     {
         menu=Instantiate(canvasPrefab).GetComponent<Menu>();
+        
+    }
+
+    public void GameOver()
+    {
+        menu.HUD.SetActive(false);
+        menu.GameOverMenu.SetActive(true);
+
+    }
+
+    private IEnumerator BackToMenu()
+    {
+        yield return new WaitForSeconds(5);
+        menu.GameOverMenu.SetActive(false);
+        menu.MainMenu.SetActive(true);
     }
 
 
@@ -20,10 +35,14 @@ public class UIManager : Singleton<UIManager>
     [MenuItem("Western/NextArena")]
     public static void NextArena()
     {
-        if (LevelManager.instance.currentArena < 4)
+        if (LevelManager.instance.currentArena < LevelManager.instance.levels[LevelManager.instance.currentLevel].arenas.Count-1)
         {
             LevelManager.instance.currentArena++;
             LevelManager.instance.LoadArena();
+        }
+        else
+        {
+            NextLevel();
         }
     }
 

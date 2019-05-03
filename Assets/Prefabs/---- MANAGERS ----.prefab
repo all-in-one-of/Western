@@ -51,12 +51,15 @@ MonoBehaviour:
   MainMenu: {fileID: 0}
   PauseMenu: {fileID: 0}
   CreditMenu: {fileID: 0}
+  GameOverMenu: {fileID: 0}
+  comboValues: {fileID: 0}
   arrowPleine: {fileID: 3726666444859746568, guid: b1e8f6ab926ae544db023e86a138251e,
     type: 3}
   arrowEmpty: {fileID: -6738162394269708684, guid: b1e8f6ab926ae544db023e86a138251e,
     type: 3}
   lotFlechePlayer1: {fileID: 0}
   lotFlechePlayer2: {fileID: 0}
+  gameManagerValues: {fileID: 0}
   gameRunning: 0
 --- !u!1 &2892385607419362371
 GameObject:
