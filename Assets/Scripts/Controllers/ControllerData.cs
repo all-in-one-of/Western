@@ -25,5 +25,6 @@ public class ControllerData : MonoBehaviour
 
     public Image enduranceJauge;
     public float timeBetweenEachDash;
+    public float lineRange=10;
 
 }
