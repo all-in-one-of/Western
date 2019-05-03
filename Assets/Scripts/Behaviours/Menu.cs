@@ -56,7 +56,6 @@ public class Menu : Singleton<Menu>
         {
             PauseMenu.gameObject.SetActive(true);
             Time.timeScale = 0;
-            mainCam.gameObject.transform.position = mainCam.camPosition;
             Menu.instance.gameRunning = false;
             return;
         }

@@ -11,10 +11,12 @@ public class EnemyBehaviour : MonoBehaviour
     public Transform self;
     public SpriteRenderer spriteRenderer;
     public Animator animator;
+    public Transform gunTransform;
+
 
     public float groupRange;
-    public Transform gun;
-    private Enemy enemy;
+    public Gun gun;
+    [System.NonSerialized] public Enemy enemy;
     private float currentHealth;
 
     [System.NonSerialized] public float distanceToNearestPlayer;

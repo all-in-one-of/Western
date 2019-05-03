@@ -19,7 +19,6 @@ public class SubMenu : MonoBehaviour
         {
             selectedButtonIndex--;
         }
-        UIManager.instance.PlaceSelectionButton();
     }
 
     public void Click()
