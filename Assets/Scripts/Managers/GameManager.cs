@@ -54,6 +54,14 @@ public class GameManager : Singleton<GameManager>
             SaveManager.instance.LoadPlayerData(i);
         }
 
+        
+
+        UIManager.instance.SpawnCanvas();
+        InputManager.instance.Init();
+    }
+
+    public void LoadArenas()
+    {
         if (playerCount <= 0)
         {
             Debug.Log("no player connected");

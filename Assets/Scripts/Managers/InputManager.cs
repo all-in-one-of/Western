@@ -24,6 +24,33 @@ public class InputManager : Singleton<InputManager>
         if (!on) { return; }
 
         //add inputs here
+        if (Input.GetAxisRaw("Vertical_1")>0)
+        {
+            if (SubMenu.activeSubMenu != null)
+            {
+                SubMenu.activeSubMenu.ChangeSelectedButtonIndex(-1);
+            }
+            
+        }
+
+        if (Input.GetAxisRaw("Vertical_1") < 0)
+        {
+            if (SubMenu.activeSubMenu != null)
+            {
+                SubMenu.activeSubMenu.ChangeSelectedButtonIndex(1);
+            }
+        }
+
+
+        if (Input.GetButtonDown("A_Button_1"))
+        {
+            if (SubMenu.activeSubMenu != null)
+            {
+                SubMenu.activeSubMenu.Click();
+            }
+        }
+
+
 
     }
 
