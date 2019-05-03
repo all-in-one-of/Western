@@ -13,6 +13,8 @@ public class GameManager : Singleton<GameManager>
 
     [System.NonSerialized] public int playerCount = 2;
 
+    public bool levelFinished=false;
+
 
 
     private void Start()

@@ -15,7 +15,6 @@ public class ArrowRamassageNEW : MonoBehaviour
             {
                 SoundManager.instance.PlayArrowTake();
                 otherController.numberOfBullets++;
-                Debug.Log("ici");
                 Destroy(Arrow);
             }
         }

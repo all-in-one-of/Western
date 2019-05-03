@@ -13,13 +13,16 @@ public class EnemyManager : Singleton<EnemyManager>
     public float maxGroupSpeed=2;
 
     public GameObject bulletPrefab;
-    public GameObject standPrefab;
+    
 
     public void Init()
     {
         for (int i = 0; i < EnemySpawn.levelSpawns.Length; i++)
-        {
-            print("arena " + i + ", enemySpawn count : " + EnemySpawn.levelSpawns[i].Count);
+        {   
+            if (EnemySpawn.levelSpawns[i] != null)
+            {
+                print("arena " + i + ", enemySpawn count : " + EnemySpawn.levelSpawns[i].Count);
+            }
         }
 
 
@@ -59,10 +62,13 @@ public class EnemyManager : Singleton<EnemyManager>
     public void RemoveEnemy(EnemyBehaviour enemy)
     {
         enemies.Remove(enemy);
-        if (enemies.Count <= 0)
+        print("remaining enemies : " + enemies.Count);
+        print("level finished : " + GameManager.instance.levelFinished);
+        if (enemies.Count <= 0 && !GameManager.instance.levelFinished)
         {
             //pop stand achat
-            Instantiate(standPrefab);
+            LevelManager.instance.SpawnStand();
+            GameManager.instance.levelFinished = true;
         }
     }
 }

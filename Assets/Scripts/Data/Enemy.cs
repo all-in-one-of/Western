@@ -10,9 +10,7 @@ public class Enemy : ScriptableObject
     public float range;
     public float moveSpeed;
     public float bulletSpeed;
-    public Sprite sprite;
     public float chargeDuration;
     public float shootDuration;
-    public float health;
     public float bulletDamage;
 }
