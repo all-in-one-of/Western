@@ -33,7 +33,6 @@ public class ItemOfUpgrade : MonoBehaviour
             playerController = other.GetComponent<ControllerBehaviour>();
             //player is buying
 
-            Debug.Log(typeOfUpgrade);
         }
     }
 

@@ -52,3 +52,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  directionalLights:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  standPrefab: {fileID: 5761469704645198287, guid: 3969c6046a537a242b76e491097ffff8,
+    type: 3}

@@ -52,10 +52,10 @@ public class Menu : Singleton<Menu>
 
     public void Update()
     {
-        if(MainMenu.activeSelf == false && Input.GetButtonDown("Select_Button") && CreditMenu.activeSelf==false )
+        /*if(MainMenu.activeSelf == false && Input.GetButtonDown("Select_Button") && CreditMenu.activeSelf==false )
         {
             StopGame();
-        }
+        }*/
 
         if (MainMenu.activeSelf == false && Input.GetButtonDown("B_Button") && CreditMenu.activeSelf == true)
         {

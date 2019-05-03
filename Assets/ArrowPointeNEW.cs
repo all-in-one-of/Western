@@ -33,7 +33,7 @@ public class ArrowPointeNEW : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<ControllerBehaviour>() == null && other.gameObject.tag != "Ennemy" && other.gameObject.tag != "SurfaceRebond")
+        if (other.GetComponent<ControllerBehaviour>() == null && other.gameObject.tag != "Ennemy" && other.gameObject.tag != "SurfaceRebond")
         {
             Debug.Log("collission arrow point: " + other.gameObject.name);
             parentRigidbody.isKinematic = true;
@@ -46,7 +46,6 @@ public class ArrowPointeNEW : MonoBehaviour
 
         else if (other.gameObject.tag == "Ennemy")
         {
-            Debug.Log("ennemy");
             if (trajectoireFinished == false)
             {
                 GameManagerValues.instance.score++;
@@ -55,6 +54,10 @@ public class ArrowPointeNEW : MonoBehaviour
                 GameManagerValues.instance.timerGoingOn = false;
 
                 SoundManager.instance.PlayArrowHit();
+
+                other.enabled = false;
+                other.GetComponentInParent<EnemyBehaviour>().Die();
+                
             }
         }
     }

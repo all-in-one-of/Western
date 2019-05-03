@@ -24,14 +24,12 @@ public class BulletBehaviour : MonoBehaviour
     {
         PlayerBehaviour player = other.GetComponentInParent<PlayerBehaviour>();
         if (other.gameObject.layer != 8) { return; }
-        print("layer "+ other.gameObject.layer);
         if (player != null)
         {
             player.TakeDamage(damage);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        
+        Destroy(gameObject);
+        
     }
 }

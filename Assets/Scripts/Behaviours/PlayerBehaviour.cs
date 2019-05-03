@@ -45,7 +45,7 @@ public class PlayerBehaviour : MonoBehaviour
         healthBehaviour.playerStats.health -= damage;
         if (healthBehaviour.playerStats.health <= 0)
         {
-            controllerBehaviour.data.state = ControllerData.PlayerStates.Dead;
+            healthBehaviour.PlayerDead();
         }
     }
 

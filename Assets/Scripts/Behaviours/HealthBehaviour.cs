@@ -15,9 +15,21 @@ public class HealthBehaviour : MonoBehaviour
         playerStats = GetComponent<PlayerGameplayValues>();
         controllerBehaviour = GetComponent<ControllerBehaviour>();
     }
+
+    
+
     public void Update()
     {
-        healthBar.fillAmount = playerStats.health / playerStats.maxHealth;
+
+        if (playerStats != null)
+        {
+            healthBar.fillAmount = playerStats.health / playerStats.maxHealth;
+        }
+        else
+        {
+            playerStats = GetComponent<PlayerGameplayValues>();
+
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) && playerStats.health > 0)
         {
@@ -31,18 +43,29 @@ public class HealthBehaviour : MonoBehaviour
 
     public void FillingUpHealth()
     {
-        if (playerStats.health < playerStats.maxHealth && controllerBehaviour.data.state!=ControllerData.PlayerStates.Dead)
+        if (playerStats != null)
         {
-            playerStats.health += Time.deltaTime * playerStats.healthRegen;
+            if (playerStats.health < playerStats.maxHealth && controllerBehaviour.data.state != ControllerData.PlayerStates.Dead)
+            {
+                playerStats.health += Time.deltaTime * playerStats.healthRegen;
+            }
+        }
+        else
+        {
+            playerStats= GetComponent<PlayerGameplayValues>();
         }
     }
 
     public void PlayerDead()
     {
-        if (playerStats.health <= 0 && controllerBehaviour.data.state== ControllerData.PlayerStates.Alive)
+        if (playerStats != null)
         {
-            SoundManager.instance.PlayDie();
-           controllerBehaviour.data.state = ControllerData.PlayerStates.Dead;
+            if (playerStats.health <= 0 && controllerBehaviour.data.state == ControllerData.PlayerStates.Alive)
+            {
+                SoundManager.instance.PlayDie();
+                controllerBehaviour.data.state = ControllerData.PlayerStates.Dead;
+                GetComponent<PlayerBehaviour>().animator.SetTrigger("Dead");
+            }
         }
     }
 }

@@ -32,7 +32,10 @@ public class RevivingBehaviour : MonoBehaviour
         {
             SoundManager.instance.PlayUniqueSound(SoundManager.instance.revive);
             controllerBehaviour.data.state = ControllerData.PlayerStates.Alive;
-            playerStats.health = playerStats.maxHealth/2;
+            if (playerStats != null)
+            {
+                playerStats.health = playerStats.maxHealth / 2;
+            }
             bowController.numberOfBullets = 0;
 
         }

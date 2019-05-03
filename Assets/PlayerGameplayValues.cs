@@ -25,6 +25,7 @@ public class PlayerGameplayValues : MonoBehaviour
     {
         bowController = GetComponent<BowController>();
         //if premiere partie et jamais joué avant
+        print(scriptableStats);
         maxHealth = scriptableStats.maxHealth.startValue;
         healthRegen= scriptableStats.healthRegen.startValue;
         speed= scriptableStats.speed.startValue;
