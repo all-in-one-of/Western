@@ -16,6 +16,9 @@ public enum TypeOfUpgrade
 public class ItemOfUpgrade : MonoBehaviour
 {
     public TypeOfUpgrade typeOfUpgrade;
+    public TextMesh textPrice;
+    public TextMesh textName;
+    public float price;
 
     bool playerIn;
     PlayerGameplayValues playerValues;
@@ -43,65 +46,68 @@ public class ItemOfUpgrade : MonoBehaviour
 
     public void Update()
     {
-        if(playerController!=null)
+        textPrice.text = price.ToString();
+        textName.text = typeOfUpgrade.ToString();
+
+        if (playerController!=null)
         if (Input.GetButtonDown("A_Button" + playerController.data.playerID) && playerIn==true)
         {
             if (typeOfUpgrade == TypeOfUpgrade.health)
             {
-                    // if (GameManagerValues.instance.score >= playerValues.scriptableStats.maxHealth.priceOverUpgradeLevel)
-                    // {
+                 if (GameManagerValues.instance.score >= price)
+                {
                     playerValues.UpgradeHealth();
-                // }
+               }
 
             
             }
 
             if (typeOfUpgrade == TypeOfUpgrade.healthRegen)
             {
-                // if (playerValues.currentMoney >= playerValues.scriptableStats.maxHealth.priceOverUpgradeLevel)
-                // {
-                playerValues.UpgradeHealthRegen();
-                // }
+                    if (GameManagerValues.instance.score >= price)
+                    {
+                        playerValues.UpgradeHealthRegen();
+                }
             }
 
             if (typeOfUpgrade == TypeOfUpgrade.speed)
             {
-                // if (playerValues.currentMoney >= playerValues.scriptableStats.maxHealth.priceOverUpgradeLevel)
-                // {
-                playerValues.UpgradeSpeed();
-                // }
+                    if (GameManagerValues.instance.score >= price)
+                    {
+                        playerValues.UpgradeSpeed();
+                 }
             }
 
             if (typeOfUpgrade == TypeOfUpgrade.maxAmmo)
             {
-                // if (playerValues.currentMoney >= playerValues.scriptableStats.maxHealth.priceOverUpgradeLevel)
-                // {
-                playerValues.UpgradeMaxAmmo();
-                // }
+                    if (GameManagerValues.instance.score >= price)
+                    {
+                        playerValues.UpgradeMaxAmmo();
+                }
             }
 
             if (typeOfUpgrade == TypeOfUpgrade.ammoStart)
             {
-                // if (playerValues.currentMoney >= playerValues.scriptableStats.maxHealth.priceOverUpgradeLevel)
-                // {
-                playerValues.UpgradeStartAmmo();
-                // }
+                    if (GameManagerValues.instance.score >= price)
+                    {
+                        playerValues.UpgradeStartAmmo();
+                }
             }
 
             if (typeOfUpgrade == TypeOfUpgrade.stamina)
             {
-                // if (playerValues.currentMoney >= playerValues.scriptableStats.maxHealth.priceOverUpgradeLevel)
-                // {
-                playerValues.UpgradeStamina();
-                // }
+                    if (GameManagerValues.instance.score >= price)
+                    {
+                        playerValues.UpgradeStamina();
+             }
             }
 
             if (typeOfUpgrade == TypeOfUpgrade.staminaRegen)
             {
-                // if (playerValues.currentMoney >= playerValues.scriptableStats.maxHealth.priceOverUpgradeLevel)
-                // {
-                playerValues.UpgradeStaminaRegen();
-                // }
+                    if (GameManagerValues.instance.score >= price)
+                    {
+                        playerValues.UpgradeStaminaRegen();
+                }
             }
         }
 
