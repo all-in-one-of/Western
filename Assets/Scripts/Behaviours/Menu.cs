@@ -16,12 +16,15 @@ public class Menu : Singleton<Menu>
     public GameObject CreditMenu;
     public GameObject GameOverMenu;
 
+    public Text comboValues;
+
     public Sprite arrowPleine;
     public Sprite arrowEmpty;
 
     public GameObject lotFlechePlayer1;
     public GameObject lotFlechePlayer2;
 
+   
     
 
 
