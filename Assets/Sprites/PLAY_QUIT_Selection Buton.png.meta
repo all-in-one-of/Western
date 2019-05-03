@@ -43,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: -1
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -132,11 +132,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< HEAD
       spriteID: dc07c7dfdf8289f4c87a45d55b380d26
-=======
-      spriteID: 9f9d67698c5262c40868adb6cf468672
->>>>>>> Théophile
       internalID: 8585804444307814880
       vertices: []
       indices: 
@@ -157,11 +153,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< HEAD
       spriteID: 4aa1285142a996049bd2b5129f80374d
-=======
-      spriteID: be01f6690d861b546a4b84d96cb253ab
->>>>>>> Théophile
       internalID: -143356256722327814
       vertices: []
       indices: 
@@ -182,11 +174,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< HEAD
       spriteID: 128e09765bb834b45a28f12689efdaa2
-=======
-      spriteID: bf842b92b7f08414c861452ea104c8d0
->>>>>>> Théophile
       internalID: 6102613324087323812
       vertices: []
       indices: 
@@ -207,11 +195,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-<<<<<<< HEAD
       spriteID: 25013e74ef52c544ebb2e4b3857cf952
-=======
-      spriteID: 764f6d31400a35c4c900f230bda8d9c4
->>>>>>> Théophile
       internalID: 7440665159113409223
       vertices: []
       indices: 
@@ -220,11 +204,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-<<<<<<< HEAD
     spriteID: eb9c1bb5186e9bb4793b01700d3d727b
-=======
-    spriteID: 1a56a125c7332a043a328f8635b8d938
->>>>>>> Théophile
     internalID: 0
     vertices: []
     indices: 
