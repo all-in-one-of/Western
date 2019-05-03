@@ -183,7 +183,6 @@ public class LevelManager : Singleton<LevelManager>
 
         for (int i = 0; i < enemySpawnsInThisArena.Count; i++)
         {
-            print("arena number : " + arenaNumber);
             enemySpawnsInThisArena[i].Init(arenaNumber);
         }
 
