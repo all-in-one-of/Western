@@ -14,12 +14,7 @@ public class PlayerBehaviour : MonoBehaviour
     [System.NonSerialized] public int credits;
     public Transform self;
     public Animator animator;
-    public Transform parentBow;
-    public SpriteRenderer bowSpriteRenderer;
-    public SpriteRenderer playerSpriteRenderer;
-    
-    public HealthBehaviour healthBehaviour;
-    public ControllerBehaviour controllerBehaviour;
+    public Transform bow;
 
     public List<EnemyBehaviour> attackingEnemies;
 
@@ -38,15 +33,6 @@ public class PlayerBehaviour : MonoBehaviour
     {
         attackingEnemies.Remove(enemy);
         RefreshEnemiesSpeed();
-    }
-
-    public void TakeDamage(float damage)
-    {
-        healthBehaviour.playerStats.health -= damage;
-        if (healthBehaviour.playerStats.health <= 0)
-        {
-            controllerBehaviour.data.state = ControllerData.PlayerStates.Dead;
-        }
     }
 
     private void RefreshEnemiesSpeed()
