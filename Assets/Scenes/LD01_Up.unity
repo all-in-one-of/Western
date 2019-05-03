@@ -18039,6 +18039,7 @@ GameObject:
   - component: {fileID: 1484524225}
   - component: {fileID: 1484524224}
   - component: {fileID: 1484524223}
+  - component: {fileID: 1484524226}
   m_Layer: 4
   m_Name: plateau1_bakedHDA (1)
   m_TagString: Untagged
@@ -18119,6 +18120,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484524221}
   m_Mesh: {fileID: 6927957655822025030, guid: 7008dbc84261cf045be5359cb1e1ffd2, type: 3}
+--- !u!114 &1484524226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484524221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4696a449b2aeb474197c01995591ff2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1495357149 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: c4db6dc67ff389f40a2c096779dc0f49,
