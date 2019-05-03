@@ -48,6 +48,9 @@ public class LevelManager : Singleton<LevelManager>
         currentCamera = cameras[currentArena];
         currentCamera.enabled = true;
         SpawnPlayersAndEnemies();
+        UIManager.instance.menu.MainMenu.gameObject.SetActive(false);
+        UIManager.instance.menu.HUD.gameObject.SetActive(true);
+        InputManager.instance.Enable(false);
 
     }
 

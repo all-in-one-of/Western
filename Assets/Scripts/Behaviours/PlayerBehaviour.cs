@@ -35,6 +35,11 @@ public class PlayerBehaviour : MonoBehaviour
         RefreshEnemiesSpeed();
     }
 
+    public void TakeDamage(float damage)
+    {
+
+    }
+
     private void RefreshEnemiesSpeed()
     {
         //get min and max distance

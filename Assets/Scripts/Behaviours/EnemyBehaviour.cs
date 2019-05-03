@@ -11,10 +11,12 @@ public class EnemyBehaviour : MonoBehaviour
     public Transform self;
     public SpriteRenderer spriteRenderer;
     public Animator animator;
+    public Transform gunTransform;
+
 
     public float groupRange;
-    public Transform gun;
-    private Enemy enemy;
+    public Gun gun;
+    [System.NonSerialized] public Enemy enemy;
     private float currentHealth;
 
     [System.NonSerialized] public float distanceToNearestPlayer;
@@ -145,10 +147,41 @@ public class EnemyBehaviour : MonoBehaviour
     private void Update()
     {
         if (focusedPlayer == null || shooting) { return; }
-        gun.eulerAngles = new Vector3(gun.eulerAngles.x, Quaternion.LookRotation(focusedPlayer.self.position - self.position, Vector3.up).eulerAngles.y-90, gun.eulerAngles.z);
+        
+        gunTransform.eulerAngles = new Vector3(gunTransform.eulerAngles.x, gunTransform.eulerAngles.y, Quaternion.LookRotation(focusedPlayer.self.position - self.position, Vector3.up).eulerAngles.y + 90);
+
+        print("z :"+ gunTransform.eulerAngles.z);
+
+        if (gunTransform.eulerAngles.z >= 90 && gunTransform.eulerAngles.z < 270)
+        {
+            gun.spriteRenderer.flipY = true;
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            gun.spriteRenderer.flipY = false;
+            spriteRenderer.flipX = false;
+        }
+
+        //Orientation
+        if (gunTransform.eulerAngles.z <= 360 && gunTransform.eulerAngles.z > 180)
+        {
+            animator.SetBool("GoingUp", false);
+            gun.spriteRenderer.sortingOrder = -50;
+        }
+        else
+        {
+            animator.SetBool("GoingUp", true);
+            gun.spriteRenderer.sortingOrder = 50;
+        }
+
+
+
+
         if (charging)
         {
             //self.LookAt(focusedPlayer.self);
+            
             
             return;
         }
@@ -184,7 +217,13 @@ public class EnemyBehaviour : MonoBehaviour
             navMeshAgent.SetDestination(focusedPlayer.transform.position);
             animator.SetBool("Moving", true);
         }
+
+
         
+
+        
+
+
     }
 
 
