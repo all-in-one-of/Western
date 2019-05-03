@@ -65,6 +65,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   colliderTrigger: {fileID: 910500829529078730}
+  colliderCorps: {fileID: 910500830672184965}
+  colliderPointes: {fileID: 910500829814931128}
 --- !u!1 &910500829529078735
 GameObject:
   m_ObjectHideFlags: 0
