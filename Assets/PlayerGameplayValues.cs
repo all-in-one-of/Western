@@ -19,6 +19,8 @@ public class PlayerGameplayValues : MonoBehaviour
 
     BowController bowController;
 
+    
+
     public void Start()
     {
         bowController = GetComponent<BowController>();
@@ -65,14 +67,12 @@ public class PlayerGameplayValues : MonoBehaviour
         bowController.numberOfBullets++;
 
         if (GetComponent<ControllerBehaviour>().data.playerID == "_1") {
-            GameObject arrowSup = Instantiate(Menu.instance.lotFlechePlayer1.transform.GetChild(0).gameObject,Menu.instance.lotFlechePlayer1.transform);
+            GameObject arrow = Instantiate(Menu.instance.lotFlechePlayer1.transform.GetChild(0).gameObject, Menu.instance.lotFlechePlayer1.transform);
         }
-
-        if (GetComponent<ControllerBehaviour>().data.playerID == "_2")
+        else
         {
-            GameObject arrowSup = Instantiate(Menu.instance.lotFlechePlayer2.transform.GetChild(0).gameObject, Menu.instance.lotFlechePlayer2.transform);
+            GameObject arrow = Instantiate(Menu.instance.lotFlechePlayer2.transform.GetChild(0).gameObject, Menu.instance.lotFlechePlayer2.transform);
         }
-
         Debug.Log("magazineSize");
 
     }
