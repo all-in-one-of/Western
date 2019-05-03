@@ -10,33 +10,41 @@ public class Menu : Singleton<Menu>
     public Text scoreText;
     public Text timerBeforeLoosingComboText;
 
-    public SubMenu HUD;
-    public SubMenu MainMenu;
-    public SubMenu PauseMenu;
-    public SubMenu upgradeMenu;
+    public GameObject HUD;
+    public GameObject MainMenu;
+    public GameObject PauseMenu;
 
     public RectTransform selectionButtonTransform;
 
+    public Sprite arrowPleine;
+    public Sprite arrowEmpty;
 
-
-
+    public GameObject lotFlechePlayer1;
+    public GameObject lotFlechePlayer2;
     public bool gameRunning;
 
     public void Start()
     {
-        gameRunning = true;
+        gameRunning = false;
+        Time.timeScale = 0;
+    }
 
+    public void OnClickStartGame()
+    {
+        gameRunning = true;
+        Time.timeScale = 1;
+        MainMenu.SetActive(false);
+        HUD.SetActive(true);
+    }
+
+    public void OnClickExitGame()
+    {
+        Application.Quit();
     }
 
     public void Update()
     {
-        if (MainMenu.gameObject.activeSelf == true && Input.GetButtonDown("Start_Button"))
-        {
-            MainMenu.gameObject.SetActive(false);
-            HUD.gameObject.SetActive(true);
-        }
-
-        if(MainMenu.gameObject.activeSelf == false && Input.GetButtonDown("Select_Button") )
+        if(MainMenu.activeSelf == false && Input.GetButtonDown("Select_Button") )
         {
             StopGame();
         }
@@ -44,17 +52,18 @@ public class Menu : Singleton<Menu>
 
     public void StopGame()
     {
-        if (gameRunning == true)
+        if (Menu.instance.gameRunning == true)
         {
             PauseMenu.gameObject.SetActive(true);
             Time.timeScale = 0;
-            gameRunning = false;
+            mainCam.gameObject.transform.position = mainCam.camPosition;
+            Menu.instance.gameRunning = false;
             return;
         }
         else
         {
-            PauseMenu.gameObject.SetActive(false);
-            gameRunning = true;
+            PauseMenu.SetActive(false);
+            Menu.instance.gameRunning = true;
             Time.timeScale = 1;
             return;
         }
