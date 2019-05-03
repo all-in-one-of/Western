@@ -31,7 +31,7 @@ public class GameManagerValues : Singleton<GameManagerValues>
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "Score: " + (score.ToString());
+        scoreText.text = (score.ToString()+ " p");
 
         if (timer > 0 && timerGoingOn == true)
         {
