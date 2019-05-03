@@ -57,6 +57,7 @@ MonoBehaviour:
     type: 3}
   lotFlechePlayer1: {fileID: 0}
   lotFlechePlayer2: {fileID: 0}
+  gameManagerValues: {fileID: 0}
   gameRunning: 0
 --- !u!1 &2892385607419362371
 GameObject:
