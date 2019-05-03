@@ -48,11 +48,10 @@ public class EnemyBehaviour : MonoBehaviour
     public void UpdateSpeed(float speed)
     {
         currentSpeed = speed;
-        if (speed != float.NaN)
+        if (!float.IsNaN(speed))
         {
             navMeshAgent.speed = currentSpeed;
         }
-        
     }
 
     private void Charge()
@@ -81,10 +80,11 @@ public class EnemyBehaviour : MonoBehaviour
         charging = false;
         shooting = true;
         //shoot
-        print("shooting");
-        gun.ShootOnPlayer(focusedPlayer);
-        StartCoroutine(StopShooting());
-        
+        if (!dead)
+        {
+            gun.ShootOnPlayer(focusedPlayer);
+            StartCoroutine(StopShooting());
+        }
     }
 
     private IEnumerator StopShooting()
