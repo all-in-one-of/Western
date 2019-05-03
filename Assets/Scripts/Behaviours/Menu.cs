@@ -13,6 +13,7 @@ public class Menu : Singleton<Menu>
     public GameObject HUD;
     public GameObject MainMenu;
     public GameObject PauseMenu;
+    public GameObject CreditMenu;
 
     public CameraBehaviour mainCam;
 
@@ -26,7 +27,6 @@ public class Menu : Singleton<Menu>
     public void Start()
     {
         gameRunning = false;
-        Time.timeScale = 0;
     }
 
     public void OnClickStartGame()
@@ -44,9 +44,14 @@ public class Menu : Singleton<Menu>
 
     public void Update()
     {
-        if(MainMenu.activeSelf == false && Input.GetButtonDown("Select_Button") )
+        if(MainMenu.activeSelf == false && Input.GetButtonDown("Select_Button") && CreditMenu.activeSelf==false )
         {
             StopGame();
+        }
+
+        if (MainMenu.activeSelf == false && Input.GetButtonDown("B_Button") && CreditMenu.activeSelf == true)
+        {
+            OnClickBackMenu();
         }
     }
 
@@ -67,5 +72,17 @@ public class Menu : Singleton<Menu>
             Time.timeScale = 1;
             return;
         }
+    }
+
+    public void OnClickCredits()
+    {
+        MainMenu.SetActive(false);
+        CreditMenu.SetActive(true);
+    }
+
+    public void OnClickBackMenu()
+    {
+        MainMenu.SetActive(true);
+        CreditMenu.SetActive(false);
     }
 }
