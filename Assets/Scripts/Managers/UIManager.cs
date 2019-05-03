@@ -35,7 +35,6 @@ public class UIManager : Singleton<UIManager>
     [MenuItem("Western/NextArena")]
     public static void NextArena()
     {
-        Destroy(LevelManager.instance.currentStand);
         GameManager.instance.levelFinished = false;
         if (LevelManager.instance.currentArena < LevelManager.instance.levels[LevelManager.instance.currentLevel].arenas.Count-1)
         {

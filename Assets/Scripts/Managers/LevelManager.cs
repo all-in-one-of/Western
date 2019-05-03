@@ -156,6 +156,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         RemoveAllPlayers();
         RemoveAllEnemies();
+        Destroy(currentStand);
         for (int i = 0; i < levels.Count; i++)
         {
             StartCoroutine(UnloadArena(arenaScenes[i]));

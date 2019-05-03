@@ -54,6 +54,7 @@ public class GameManager : Singleton<GameManager>
         for (int i = 0; i < playerCount; i++)
         {
             SaveManager.instance.LoadPlayerData(i);
+            print(SaveManager.instance.playerDatas[i].credits);
         }
 
         

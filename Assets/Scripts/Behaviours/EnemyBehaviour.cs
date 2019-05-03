@@ -48,7 +48,11 @@ public class EnemyBehaviour : MonoBehaviour
     public void UpdateSpeed(float speed)
     {
         currentSpeed = speed;
-        navMeshAgent.speed = currentSpeed;
+        if (speed != float.NaN)
+        {
+            navMeshAgent.speed = currentSpeed;
+        }
+        
     }
 
     private void Charge()
@@ -99,26 +103,29 @@ public class EnemyBehaviour : MonoBehaviour
 
         for (int i = 0; i < PlayerManager.instance.players.Count; i++)
         {
-            NavMeshPath p=new NavMeshPath();
+            if (PlayerManager.instance.players[i].controllerBehaviour.data.state == ControllerData.PlayerStates.Alive && Vector3.Distance(self.position,PlayerManager.instance.players[i].self.position)<=enemy.aggroRange)
+            {
+                NavMeshPath p = new NavMeshPath();
 
-            if (navMeshAgent.isOnNavMesh)
-            {
-                navMeshAgent.CalculatePath(PlayerManager.instance.players[i].transform.position, p);
-            }
-            
-            
-            
-            float distance = 0;
-            for (int j = 1; j <p.corners.Length; j++)
-            {
-                distance += Vector3.Distance(p.corners[j - 1], p.corners[j]);
-            }
+                if (navMeshAgent.isOnNavMesh)
+                {
+                    navMeshAgent.CalculatePath(PlayerManager.instance.players[i].transform.position, p);
+                }
 
-            if (distance < minDist)
-            {
-                minDist = distance;
-                playerToFocus = PlayerManager.instance.players[i];
+
+                float distance = 0;
+                for (int j = 1; j < p.corners.Length; j++)
+                {
+                    distance += Vector3.Distance(p.corners[j - 1], p.corners[j]);
+                }
+
+                if (distance < minDist)
+                {
+                    minDist = distance;
+                    playerToFocus = PlayerManager.instance.players[i];
+                }
             }
+            
 
         }
         distanceToNearestPlayer = minDist;
@@ -224,21 +231,9 @@ public class EnemyBehaviour : MonoBehaviour
                 navMeshAgent.isStopped = false;
                 navMeshAgent.SetDestination(focusedPlayer.transform.position);
                 animator.SetBool("Moving", true);
-            }
-            
-            
+            } 
         }
-
-
-        
-
-        
-
-
     }
-
-
-    
 
 
     public void Die()

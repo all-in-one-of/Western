@@ -1046,7 +1046,6 @@ GameObject:
   - component: {fileID: 35521587}
   - component: {fileID: 35521586}
   - component: {fileID: 35521585}
-  - component: {fileID: 35521584}
   m_Layer: 0
   m_Name: v_picard_pierre1_bakedHDA_2 (3)
   m_TagString: Untagged
@@ -1068,18 +1067,6 @@ Transform:
   m_Father: {fileID: 939655842}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: -48.645, z: 0}
---- !u!114 &35521584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35521582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da3a1c420c1414f9134494dcb1c221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &35521585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1330,6 +1317,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 1f652036ce5af1d43b86683e37738ed2,
     type: 3}
   m_PrefabInstance: {fileID: 273403533}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &63212356
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 858850235}
+    m_Modifications:
+    - target: {fileID: 6084698539795109234, guid: bf09cbcd9e9e5c94aa5864aacc34e008,
+        type: 3}
+      propertyPath: m_Name
+      value: StandSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084698539795109235, guid: bf09cbcd9e9e5c94aa5864aacc34e008,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.805122
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084698539795109235, guid: bf09cbcd9e9e5c94aa5864aacc34e008,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4828415
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084698539795109235, guid: bf09cbcd9e9e5c94aa5864aacc34e008,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.035455
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084698539795109235, guid: bf09cbcd9e9e5c94aa5864aacc34e008,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084698539795109235, guid: bf09cbcd9e9e5c94aa5864aacc34e008,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084698539795109235, guid: bf09cbcd9e9e5c94aa5864aacc34e008,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084698539795109235, guid: bf09cbcd9e9e5c94aa5864aacc34e008,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084698539795109235, guid: bf09cbcd9e9e5c94aa5864aacc34e008,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084698539795109235, guid: bf09cbcd9e9e5c94aa5864aacc34e008,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084698539795109235, guid: bf09cbcd9e9e5c94aa5864aacc34e008,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084698539795109235, guid: bf09cbcd9e9e5c94aa5864aacc34e008,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf09cbcd9e9e5c94aa5864aacc34e008, type: 3}
+--- !u!4 &63212357 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6084698539795109235, guid: bf09cbcd9e9e5c94aa5864aacc34e008,
+    type: 3}
+  m_PrefabInstance: {fileID: 63212356}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &66099720
 PrefabInstance:
@@ -2517,7 +2579,6 @@ GameObject:
   - component: {fileID: 225625102}
   - component: {fileID: 225625101}
   - component: {fileID: 225625100}
-  - component: {fileID: 225625104}
   m_Layer: 0
   m_Name: v_picard_pierre1_bakedHDA_2 (1)
   m_TagString: Untagged
@@ -2610,18 +2671,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 225625098}
   m_Mesh: {fileID: 7748168529116237655, guid: f77b217f87afc4d44a82c6c80cb50ed6, type: 3}
---- !u!114 &225625104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 225625098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da3a1c420c1414f9134494dcb1c221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &229834325 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 0dc41e89be440754fa3aa148fa114bb3,
@@ -2641,7 +2690,6 @@ GameObject:
   - component: {fileID: 230845237}
   - component: {fileID: 230845236}
   - component: {fileID: 230845235}
-  - component: {fileID: 230845234}
   m_Layer: 0
   m_Name: v_picard_pierre1_bakedHDA_2 (6)
   m_TagString: Untagged
@@ -2663,18 +2711,6 @@ Transform:
   m_Father: {fileID: 939655842}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 62.755005, z: 0}
---- !u!114 &230845234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 230845232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da3a1c420c1414f9134494dcb1c221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &230845235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4418,6 +4454,7 @@ GameObject:
   - component: {fileID: 316709908}
   - component: {fileID: 316709907}
   - component: {fileID: 316709909}
+  - component: {fileID: 316709910}
   m_Layer: 0
   m_Name: v_picard_pierre1_bakedHDA_4 (2)
   m_TagString: Untagged
@@ -4496,6 +4533,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81da3a1c420c1414f9134494dcb1c221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!64 &316709910
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316709905}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 2910738907502677273, guid: 51c64ea603422804ca6b32339d2e5015, type: 3}
 --- !u!1 &317953356
 GameObject:
   m_ObjectHideFlags: 0
@@ -7371,7 +7422,6 @@ GameObject:
   - component: {fileID: 575539970}
   - component: {fileID: 575539969}
   - component: {fileID: 575539968}
-  - component: {fileID: 575539972}
   m_Layer: 0
   m_Name: v_picard_pierre1_bakedHDA_2 (1)
   m_TagString: Untagged
@@ -7464,18 +7514,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575539966}
   m_Mesh: {fileID: 7748168529116237655, guid: f77b217f87afc4d44a82c6c80cb50ed6, type: 3}
---- !u!114 &575539972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 575539966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da3a1c420c1414f9134494dcb1c221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &575772582 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 72ed420a3a47ea940a24dbfc89544e3d,
@@ -10892,6 +10930,7 @@ Transform:
   - {fileID: 684417497}
   - {fileID: 1234765273}
   - {fileID: 478059153}
+  - {fileID: 63212357}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11056,6 +11095,7 @@ GameObject:
   - component: {fileID: 903366826}
   - component: {fileID: 903366825}
   - component: {fileID: 903366827}
+  - component: {fileID: 903366828}
   m_Layer: 0
   m_Name: v_picard_pierre1_bakedHDA_3 (4)
   m_TagString: Untagged
@@ -11134,6 +11174,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81da3a1c420c1414f9134494dcb1c221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!64 &903366828
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903366823}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -6811898798427671959, guid: 51c64ea603422804ca6b32339d2e5015, type: 3}
 --- !u!4 &907402970 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 1efdd094aa7c21b4d90a2e8e0d3c5827,
@@ -12511,7 +12565,6 @@ GameObject:
   - component: {fileID: 1011719133}
   - component: {fileID: 1011719132}
   - component: {fileID: 1011719131}
-  - component: {fileID: 1011719135}
   m_Layer: 0
   m_Name: v_picard_pierre1_bakedHDA_2
   m_TagString: Untagged
@@ -12604,18 +12657,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011719129}
   m_Mesh: {fileID: 7748168529116237655, guid: f77b217f87afc4d44a82c6c80cb50ed6, type: 3}
---- !u!114 &1011719135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1011719129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da3a1c420c1414f9134494dcb1c221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1013889094 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: e4615fd5e5ee77b45b38dfc7d7228383,
@@ -14792,6 +14833,7 @@ GameObject:
   - component: {fileID: 1197930662}
   - component: {fileID: 1197930661}
   - component: {fileID: 1197930663}
+  - component: {fileID: 1197930664}
   m_Layer: 0
   m_Name: v_picard_pierre1_bakedHDA_3 (3)
   m_TagString: Untagged
@@ -14870,6 +14912,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81da3a1c420c1414f9134494dcb1c221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!64 &1197930664
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197930659}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -6811898798427671959, guid: 51c64ea603422804ca6b32339d2e5015, type: 3}
 --- !u!1001 &1199132914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16246,7 +16302,6 @@ GameObject:
   - component: {fileID: 1278133491}
   - component: {fileID: 1278133490}
   - component: {fileID: 1278133489}
-  - component: {fileID: 1278133493}
   m_Layer: 0
   m_Name: v_picard_pierre1_bakedHDA_2 (2)
   m_TagString: Untagged
@@ -16339,18 +16394,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1278133487}
   m_Mesh: {fileID: 7748168529116237655, guid: f77b217f87afc4d44a82c6c80cb50ed6, type: 3}
---- !u!114 &1278133493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1278133487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da3a1c420c1414f9134494dcb1c221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1283212728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20872,7 +20915,6 @@ GameObject:
   - component: {fileID: 1641314823}
   - component: {fileID: 1641314822}
   - component: {fileID: 1641314821}
-  - component: {fileID: 1641314825}
   m_Layer: 0
   m_Name: v_picard_pierre1_bakedHDA_2 (2)
   m_TagString: Untagged
@@ -20965,18 +21007,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641314819}
   m_Mesh: {fileID: 7748168529116237655, guid: f77b217f87afc4d44a82c6c80cb50ed6, type: 3}
---- !u!114 &1641314825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1641314819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da3a1c420c1414f9134494dcb1c221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1648245550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21815,7 +21845,6 @@ GameObject:
   - component: {fileID: 1686003111}
   - component: {fileID: 1686003110}
   - component: {fileID: 1686003109}
-  - component: {fileID: 1686003108}
   m_Layer: 0
   m_Name: v_picard_pierre1_bakedHDA_2 (4)
   m_TagString: Untagged
@@ -21837,18 +21866,6 @@ Transform:
   m_Father: {fileID: 939655842}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 62.755005, z: 0}
---- !u!114 &1686003108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1686003106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da3a1c420c1414f9134494dcb1c221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1686003109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23511,7 +23528,6 @@ GameObject:
   - component: {fileID: 1837872593}
   - component: {fileID: 1837872592}
   - component: {fileID: 1837872591}
-  - component: {fileID: 1837872590}
   m_Layer: 0
   m_Name: v_picard_pierre1_bakedHDA_2 (5)
   m_TagString: Untagged
@@ -23533,18 +23549,6 @@ Transform:
   m_Father: {fileID: 939655842}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 62.755005, z: 0}
---- !u!114 &1837872590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1837872588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da3a1c420c1414f9134494dcb1c221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1837872591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23823,6 +23827,7 @@ MonoBehaviour:
   saveManagerPrefab: {fileID: 0}
   levelManagerPrefab: {fileID: 0}
   playerManagerPrefab: {fileID: 0}
+  levelFinished: 0
 --- !u!4 &1866182728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 8d1495c407f124446b1fe472a7a5fd02,
@@ -26555,7 +26560,6 @@ GameObject:
   - component: {fileID: 2133555738}
   - component: {fileID: 2133555737}
   - component: {fileID: 2133555736}
-  - component: {fileID: 2133555740}
   m_Layer: 0
   m_Name: v_picard_pierre1_bakedHDA_2
   m_TagString: Untagged
@@ -26648,18 +26652,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2133555734}
   m_Mesh: {fileID: 7748168529116237655, guid: f77b217f87afc4d44a82c6c80cb50ed6, type: 3}
---- !u!114 &2133555740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2133555734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81da3a1c420c1414f9134494dcb1c221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2136153126
 PrefabInstance:
   m_ObjectHideFlags: 0

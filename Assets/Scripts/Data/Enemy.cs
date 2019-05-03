@@ -13,4 +13,5 @@ public class Enemy : ScriptableObject
     public float chargeDuration;
     public float shootDuration;
     public float bulletDamage;
+    public float aggroRange;
 }
