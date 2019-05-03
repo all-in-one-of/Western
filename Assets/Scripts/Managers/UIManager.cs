@@ -13,6 +13,7 @@ public class UIManager : Singleton<UIManager>
     public void SpawnCanvas()
     {
         menu=Instantiate(canvasPrefab).GetComponent<Menu>();
+        
     }
 
 

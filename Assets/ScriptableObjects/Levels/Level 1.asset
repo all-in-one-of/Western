@@ -15,10 +15,6 @@ MonoBehaviour:
   arenas:
   - sceneName: LD01_Down
     sceneWidth: 150
-  - sceneName: 
-    sceneWidth: 0
-  - sceneName: 
-    sceneWidth: 0
-  - sceneName: 
-    sceneWidth: 0
-  arenasToSpawnCount: 4
+  - sceneName: LD01_Up
+    sceneWidth: 150
+  arenasToSpawnCount: 2
