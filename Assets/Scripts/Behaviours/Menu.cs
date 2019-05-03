@@ -15,7 +15,6 @@ public class Menu : Singleton<Menu>
     public GameObject PauseMenu;
     public GameObject CreditMenu;
 
-    public RectTransform selectionButtonTransform;
 
     public Sprite arrowPleine;
     public Sprite arrowEmpty;

@@ -6,7 +6,6 @@ public class Gun : MonoBehaviour
 {
     public EnemyBehaviour enemyBehaviour;
     public Transform embout;
-
     public SpriteRenderer spriteRenderer;
 
     private void OnTriggerEnter(Collider other)
@@ -21,8 +20,6 @@ public class Gun : MonoBehaviour
             enemyBehaviour.playerInTriggerBox = player;
             return;
         }
-        
-
     }
 
 
