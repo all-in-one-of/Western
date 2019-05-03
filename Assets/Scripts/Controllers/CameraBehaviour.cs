@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraBehaviour : MonoBehaviour
 {
-    [System.NonSerialized] public Transform Player1;
-    [System.NonSerialized] public Transform Player2;
+     public Transform Player1;
+     public Transform Player2;
 
     public Camera camComponent;
 

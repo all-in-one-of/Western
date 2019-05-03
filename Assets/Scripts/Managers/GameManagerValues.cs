@@ -32,6 +32,7 @@ public class GameManagerValues : Singleton<GameManagerValues>
     void Update()
     {
         scoreText.text = (score.ToString()+ " p");
+        Menu.instance.comboValues.text = comboValue.ToString();
 
         if (timer > 0 && timerGoingOn == true)
         {
