@@ -8,6 +8,7 @@ public class ControllerBehaviour : MonoBehaviour
     public ControllerData data;
     public PlayerBehaviour playerBehaviour;
 
+    public ParticleSystem dashParticle;
     LineRenderer lineRenderer;
     BowController bowController;
 
@@ -38,13 +39,16 @@ public class ControllerBehaviour : MonoBehaviour
         lineRenderer.endWidth = 0.5f;
         lineRenderer.SetPosition(0, bowController.data.firePoint.position);
 
-        lineRenderer.SetPosition(1, transform.forward * 10000);
+        lineRenderer.SetPosition(1, transform.forward * data.lineRange);
 
     }
 
 
     void Update()
     {
+
+        
+
         data.enduranceJauge.fillAmount = playerStats.stamina / playerStats.maxStamina;
 
         if (noStaminaSoundPlaying == true && timer <= 0)
@@ -108,14 +112,22 @@ public class ControllerBehaviour : MonoBehaviour
 
             lineRenderer.startWidth = 0.5f;
             lineRenderer.endWidth = 0.5f;
+
+            lineRenderer.positionCount = 1;
             lineRenderer.SetPosition(0, bowController.data.firePoint.position);
+            
 
             if (aimInput.sqrMagnitude > 0.0f)
             {
                 playerBehaviour.parentBow.transform.eulerAngles = new Vector3(playerBehaviour.parentBow.transform.eulerAngles.x, playerBehaviour.parentBow.transform.eulerAngles.y, Quaternion.LookRotation(aimInput, Vector3.up).eulerAngles.y+90) ;
                 objetquitourne.transform.rotation = Quaternion.LookRotation(aimInput, Vector3.up);
 
-                lineRenderer.SetPosition(1, aimInput * 10000);
+
+
+
+
+                //lineRenderer.SetPosition(1, aimInput * data.lineRange);
+                Bounce(aimInput.normalized, data.lineRange);
             }
 
             if(Input.GetAxisRaw("Horizontal" + data.playerID)!=0 || Input.GetAxisRaw("Vertical" + data.playerID) != 0 )
@@ -134,8 +146,15 @@ public class ControllerBehaviour : MonoBehaviour
 
                 //dasH
                 SoundManager.instance.PlayDash();
+                dashParticle.Play();
 
                 data.myRigidbody.AddForce(data.moveInput * DashStrengh);
+
+                dashParticle.gameObject.transform.LookAt(-(data.moveInput * DashStrengh));
+
+                dashParticle.gameObject.transform.localPosition = Vector3.zero;
+
+
                 if (playerStats.stamina - DashCost >= 0)
                 {
                     playerStats.stamina -= DashCost;
@@ -146,6 +165,7 @@ public class ControllerBehaviour : MonoBehaviour
                 }
                 timeBewteenDash = data.timeBetweenEachDash;
                 readyToDash = false;
+                StartCoroutine(waitForSecondsDash(0.2f));
 
             }
             else if (data.moveInput == Vector3.zero)
@@ -167,6 +187,38 @@ public class ControllerBehaviour : MonoBehaviour
             //game finie
             data.state = ControllerData.PlayerStates.Alive;
         }
+    }
+
+    IEnumerator waitForSecondsDash(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        dashParticle.Stop();
+
+    }
+    private void Bounce(Vector3 direction,float remainingRange)
+    {
+        int layerMask = 1 << 8 | 1 << 12;
+        layerMask = ~layerMask;
+        RaycastHit raycastHit;
+        lineRenderer.positionCount++;
+        if (remainingRange > 0)
+        {
+            if (Physics.Raycast(bowController.data.firePoint.position, direction, out raycastHit, remainingRange, layerMask))
+            {
+                
+                lineRenderer.SetPosition(lineRenderer.positionCount - 1, raycastHit.point);
+                Vector3 bounceDirection = Vector3.Reflect(direction, raycastHit.normal);
+                bounceDirection = new Vector3(bounceDirection.x, 0, bounceDirection.y);
+                remainingRange -= raycastHit.distance;
+
+                Bounce(bounceDirection.normalized, remainingRange);
+            }
+            else
+            {
+                lineRenderer.SetPosition(lineRenderer.positionCount - 1,lineRenderer.GetPosition(lineRenderer.positionCount-2)+ direction * remainingRange);
+            }
+        }
+        
     }
 
     public void FillingUpendurance()

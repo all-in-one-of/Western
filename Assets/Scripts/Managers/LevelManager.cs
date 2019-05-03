@@ -44,7 +44,10 @@ public class LevelManager : Singleton<LevelManager>
     {
         RemoveAllPlayers();
         RemoveAllEnemies();
-        currentCamera.enabled = false;
+        if (currentCamera != null)
+        {
+            currentCamera.enabled = false;
+        }
         currentCamera = cameras[currentArena];
         currentCamera.enabled = true;
         SpawnPlayersAndEnemies();

@@ -44,14 +44,19 @@ public class GameManagerValues : Singleton<GameManagerValues>
 
         TimerText.text = timer.ToString("F2") + " sec left";
 
-        if (Player1.data.state == ControllerData.PlayerStates.Dead && Player2.data.state == ControllerData.PlayerStates.Dead && Menu.instance.gameRunning==true)
-        {
-            //Game finished
-            SoundManager.instance.PlayUniqueSound(SoundManager.instance.gameOver);
 
-            Debug.Log("Game Finished");
-            Menu.instance.gameRunning = false;
+        if (Player1 != null)
+        {
+            if (Player1.data.state == ControllerData.PlayerStates.Dead && Player2.data.state == ControllerData.PlayerStates.Dead && Menu.instance.gameRunning == true)
+            {
+                //Game finished
+                SoundManager.instance.PlayUniqueSound(SoundManager.instance.gameOver);
+
+                Debug.Log("Game Finished");
+                Menu.instance.gameRunning = false;
+            }
         }
+        
 
         if(comboValue > 1 && timerGoingOn==false)  //start cooldown before loosing combo
         {
