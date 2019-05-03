@@ -13,12 +13,8 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   arenas:
-  - sceneName: 
-    sceneWidth: 0
-  - sceneName: 
-    sceneWidth: 0
-  - sceneName: 
-    sceneWidth: 0
-  - sceneName: 
-    sceneWidth: 0
-  arenasToSpawnCount: 0
+  - sceneName: LD02_Down
+    sceneWidth: 150
+  - sceneName: LD02_Up
+    sceneWidth: 150
+  arenasToSpawnCount: 2
