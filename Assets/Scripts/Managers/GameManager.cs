@@ -79,7 +79,6 @@ public class GameManager : Singleton<GameManager>
 
         LevelManager.instance.LoadLevel(LevelManager.instance.LoadArena);
     }
-
     
 
     

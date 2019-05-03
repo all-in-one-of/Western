@@ -15,13 +15,7 @@ public class UIManager : Singleton<UIManager>
         menu=Instantiate(canvasPrefab).GetComponent<Menu>();
     }
 
- 
 
-
-    public void ShowUpgradeMenu()
-    {
-        //menu.upgradeMenu.setActive(true);
-    }
 
     [MenuItem("Western/NextArena")]
     public static void NextArena()
