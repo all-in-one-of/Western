@@ -18,17 +18,27 @@ public class BowController : MonoBehaviour
 
     private void Awake()
     {
-        playerStats = GetComponent<PlayerGameplayValues>();
-
-        timeBetweenShots = data.timeBetweenShots;
-        controllerBehaviour = GetComponent<ControllerBehaviour>();
+        
     }
 
     public void Start()
     {
-        numberOfBullets = playerStats.numberOfArrowStartingGame;
+        playerStats = GetComponent<PlayerGameplayValues>();
+
+        timeBetweenShots = data.timeBetweenShots;
+        controllerBehaviour = GetComponent<ControllerBehaviour>();
+
+        StartCoroutine(GiveArrows());
 
     }
+
+    private IEnumerator GiveArrows()
+    {
+        yield return new WaitForSeconds(1);
+        numberOfBullets = playerStats.numberOfArrowStartingGame;
+    }
+
+
     public void Update()
     {
         timeBetweenShots -= Time.deltaTime;
@@ -89,7 +99,7 @@ public class BowController : MonoBehaviour
                 SoundManager.instance.PlayArrowThrow();
 
             //Instantiate bullet
-            GameObject newBullet = Instantiate(data.bullet, data.firePoint.position, Quaternion.Euler(data.firePoint.eulerAngles.x, data.firePoint.eulerAngles.y, data.firePoint.eulerAngles.z), data.bulletsGroup.transform);
+            GameObject newBullet = Instantiate(data.bullet, data.firePoint.position, Quaternion.Euler(data.firePoint.eulerAngles.x, data.firePoint.eulerAngles.y, data.firePoint.eulerAngles.z));
             newBullet.GetComponent<ArrowValuesGeneralNEW>().speed = data.bulletSpeed;
             Vector3 vec = data.firePoint.transform.forward * newBullet.GetComponent<ArrowValuesGeneralNEW>().speed;
 
@@ -116,16 +126,19 @@ public class BowController : MonoBehaviour
             }
         }
 
-        for (int i = (int)numberOfBullets; i < playerStats.magazineSize; i++)
+        if (playerStats != null)
         {
-            if (GetComponent<ControllerBehaviour>().data.playerID == "_1")
+            for (int i = (int)numberOfBullets; i < playerStats.magazineSize; i++)
             {
-                Menu.instance.lotFlechePlayer1.transform.GetChild(i).GetComponent<Image>().sprite = Menu.instance.arrowEmpty;
-            }
+                if (GetComponent<ControllerBehaviour>().data.playerID == "_1")
+                {
+                    Menu.instance.lotFlechePlayer1.transform.GetChild(i).GetComponent<Image>().sprite = Menu.instance.arrowEmpty;
+                }
 
-            if (GetComponent<ControllerBehaviour>().data.playerID == "_2")
-            {
-                Menu.instance.lotFlechePlayer2.transform.GetChild(i).GetComponent<Image>().sprite = Menu.instance.arrowEmpty;
+                if (GetComponent<ControllerBehaviour>().data.playerID == "_2")
+                {
+                    Menu.instance.lotFlechePlayer2.transform.GetChild(i).GetComponent<Image>().sprite = Menu.instance.arrowEmpty;
+                }
             }
         }
     }

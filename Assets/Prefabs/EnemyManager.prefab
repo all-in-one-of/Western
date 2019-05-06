@@ -46,9 +46,7 @@ MonoBehaviour:
   enemies: []
   enemyPrefab: {fileID: 8055712555609436717, guid: f7160ad6cde8ce54489c170b1948dba2,
     type: 3}
-  minGroupSpeed: 1
-  maxGroupSpeed: 2
+  minGroupSpeed: 3
+  maxGroupSpeed: 5
   bulletPrefab: {fileID: 1160332608220946685, guid: 6875b1ef5b46a9e40a5edabfe1d34774,
-    type: 3}
-  standPrefab: {fileID: 5761469704645198287, guid: 3969c6046a537a242b76e491097ffff8,
     type: 3}

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -25,7 +26,7 @@ public class EnemyBehaviour : MonoBehaviour
     public float targetRefreshDelay = 2;
 
     private List<EnemyBehaviour> allies;
-
+    private bool dead = false;
 
 
     private PlayerBehaviour focusedPlayer;
@@ -41,14 +42,16 @@ public class EnemyBehaviour : MonoBehaviour
     public void Init(Enemy enemy)
     {
         this.enemy = enemy;
-        currentHealth = enemy.health;
         UpdateSpeed(enemy.moveSpeed);
     }
 
     public void UpdateSpeed(float speed)
     {
         currentSpeed = speed;
-        navMeshAgent.speed = currentSpeed;
+        if (!float.IsNaN(speed))
+        {
+            navMeshAgent.speed = currentSpeed;
+        }
     }
 
     private void Charge()
@@ -56,7 +59,6 @@ public class EnemyBehaviour : MonoBehaviour
         navMeshAgent.isStopped = true;
         charging = true;
         StartCoroutine(Shoot());
-        print("charging");
     }
 
     private void FocusPlayer(PlayerBehaviour player)
@@ -78,17 +80,17 @@ public class EnemyBehaviour : MonoBehaviour
         charging = false;
         shooting = true;
         //shoot
-        print("shooting");
-        gun.ShootOnPlayer(focusedPlayer);
-        StartCoroutine(StopShooting());
-        
+        if (!dead)
+        {
+            gun.ShootOnPlayer(focusedPlayer);
+            StartCoroutine(StopShooting());
+        }
     }
 
     private IEnumerator StopShooting()
     {
         yield return new WaitForSeconds(enemy.shootDuration);
         shooting = false;
-        print("zbeub");
         StartCoroutine(RefreshTarget());
     }
 
@@ -101,19 +103,29 @@ public class EnemyBehaviour : MonoBehaviour
 
         for (int i = 0; i < PlayerManager.instance.players.Count; i++)
         {
-            NavMeshPath p=new NavMeshPath();
-            navMeshAgent.CalculatePath(PlayerManager.instance.players[i].transform.position,p);
-            float distance = 0;
-            for (int j = 1; j <p.corners.Length; j++)
+            if (PlayerManager.instance.players[i].controllerBehaviour.data.state == ControllerData.PlayerStates.Alive && Vector3.Distance(self.position,PlayerManager.instance.players[i].self.position)<=enemy.aggroRange)
             {
-                distance += Vector3.Distance(p.corners[j - 1], p.corners[j]);
-            }
+                NavMeshPath p = new NavMeshPath();
 
-            if (distance < minDist)
-            {
-                minDist = distance;
-                playerToFocus = PlayerManager.instance.players[i];
+                if (navMeshAgent.isOnNavMesh)
+                {
+                    navMeshAgent.CalculatePath(PlayerManager.instance.players[i].transform.position, p);
+                }
+
+
+                float distance = 0;
+                for (int j = 1; j < p.corners.Length; j++)
+                {
+                    distance += Vector3.Distance(p.corners[j - 1], p.corners[j]);
+                }
+
+                if (distance < minDist)
+                {
+                    minDist = distance;
+                    playerToFocus = PlayerManager.instance.players[i];
+                }
             }
+            
 
         }
         distanceToNearestPlayer = minDist;
@@ -124,7 +136,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(targetRefreshDelay);
 
-        if (active)
+        if (active && !dead)
         {
             StartCoroutine(RefreshTarget());
         }
@@ -147,11 +159,11 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Update()
     {
+        if (dead) { return; }
         if (focusedPlayer == null || shooting) { return; }
         
         gunTransform.eulerAngles = new Vector3(gunTransform.eulerAngles.x, gunTransform.eulerAngles.y, Quaternion.LookRotation(focusedPlayer.self.position - self.position, Vector3.up).eulerAngles.y + 90);
 
-        print("z :"+ gunTransform.eulerAngles.z);
 
         if (gunTransform.eulerAngles.z >= 90 && gunTransform.eulerAngles.z < 270)
         {
@@ -195,7 +207,6 @@ public class EnemyBehaviour : MonoBehaviour
             if (Physics.Raycast(self.position, playerInTriggerBox.self.position-self.position, out hit,Mathf.Infinity,layerMask))
             {
                 PlayerBehaviour raycastedPlayer = hit.collider.GetComponentInParent<PlayerBehaviour>();
-                Debug.Log("object hit : ",hit.collider.gameObject);
                 if (raycastedPlayer == null || raycastedPlayer != focusedPlayer)
                 {
                     canSeePlayer = false;
@@ -215,26 +226,24 @@ public class EnemyBehaviour : MonoBehaviour
         }
         else
         {
-            navMeshAgent.isStopped = false;
-            navMeshAgent.SetDestination(focusedPlayer.transform.position);
-            animator.SetBool("Moving", true);
+            if (navMeshAgent.isOnNavMesh)
+            {
+                navMeshAgent.isStopped = false;
+                navMeshAgent.SetDestination(focusedPlayer.transform.position);
+                animator.SetBool("Moving", true);
+            } 
         }
-
-
-        
-
-        
-
-
     }
-
-
-    
 
 
     public void Die()
     {
+        GetComponentInChildren<CapsuleCollider>().enabled = false;
         EnemyManager.instance.RemoveEnemy(this);
-        Destroy(gameObject);
+        focusedPlayer.attackingEnemies.Remove(this);
+        animator.SetTrigger("Dead");
+        dead = true;
+        navMeshAgent.isStopped = true;
+        
     }
 }

@@ -46,7 +46,7 @@ public class GameManagerValues : Singleton<GameManagerValues>
         TimerText.text = timer.ToString("F2") + " sec left";
 
 
-        if (Player1 != null)
+        if (Player1 != null && Player2!=null)
         {
             if (Player1.data.state == ControllerData.PlayerStates.Dead && Player2.data.state == ControllerData.PlayerStates.Dead && Menu.instance.gameRunning == true)
             {
@@ -56,7 +56,7 @@ public class GameManagerValues : Singleton<GameManagerValues>
                 Debug.Log("Game Finished");
                 Menu.instance.gameRunning = false;
 
-                UIManager.instance.menu.GameOverMenu.SetActive(true);
+                UIManager.instance.GameOver();
             }
         }
         

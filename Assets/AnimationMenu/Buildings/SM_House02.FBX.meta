@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 66e2c1ed2635ffc4bae769f0e64b054b
+guid: c4db6dc67ff389f40a2c096779dc0f49
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
@@ -7,8 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: No Name
-    second: {fileID: 2100000, guid: 5ce71a923ec0d64419532c6c7bff9ead, type: 2}
+      name: 'Material #14'
+    second: {fileID: 2100000, guid: 2aea349b32e01be42aef97689c7aedde, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #15'
+    second: {fileID: 2100000, guid: 1c6a8f66f72744743b388fab761728e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #16'
+    second: {fileID: 2100000, guid: d11d21765584d864da9dea0b15ead9ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #17'
+    second: {fileID: 2100000, guid: 342bb3e0fa2f6fe49ae6e1105b38622e, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -36,7 +51,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 10
@@ -85,7 +100,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.099999994
+    globalScale: 10
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

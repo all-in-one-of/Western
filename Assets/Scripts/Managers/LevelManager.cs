@@ -9,7 +9,7 @@ public class LevelManager : Singleton<LevelManager>
     public List<Level> levels;
     public List<int> selectedArenaIndexes;
     private UnityAction callback;
-    
+
 
     [System.NonSerialized] public int currentLevel;
     [System.NonSerialized] public int currentArena;
@@ -24,7 +24,13 @@ public class LevelManager : Singleton<LevelManager>
     private GameObject currentRootArena;
 
     public Camera[] cameras = new Camera[4];
+    public Light[] directionalLights=new Light[4];
+    private Light currentDirectionalLight;
     private Camera currentCamera;
+
+    public GameObject standPrefab;
+
+    [System.NonSerialized] public GameObject currentStand;
 
 
     public void LoadLevel(UnityAction callback=null) {
@@ -56,14 +62,26 @@ public class LevelManager : Singleton<LevelManager>
             currentCamera.enabled = false;
             currentCamera.GetComponent<CameraBehaviour>().Activate(false);
         }
+        if (currentDirectionalLight != null)
+        {
+            currentDirectionalLight.enabled = false;
+        }
+        
+        SpawnPlayersAndEnemies();
         currentCamera = cameras[currentArena];
         if (currentCamera != null)
         {
             currentCamera.enabled = true;
             currentCamera.GetComponent<CameraBehaviour>().Init();
         }
-        
-        SpawnPlayersAndEnemies();
+
+        currentDirectionalLight = directionalLights[currentArena];
+        if (currentDirectionalLight != null)
+        {
+            currentDirectionalLight.enabled = true;
+        }
+
+
         UIManager.instance.menu.MainMenu.gameObject.SetActive(false);
         UIManager.instance.menu.HUD.gameObject.SetActive(true);
         InputManager.instance.Enable(false);
@@ -124,7 +142,12 @@ public class LevelManager : Singleton<LevelManager>
         SceneManager.sceneLoaded += OnSceneAdded;
         if (!useSave)
         {
-            currentArenaIndex = Random.Range(0, levels[currentLevel].arenas.Count);
+            int random = Random.Range(0, levels[currentLevel].arenas.Count);
+            while (currentArenaIndex == random)
+            {
+                random= Random.Range(0, levels[currentLevel].arenas.Count);
+            }
+            currentArenaIndex = random;
         }
         else
         {
@@ -138,6 +161,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         RemoveAllPlayers();
         RemoveAllEnemies();
+        Destroy(currentStand);
         for (int i = 0; i < levels.Count; i++)
         {
             StartCoroutine(UnloadArena(arenaScenes[i]));
@@ -183,7 +207,6 @@ public class LevelManager : Singleton<LevelManager>
 
         for (int i = 0; i < enemySpawnsInThisArena.Count; i++)
         {
-            print("arena number : " + arenaNumber);
             enemySpawnsInThisArena[i].Init(arenaNumber);
         }
 
@@ -195,10 +218,12 @@ public class LevelManager : Singleton<LevelManager>
         }
 
         List<Camera> cams = GetObjectsByComponent<Camera>(rootTransform);
-
+        List<Light> lights = GetObjectsByComponent<Light>(rootTransform);
 
         cameras[arenaNumber] = cams[0];
         arenaScenes[arenaNumber] = arena;
+        directionalLights[arenaNumber] = lights[0];
+        lights[0].enabled = false;
         //
 
         if (arenasLeftToSpawn > 0)
@@ -238,6 +263,7 @@ public class LevelManager : Singleton<LevelManager>
             }
 
             currentCamera = cameras[0];
+            currentDirectionalLight = directionalLights[0];
 
             if (callback != null)
             {
@@ -275,5 +301,8 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
-
+    public void SpawnStand()
+    {
+        currentStand=Instantiate(standPrefab,StandSpawn.spawns[currentArena].transform);
+    }
 }

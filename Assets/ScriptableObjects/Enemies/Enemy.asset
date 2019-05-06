@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bca58c939386a4299c50a2877254de, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: 
-  range: 5
-  moveSpeed: 1
-  bulletSpeed: 1
-  sprite: {fileID: 21300000, guid: 889174cc9a9db4c4d80524bca790be65, type: 3}
+  range: 10
+  moveSpeed: 3
+  bulletSpeed: 10
   chargeDuration: 1
   shootDuration: 1
-  health: 0
+  bulletDamage: 10
+  aggroRange: 27

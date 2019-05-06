@@ -41,15 +41,32 @@ public class ControllerBehaviour : MonoBehaviour
 
         lineRenderer.SetPosition(1, transform.forward * data.lineRange);
 
+        if (data.playerID == "_0")
+        {
+            GameManagerValues.instance.Player1 = this;
+        }
+        else
+        {
+            GameManagerValues.instance.Player2 = this;
+
+        }
+
     }
 
 
     void Update()
     {
 
-        
 
-        data.enduranceJauge.fillAmount = playerStats.stamina / playerStats.maxStamina;
+        if (playerStats != null)
+        {
+            data.enduranceJauge.fillAmount = playerStats.stamina / playerStats.maxStamina;
+        }
+        else
+        {
+            playerStats = GetComponent<PlayerGameplayValues>();
+
+        }
 
         if (noStaminaSoundPlaying == true && timer <= 0)
         {
@@ -85,7 +102,10 @@ public class ControllerBehaviour : MonoBehaviour
             
             data.moveInput = new Vector3(Input.GetAxisRaw("Horizontal" + data.playerID), 0f, Input.GetAxisRaw("Vertical" + data.playerID));
 
-            data.moveVelocity = data.moveInput * playerStats.speed;
+            if (playerStats != null)
+            {
+                data.moveVelocity = data.moveInput * playerStats.speed;
+            }
 
             Vector3 aimInput = Vector3.right * Input.GetAxisRaw("Right_Horizontal" + data.playerID) + Vector3.forward * -Input.GetAxisRaw("Right_Vertical" + data.playerID);
 
@@ -230,17 +250,20 @@ public class ControllerBehaviour : MonoBehaviour
 
     public void FillingUpendurance()
     {
-        if (playerStats.stamina < playerStats.maxStamina && playerStats.stamina!= 0)
+        if (playerStats != null)
         {
-            playerStats.stamina += Time.deltaTime * playerStats.staminaRegen;
-        }
-        else if (playerStats.stamina == 0)
-        {
-            if (coroutineLaunched == false)
+            if (playerStats.stamina < playerStats.maxStamina && playerStats.stamina != 0)
             {
-                StartCoroutine(waitForSeconds());
+                playerStats.stamina += Time.deltaTime * playerStats.staminaRegen;
             }
-            
+            else if (playerStats.stamina == 0)
+            {
+                if (coroutineLaunched == false)
+                {
+                    StartCoroutine(waitForSeconds());
+                }
+
+            }
         }
     }
 

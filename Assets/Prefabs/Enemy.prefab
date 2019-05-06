@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6742821983279246599}
   m_Layer: 12
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 5398387491457465752}
   m_Layer: 12
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,7 +90,7 @@ Transform:
   m_GameObject: {fileID: 1106204901039750103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5.5, y: 5.5, z: 5.5}
   m_Children: []
   m_Father: {fileID: 8055712555609436718}
   m_RootOrder: 0
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 1414816497303930289}
   m_Layer: 12
   m_Name: Embout
-  m_TagString: Untagged
+  m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 2636037337167508205}
   m_Layer: 12
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,8 +210,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369184552055962580}
   m_LocalRotation: {x: 0, y: 0.92387956, z: 0.38268343, w: 0}
-  m_LocalPosition: {x: 0.051, y: 0.48, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalPosition: {x: 0.051, y: 1.37, z: 0}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children:
   - {fileID: 7112022604202639596}
   m_Father: {fileID: 8055712555609436718}
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 7112022604202639596}
   m_Layer: 12
   m_Name: GunParent
-  m_TagString: Untagged
+  m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 584861870025181443}
   m_Layer: 12
   m_Name: GunVisual
-  m_TagString: Untagged
+  m_TagString: Ennemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -423,7 +423,7 @@ Transform:
   m_GameObject: {fileID: 8055712555609436717}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 7203015155266247283}
   - {fileID: 342360016160497086}

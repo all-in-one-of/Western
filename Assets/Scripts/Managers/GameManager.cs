@@ -13,6 +13,21 @@ public class GameManager : Singleton<GameManager>
 
     [System.NonSerialized] public int playerCount = 2;
 
+    public bool levelFinished=false;
+
+
+    public int p1healthUpgradeLevel;
+    public int p1speedUpgradeLevel;
+    public int p1magazineSizeUpgradeLevel;
+    public int p1startArrowsNumberUpgradeLevel;
+    public int p1maxStaminaUpgradeLevel;
+
+    public int p2healthUpgradeLevel;
+    public int p2speedUpgradeLevel;
+    public int p2magazineSizeUpgradeLevel;
+    public int p2startArrowsNumberUpgradeLevel;
+    public int p2maxStaminaUpgradeLevel;
+
 
 
     private void Start()
@@ -52,11 +67,17 @@ public class GameManager : Singleton<GameManager>
         for (int i = 0; i < playerCount; i++)
         {
             SaveManager.instance.LoadPlayerData(i);
+            print(SaveManager.instance.playerDatas[i].credits);
         }
 
-        
 
-        UIManager.instance.SpawnCanvas();
+    /*p1healthUpgradeLevel=SaveManager.instance 
+    p1speedUpgradeLevel
+    p1magazineSizeUpgradeLevel
+    p1startArrowsNumberUpgradeLevel
+    p1maxStaminaUpgradeLevel*/
+
+    UIManager.instance.SpawnCanvas();
         InputManager.instance.Init();
     }
 

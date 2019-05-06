@@ -16,11 +16,26 @@ public class UIManager : Singleton<UIManager>
         
     }
 
+    public void GameOver()
+    {
+        menu.HUD.SetActive(false);
+        menu.GameOverMenu.SetActive(true);
+
+    }
+
+    private IEnumerator BackToMenu()
+    {
+        yield return new WaitForSeconds(5);
+        menu.GameOverMenu.SetActive(false);
+        menu.MainMenu.SetActive(true);
+    }
+
 
 
     [MenuItem("Western/NextArena")]
     public static void NextArena()
     {
+        GameManager.instance.levelFinished = false;
         if (LevelManager.instance.currentArena < LevelManager.instance.levels[LevelManager.instance.currentLevel].arenas.Count-1)
         {
             LevelManager.instance.currentArena++;
@@ -30,6 +45,7 @@ public class UIManager : Singleton<UIManager>
         {
             NextLevel();
         }
+        
     }
 
 

@@ -17,6 +17,9 @@ public class Obstacle : MonoBehaviour
 
     private void OnDestroy()
     {
-        obstacles.Remove(this);
+        if (obstacles != null)
+        {
+            obstacles.Remove(this);
+        }
     }
 }
